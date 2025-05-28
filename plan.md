@@ -541,3 +541,41 @@ const FeaturesSection = () => (
 
 This comprehensive plan ensures the new AI-first tech platform section perfectly matches the reference image while maintaining code quality, performance, and accessibility standards.
 
+### Testimonials & metrics section
+COMPREHENSIVE ANALYSIS & EXECUTION PLAN
+Based on the reference image, I need to completely restructure the testimonial & stats section. Here are the key differences I observe:
+📊 Current vs Reference Analysis:
+Current Issues:
+Background: Currently black, should be white/light
+Layout: Stats are in a grid, should have vertical separators on desktop
+Testimonial: No photo, should have a professional headshot on the left
+Content: Different text and metrics
+Typography: Different font sizes and hierarchy
+Mobile Layout: No proper mobile-first responsive design
+Reference Image Requirements:
+Header: "Why hire from apna?" (we'll adapt to "Why use StaffChahiye?")
+Subtitle: Descriptive text about the platform
+Stats Layout: 4 metrics with vertical separators on desktop, stacked on mobile
+Metrics: "5 Lakhs+", "200+", "Upto 5X", "80%" with specific descriptions
+Testimonial: Left side photo + right side text with company logo
+Background: White/light background instead of black
+🔧 DETAILED EXECUTION PLAN:
+Phase 1: Update Section Structure & Background
+Change from black background to white
+Update text colors accordingly
+Restructure the layout to match reference
+Phase 2: Implement Stats with Vertical Separators
+Create horizontal layout with vertical dividers for desktop
+Implement mobile-first responsive design (stacked layout)
+Update metrics to match reference values
+Phase 3: Add Professional Testimonial with Photo
+Add testimonial photo on the left
+Restructure testimonial text layout
+Add company logo (TATA 1mg style)
+Implement proper mobile layout (photo above text)
+Phase 4: Typography & Spacing Refinements
+Match font sizes and weights to reference
+Implement proper spacing and padding
+Add subtle design elements
+Let me start implementing these changes:
+ 

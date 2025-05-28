@@ -284,4 +284,171 @@ body {
   width: 100%;
   height: 500px;
   min-height: 500px;
+}
+
+/* ===== TESTIMONIAL & STATS SECTION STYLES ===== */
+
+/* Stats Section Enhancements */
+.stats-separator {
+  height: 60px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, #e5e7eb 20%, #e5e7eb 80%, transparent);
+}
+
+/* Testimonial Section Styles */
+.testimonial-container {
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.testimonial-photo {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 3px solid #ffffff;
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.testimonial-quote {
+  position: relative;
+}
+
+.testimonial-quote::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: -20px;
+  font-size: 4rem;
+  color: #d1d5db;
+  font-family: serif;
+  line-height: 1;
+}
+
+/* Company Logo Styling */
+.company-logo {
+  transition: all 0.3s ease;
+}
+
+.company-logo:hover {
+  transform: translateY(-2px);
+}
+
+/* Dotted Line Animation */
+.dotted-separator {
+  animation: fadeInDots 2s ease-in-out;
+}
+
+@keyframes fadeInDots {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Mobile Responsive Adjustments for Testimonial */
+@media (max-width: 1023px) {
+  .enhanced-illustration-container {
+    height: 400px;
+    min-height: 400px;
+  }
+  
+  .testimonial-quote::before {
+    font-size: 3rem;
+    top: -8px;
+    left: -15px;
+  }
+  
+  .stats-separator {
+    height: 40px;
+  }
+} 
+
+/* ===== FAQ SECTION STYLES ===== */
+
+/* FAQ Item Animations */
+.faq-item {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.faq-item:hover {
+  background-color: #f9fafb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.faq-button {
+  transition: all 0.2s ease;
+}
+
+.faq-button:hover {
+  color: var(--brand-orange);
+}
+
+/* FAQ Answer Animation */
+.faq-answer {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-answer.expanded {
+  animation: fadeInDown 0.4s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Chevron Icon Animation */
+.faq-chevron {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-chevron.rotated {
+  transform: rotate(180deg);
+}
+
+/* Tri-color Bar Enhancement */
+.tri-color-bar {
+  background: linear-gradient(
+    90deg,
+    #181818 0% 33%,
+    #ffffff 33% 66%,
+    #eb8314 66% 100%
+  );
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FAQ Section Responsive */
+@media (max-width: 768px) {
+  .faq-item {
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+  
+  .faq-button {
+    padding: 1rem 0;
+  }
 } 
