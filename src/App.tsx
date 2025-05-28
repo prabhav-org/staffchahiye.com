@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
 function App() {
+  const [activeFeature, setActiveFeature] = useState(0);
+
+  const features = [
+    {
+      title: "Advanced Job Filters & Assessments",
+      image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&h=400&fit=crop&auto=format"
+    },
+    {
+      title: "Smart AI Lead Management", 
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=500&h=400&fit=crop&auto=format"
+    },
+    {
+      title: "Inbound Calls & WhatsApp Alerts",
+      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=400&fit=crop&auto=format"
+    }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* Hero Section */}
@@ -18,15 +35,15 @@ function App() {
         </header>
         
         {/* Hero Content */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8 lg:py-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 lg:py-10">
           {/* Hero Content Row */}
-          <div className="flex flex-col lg:flex-row items-start lg:items-stretch justify-between gap-8 lg:gap-12 mb-8 min-h-[400px] lg:min-h-[350px]">
+          <div className="flex flex-col lg:flex-row items-start lg:items-stretch justify-between gap-8 lg:gap-12 mb-8 min-h-[50px] lg:min-h-[50px]">
             {/* Left: Hero Text */}
             <div className="flex-1 max-w-xl">
               <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
                 Hire top talent in 48 hours with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
               </h1>
-              <p className="text-base lg:text-lg text-gray-600 mb-6 leading-relaxed">Streamline your recruitment with AI-driven precision. Single solution from Fresher to experienced hiring.</p>
+              <p className="text-base lg:text-lg text-gray-600 leading-relaxed">Streamline your recruitment with AI-driven precision. Single solution from Fresher to experienced hiring.</p>
             </div>
             
             {/* Right: YouTube Video (Desktop) */}
@@ -39,6 +56,18 @@ function App() {
                   allowFullScreen
                 ></iframe>
               </div>
+            </div>
+          </div>
+
+          {/* YouTube Video (Mobile) - Positioned after hero text, before stats */}
+          <div className="block lg:hidden mb-8">
+            <div className="video-responsive">
+              <iframe
+                src="https://www.youtube.com/embed/lcjdwSY2AzM"
+                title="StaffChahiye Demo Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
 
@@ -74,18 +103,6 @@ function App() {
             </div>
             <div className="mt-3 text-xs text-gray-500">
               By clicking continue, you agree to the StaffChahiye <a href="#" className="text-[var(--brand-orange)] hover:underline">Terms of service</a> & <a href="#" className="text-[var(--brand-orange)] hover:underline">Privacy policy</a>.
-            </div>
-          </div>
-
-          {/* YouTube Video (Mobile) */}
-          <div className="block lg:hidden mb-6">
-            <div className="video-responsive">
-              <iframe
-                src="https://www.youtube.com/embed/lcjdwSY2AzM"
-                title="StaffChahiye Demo Video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
             </div>
           </div>
         </div>
@@ -131,11 +148,22 @@ function App() {
               <h3 className="text-xl lg:text-2xl font-semibold text-gray-900 mb-6">
                 Get access to pre-screened candidates
               </h3>
-              <ul className="feature-points space-y-4 mb-8">
-                <li>Advanced Job Filters & Assessments</li>
-                <li>Smart AI Lead Management</li>
-                <li>Inbound Calls & WhatsApp Alerts</li>
-              </ul>
+              <div className="space-y-0 mb-8">
+                {features.map((feature, index) => (
+                  <React.Fragment key={index}>
+                    <div 
+                      className={`feature-point-clickable ${activeFeature === index ? 'active' : ''}`}
+                      onClick={() => setActiveFeature(index)}
+                    >
+                      <div className="flex items-center">
+                        <span className="checkmark font-bold mr-3">✓</span>
+                        <span className="text-gray-700 font-medium">{feature.title}</span>
+                      </div>
+                    </div>
+                    {index < features.length - 1 && <div className="feature-separator"></div>}
+                  </React.Fragment>
+                ))}
+              </div>
               <button className="cta-button">
                 Post a job now
               </button>
@@ -143,10 +171,12 @@ function App() {
 
             {/* Right Column: Illustration */}
             <div className="lg:order-2 order-1">
-              <div className="illustration-container">
-                <div className="illustration-placeholder">
-                  {/* Illustration content placeholder */}
-                </div>
+              <div className="enhanced-illustration-container">
+                <img 
+                  src={features[activeFeature].image}
+                  alt={features[activeFeature].title}
+                  className="w-full h-full object-cover rounded-2xl shadow-lg transition-all duration-500 ease-in-out"
+                />
               </div>
             </div>
           </div>
