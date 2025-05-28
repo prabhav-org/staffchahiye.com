@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
   const [activeFeature, setActiveFeature] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const features = [
     {
@@ -17,6 +18,28 @@ function App() {
       image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=400&fit=crop&auto=format"
     }
   ];
+
+  // Auto-rotation effect - cycle through features every 5 seconds
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setActiveFeature((prev) => (prev + 1) % features.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [features.length, isPaused]);
+
+  // Handle manual feature selection
+  const handleFeatureClick = (index: number) => {
+    setActiveFeature(index);
+    setIsPaused(true);
+    
+    // Resume auto-rotation after 10 seconds of user inactivity
+    setTimeout(() => {
+      setIsPaused(false);
+    }, 3000);
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -36,19 +59,57 @@ function App() {
         
         {/* Hero Content */}
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 lg:py-10">
-          {/* Hero Content Row */}
+          {/* Hero Content Row - Two Column Layout */}
           <div className="flex flex-col lg:flex-row items-start lg:items-stretch justify-between gap-8 lg:gap-12 mb-8 min-h-[50px] lg:min-h-[50px]">
-            {/* Left: Hero Text */}
-            <div className="flex-1 max-w-xl">
-              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-                Hire top talent in 48 hours with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
-              </h1>
-              <p className="text-base lg:text-lg text-gray-600 leading-relaxed">Streamline your recruitment with AI-driven precision. Single solution from Fresher to experienced hiring.</p>
+            {/* Left Column: All Text Content */}
+            <div className="flex-1 max-w-xl flex flex-col">
+              {/* Hero Text */}
+              <div className="mb-8">
+                <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+                  Hire top talent in 48 hours with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
+                </h1>
+                <p className="text-base lg:text-lg text-gray-600 leading-relaxed">Streamline your recruitment with AI-driven precision. Single solution from Fresher to experienced hiring.</p>
+              </div>
+
+              {/* Statistics Section */}
+              <div className="flex flex-wrap items-center gap-6 lg:gap-8 mb-8">
+                <div>
+                  <div className="text-xl lg:text-2xl font-bold text-gray-900">1Lakh+</div>
+                  <div className="text-xs lg:text-sm text-gray-500">Qualified candidates</div>
+                </div>
+                <div>
+                  <div className="text-xl lg:text-2xl font-bold text-gray-900">5,000+</div>
+                  <div className="text-xs lg:text-sm text-gray-500">Employers</div>
+                </div>
+                <div>
+                  <div className="text-xl lg:text-2xl font-bold text-gray-900">100+</div>
+                  <div className="text-xs lg:text-sm text-gray-500">Available cities</div>
+                </div>
+              </div>
+
+              {/* Phone Input Section */}
+              <div className="max-w-xl">
+                <div className="mb-2 font-bold text-lg lg:text-xl text-gray-900">Let's get started</div>
+                <div className="mb-4 text-sm lg:text-base text-gray-600">Hire top talent faster with StaffChahiye</div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input 
+                    type="tel" 
+                    placeholder="Enter 10 digit mobile number" 
+                    className="flex-1 px-4 py-3 text-sm lg:text-base border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-[var(--brand-orange)] focus:border-[var(--brand-orange)] focus:outline-none transition-all" 
+                  />
+                  <button className="bg-[var(--brand-orange)] text-white px-6 py-3 text-sm lg:text-base rounded-lg font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap">
+                    Continue
+                  </button>
+                </div>
+                <div className="mt-3 text-xs text-gray-500">
+                  By clicking continue, you agree to the StaffChahiye <a href="#" className="text-[var(--brand-orange)] hover:underline">Terms of service</a> & <a href="#" className="text-[var(--brand-orange)] hover:underline">Privacy policy</a>.
+                </div>
+              </div>
             </div>
             
-            {/* Right: YouTube Video (Desktop) */}
+            {/* Right Column: YouTube Video (Desktop) */}
             <div className="hidden lg:block flex-1">
-              <div className="video-responsive h-full">
+              <div className="video-responsive h-full min-h-[500px]">
                 <iframe
                   src="https://www.youtube.com/embed/lcjdwSY2AzM"
                   title="StaffChahiye Demo Video"
@@ -59,7 +120,7 @@ function App() {
             </div>
           </div>
 
-          {/* YouTube Video (Mobile) - Positioned after hero text, before stats */}
+          {/* YouTube Video (Mobile) - Below all content on mobile */}
           <div className="block lg:hidden mb-8">
             <div className="video-responsive">
               <iframe
@@ -68,41 +129,6 @@ function App() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
-            </div>
-          </div>
-
-          {/* Statistics Section */}
-          <div className="flex flex-wrap items-center gap-6 lg:gap-8 mb-6">
-            <div>
-              <div className="text-xl lg:text-2xl font-bold text-gray-900">1Lakh+</div>
-              <div className="text-xs lg:text-sm text-gray-500">Qualified candidates</div>
-            </div>
-            <div>
-              <div className="text-xl lg:text-2xl font-bold text-gray-900">5,000+</div>
-              <div className="text-xs lg:text-sm text-gray-500">Employers</div>
-            </div>
-            <div>
-              <div className="text-xl lg:text-2xl font-bold text-gray-900">100+</div>
-              <div className="text-xs lg:text-sm text-gray-500">Available cities</div>
-            </div>
-          </div>
-
-          {/* Phone Input Section (Below Stats) */}
-          <div className="max-w-xl mb-6">
-            <div className="mb-2 font-bold text-lg lg:text-xl text-gray-900">Let's get started</div>
-            <div className="mb-4 text-sm lg:text-base text-gray-600">Hire top talent faster with StaffChahiye</div>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input 
-                type="tel" 
-                placeholder="Enter 10 digit mobile number" 
-                className="flex-1 px-4 py-3 text-sm lg:text-base border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-[var(--brand-orange)] focus:border-[var(--brand-orange)] focus:outline-none transition-all" 
-              />
-              <button className="bg-[var(--brand-orange)] text-white px-6 py-3 text-sm lg:text-base rounded-lg font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap">
-                Continue
-              </button>
-            </div>
-            <div className="mt-3 text-xs text-gray-500">
-              By clicking continue, you agree to the StaffChahiye <a href="#" className="text-[var(--brand-orange)] hover:underline">Terms of service</a> & <a href="#" className="text-[var(--brand-orange)] hover:underline">Privacy policy</a>.
             </div>
           </div>
         </div>
@@ -141,7 +167,7 @@ function App() {
           {/* Main Content Grid */}
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column: Feature Content */}
-            <div className="lg:order-1 order-2">
+            <div className="lg:order-1 order-1">
               <div className="feature-tag mb-4">
                 📋 SMART JOB POSTING
               </div>
@@ -153,7 +179,7 @@ function App() {
                   <React.Fragment key={index}>
                     <div 
                       className={`feature-point-clickable ${activeFeature === index ? 'active' : ''}`}
-                      onClick={() => setActiveFeature(index)}
+                      onClick={() => handleFeatureClick(index)}
                     >
                       <div className="flex items-center">
                         <span className="checkmark font-bold mr-3">✓</span>
@@ -170,7 +196,7 @@ function App() {
             </div>
 
             {/* Right Column: Illustration */}
-            <div className="lg:order-2 order-1">
+            <div className="lg:order-2 order-2">
               <div className="enhanced-illustration-container">
                 <img 
                   src={features[activeFeature].image}

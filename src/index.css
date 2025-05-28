@@ -262,6 +262,22 @@ body {
   color: var(--brand-orange);
 }
 
+/* Auto-rotation progress indicator */
+.feature-point-clickable.active .checkmark {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
 /* Enhanced Image Container */
 .enhanced-illustration-container {
   position: relative;
