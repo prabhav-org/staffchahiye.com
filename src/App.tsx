@@ -4,31 +4,81 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* Hero Section */}
-      <section className="w-full px-4 py-12 bg-white border-b">
+      <section className="w-full bg-white border-b border-gray-100">
         {/* Logo & Nav */}
-        <header className="flex items-center justify-between mb-8">
-          <div className="text-2xl font-extrabold text-black tracking-tight" style={{ color: 'var(--brand-orange)' }}>
+        <header className="max-w-7xl mx-auto px-6 lg:px-8 py-3 flex items-center justify-between relative nav-separator">
+          <div className="text-xl font-extrabold text-black tracking-tight" style={{ color: 'var(--brand-orange)' }}>
             StaffChahiye
           </div>
-          <nav className="flex gap-6 text-base font-medium">
-            <a href="#" className="hover:text-[var(--brand-orange)]">Product</a>
-            <a href="#" className="hover:text-[var(--brand-orange)]">Blogs</a>
-            <a href="#" className="hover:text-[var(--brand-orange)]">Pricing</a>
+          <nav className="flex items-center gap-6 text-sm font-medium">
+            <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Product</a>
+            <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a>
+            <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
           </nav>
         </header>
         
-        {/* Hero Content Row */}
-        <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-8">
-          {/* Left: Hero Text */}
-          <div className="max-w-lg">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-black mb-4">
-              Hire top talent in 48 hours with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
-            </h1>
-            <p className="text-lg text-gray-700 mb-6">Streamline your recruitment with AI-driven precision. Single solution from Fresher to experienced hiring.</p>
+        {/* Hero Content */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8 lg:py-10">
+          {/* Hero Content Row */}
+          <div className="flex flex-col lg:flex-row items-start lg:items-stretch justify-between gap-8 lg:gap-12 mb-8 min-h-[400px] lg:min-h-[350px]">
+            {/* Left: Hero Text */}
+            <div className="flex-1 max-w-xl">
+              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+                Hire top talent in 48 hours with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
+              </h1>
+              <p className="text-base lg:text-lg text-gray-600 mb-6 leading-relaxed">Streamline your recruitment with AI-driven precision. Single solution from Fresher to experienced hiring.</p>
+            </div>
+            
+            {/* Right: YouTube Video (Desktop) */}
+            <div className="hidden lg:block flex-1">
+              <div className="video-responsive h-full">
+                <iframe
+                  src="https://www.youtube.com/embed/lcjdwSY2AzM"
+                  title="StaffChahiye Demo Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
           </div>
-          
-          {/* Right: YouTube Video (Desktop) */}
-          <div className="hidden md:block w-full max-w-md">
+
+          {/* Statistics Section */}
+          <div className="flex flex-wrap items-center gap-6 lg:gap-8 mb-6">
+            <div>
+              <div className="text-xl lg:text-2xl font-bold text-gray-900">1Lakh+</div>
+              <div className="text-xs lg:text-sm text-gray-500">Qualified candidates</div>
+            </div>
+            <div>
+              <div className="text-xl lg:text-2xl font-bold text-gray-900">5,000+</div>
+              <div className="text-xs lg:text-sm text-gray-500">Employers</div>
+            </div>
+            <div>
+              <div className="text-xl lg:text-2xl font-bold text-gray-900">100+</div>
+              <div className="text-xs lg:text-sm text-gray-500">Available cities</div>
+            </div>
+          </div>
+
+          {/* Phone Input Section (Below Stats) */}
+          <div className="max-w-xl mb-6">
+            <div className="mb-2 font-bold text-lg lg:text-xl text-gray-900">Let's get started</div>
+            <div className="mb-4 text-sm lg:text-base text-gray-600">Hire top talent faster with StaffChahiye</div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input 
+                type="tel" 
+                placeholder="Enter 10 digit mobile number" 
+                className="flex-1 px-4 py-3 text-sm lg:text-base border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-[var(--brand-orange)] focus:border-[var(--brand-orange)] focus:outline-none transition-all" 
+              />
+              <button className="bg-[var(--brand-orange)] text-white px-6 py-3 text-sm lg:text-base rounded-lg font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap">
+                Continue
+              </button>
+            </div>
+            <div className="mt-3 text-xs text-gray-500">
+              By clicking continue, you agree to the StaffChahiye <a href="#" className="text-[var(--brand-orange)] hover:underline">Terms of service</a> & <a href="#" className="text-[var(--brand-orange)] hover:underline">Privacy policy</a>.
+            </div>
+          </div>
+
+          {/* YouTube Video (Mobile) */}
+          <div className="block lg:hidden mb-6">
             <div className="video-responsive">
               <iframe
                 src="https://www.youtube.com/embed/lcjdwSY2AzM"
@@ -40,103 +90,69 @@ function App() {
           </div>
         </div>
 
-        {/* Statistics Section */}
-        <div className="flex items-center gap-8 mb-8">
-          <div>
-            <div className="text-xl font-bold text-black">1Lakh+</div>
-            <div className="text-sm text-gray-500">Qualified candidates</div>
-          </div>
-          <div>
-            <div className="text-xl font-bold text-black">5,000+</div>
-            <div className="text-sm text-gray-500">Employers</div>
-          </div>
-          <div>
-            <div className="text-xl font-bold text-black">100+</div>
-            <div className="text-sm text-gray-500">Available cities</div>
-          </div>
-        </div>
-
-        {/* Phone Input Section (Below Stats) */}
-        <div className="max-w-lg mb-8">
-          <div className="mb-2 font-bold text-lg">Let's get started</div>
-          <div className="mb-4 text-gray-500">Hire top talent faster with StaffChahiye</div>
-          <form className="flex gap-3">
-            <input 
-              type="tel" 
-              placeholder="Enter 10 digit mobile number" 
-              className="flex-1 px-4 py-3 border rounded text-black focus:ring-2 focus:ring-[var(--brand-orange)] focus:border-[var(--brand-orange)]" 
-            />
-            <button className="bg-[var(--brand-orange)] text-white px-6 py-3 rounded font-semibold hover:bg-orange-600 transition-colors">
-              Continue
-            </button>
-          </form>
-          <div className="mt-3 text-xs text-gray-400">
-            By clicking continue, you agree to the StaffChahiye <a href="#" className="text-[var(--brand-orange)]">Terms of service</a> & <a href="#" className="text-[var(--brand-orange)]">Privacy policy</a>.
-          </div>
-        </div>
-
-        {/* YouTube Video (Mobile) */}
-        <div className="block md:hidden mb-8">
-          <div className="video-responsive">
-            <iframe
-              src="https://www.youtube.com/embed/lcjdwSY2AzM"
-              title="StaffChahiye Demo Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-
         {/* Marquee Brands Section */}
-        <div className="mt-10 overflow-hidden">
-          <div className="mb-4 text-center font-semibold text-gray-600">Trusted by 1000+ enterprises and 7 lakhs+ MSMEs for hiring</div>
-          <div className="flex items-center whitespace-nowrap marquee">
-            <img src="https://ext.same-assets.com/2583224959/3153208819.png" alt="logo1" className="h-8 mx-8" />
-            <img src="https://ext.same-assets.com/2583224959/1201393804.png" alt="logo2" className="h-8 mx-8" />
-            <img src="https://ext.same-assets.com/2583224959/2358811312.png" alt="logo3" className="h-8 mx-8" />
-            <img src="https://ext.same-assets.com/2583224959/3153208819.png" alt="logo4" className="h-8 mx-8" />
-            <img src="https://ext.same-assets.com/2583224959/1201393804.png" alt="logo5" className="h-8 mx-8" />
-            <img src="https://ext.same-assets.com/2583224959/2358811312.png" alt="logo6" className="h-8 mx-8" />
-          </div>
-        </div>
-      </section>
-      {/* Features Sections Placeholders */}
-      <section className="py-14 bg-[#f5f7fb]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-4">A single platform for your hiring needs</h2>
-          {/* Feature cards and illustrations go here */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="font-bold text-lg text-black mb-2">Smart Job Posting</div>
-              <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
-                <li>Relevant, high-intent candidates</li>
-                <li>Advanced job filters & assessments</li>
-                <li>AI lead management</li>
-                <li>WhatsApp & Call alerts</li>
-              </ul>
-              <button className="mt-4 bg-[var(--brand-orange)] text-white px-4 py-2 rounded">Post a job now</button>
+        <div className="bg-gray-50 py-6">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="mb-4 text-center">
+              <h3 className="text-sm lg:text-base font-semibold text-gray-900">Trusted by 1000+ enterprises and 7 lakhs+ MSMEs for hiring</h3>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="font-bold text-lg text-black mb-2">StaffChahiye Database</div>
-              <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
-                <li>AI powered search</li>
-                <li>Area-based search</li>
-                <li>Bulk WhatsApp invites</li>
-              </ul>
-              <button className="mt-4 bg-[var(--brand-orange)] text-white px-4 py-2 rounded">Search candidates</button>
-            </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="font-bold text-lg text-black mb-2">WhatsApp Fast Recruit</div>
-              <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
-                <li>Bulk communication</li>
-                <li>Instant responses</li>
-                <li>Delivered directly to your WhatsApp inbox</li>
-              </ul>
-              <button className="mt-4 bg-[var(--brand-orange)] text-white px-4 py-2 rounded">Install Chrome Extension</button>
+            <div className="overflow-hidden">
+              <div className="flex items-center whitespace-nowrap marquee">
+                <img src="https://ext.same-assets.com/2583224959/3153208819.png" alt="logo1" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
+                <img src="https://ext.same-assets.com/2583224959/1201393804.png" alt="logo2" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
+                <img src="https://ext.same-assets.com/2583224959/2358811312.png" alt="logo3" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
+                <img src="https://ext.same-assets.com/2583224959/3153208819.png" alt="logo4" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
+                <img src="https://ext.same-assets.com/2583224959/1201393804.png" alt="logo5" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
+                <img src="https://ext.same-assets.com/2583224959/2358811312.png" alt="logo6" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
+              </div>
             </div>
           </div>
         </div>
       </section>
+      
+      {/* AI-First Tech Platform Section */}
+      <section className="feature-section py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          {/* Section Header with Tri-Color Underline */}
+          <div className="text-center mb-12 lg:mb-16">
+            <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-4">
+              AI first tech platform for you
+            </h2>
+            <div className="tri-color-underline mx-auto"></div>
+          </div>
+
+          {/* Main Content Grid */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Column: Feature Content */}
+            <div className="lg:order-1 order-2">
+              <div className="feature-tag mb-4">
+                📋 SMART JOB POSTING
+              </div>
+              <h3 className="text-xl lg:text-2xl font-semibold text-gray-900 mb-6">
+                Get access to pre-screened candidates
+              </h3>
+              <ul className="feature-points space-y-4 mb-8">
+                <li>Advanced Job Filters & Assessments</li>
+                <li>Smart AI Lead Management</li>
+                <li>Inbound Calls & WhatsApp Alerts</li>
+              </ul>
+              <button className="cta-button">
+                Post a job now
+              </button>
+            </div>
+
+            {/* Right Column: Illustration */}
+            <div className="lg:order-2 order-1">
+              <div className="illustration-container">
+                <div className="illustration-placeholder">
+                  {/* Illustration content placeholder */}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonial & Stats Section */}
       <section className="py-14 bg-black text-white">
         <div className="max-w-5xl mx-auto px-4 text-center">
