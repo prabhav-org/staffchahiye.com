@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { Toaster } from "sonner";
+import { VacancyModal } from "./components/VacancyModal";
+import { usePhoneValidation } from "./hooks/usePhoneValidation";
 
 function App() {
   const [activeFeature, setActiveFeature] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [expandedFAQ, setExpandedFAQ] = useState(0); // First FAQ expanded by default
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Phone validation hook
+  const { 
+    phoneNumber, 
+    phoneError, 
+    validatePhone, 
+    handlePhoneChange 
+  } = usePhoneValidation();
 
   const features = [
     {
@@ -66,12 +78,39 @@ function App() {
     setExpandedFAQ(expandedFAQ === index ? -1 : index);
   };
 
+  // Handle Continue button click (with phone validation)
+  const handleContinueClick = () => {
+    if (validatePhone(phoneNumber)) {
+      setIsModalOpen(true);
+    }
+  };
+
+  // Handle "Post a job now" button click (direct modal open)
+  const handlePostJobClick = () => {
+    setIsModalOpen(true);
+  };
+
+  // Handle modal close
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      {/* Toast Notifications */}
+      <Toaster position="top-right" richColors />
+      
+      {/* Vacancy Modal */}
+      <VacancyModal 
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        initialPhone={phoneNumber}
+      />
+
       {/* Hero Section */}
       <section className="w-full bg-white border-b border-gray-100">
         {/* Logo & Nav */}
-        <header className="max-w-7xl mx-auto px-6 lg:px-8 py-3 flex items-center justify-between relative nav-separator">
+        <header className="max-w-7xl mx-auto px-6 my-8 lg:px-8 py-3 flex items-center justify-between relative nav-separator">
           <div className="text-xl font-extrabold text-black tracking-tight" style={{ color: 'var(--brand-orange)' }}>
             StaffChahiye
           </div>
@@ -119,13 +158,25 @@ function App() {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <input 
                     type="tel" 
+                    value={phoneNumber}
+                    onChange={(e) => handlePhoneChange(e.target.value)}
                     placeholder="Enter 10 digit mobile number" 
-                    className="flex-1 px-4 py-3 text-sm lg:text-base border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-[var(--brand-orange)] focus:border-[var(--brand-orange)] focus:outline-none transition-all" 
+                    className={`flex-1 px-4 py-3 text-sm lg:text-base border rounded-lg text-gray-900 focus:ring-2 focus:ring-[var(--brand-orange)] focus:border-[var(--brand-orange)] focus:outline-none transition-all ${
+                      phoneError ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   />
-                  <button className="bg-[var(--brand-orange)] text-white px-6 py-3 text-sm lg:text-base rounded-lg font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap">
+                  <button 
+                    onClick={handleContinueClick}
+                    className="bg-[var(--brand-orange)] text-white px-6 py-3 text-sm lg:text-base rounded-lg font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap"
+                  >
                     Continue
                   </button>
                 </div>
+                {phoneError && (
+                  <div className="mt-2 text-sm text-red-500 font-medium">
+                    {phoneError}
+                  </div>
+                )}
                 <div className="mt-3 text-xs text-gray-500">
                   By clicking continue, you agree to the StaffChahiye <a href="#" className="text-[var(--brand-orange)] hover:underline">Terms of service</a> & <a href="#" className="text-[var(--brand-orange)] hover:underline">Privacy policy</a>.
                 </div>
@@ -215,7 +266,10 @@ function App() {
                   </React.Fragment>
                 ))}
               </div>
-              <button className="cta-button">
+              <button 
+                onClick={handlePostJobClick}
+                className="cta-button"
+              >
                 Post a job now
               </button>
             </div>

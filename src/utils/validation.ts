@@ -1,0 +1,66 @@
+import { z } from 'zod';
+
+// Indian phone number validation
+export const validateIndianPhone = (phone: string): boolean => {
+  const indianPhoneRegex = /^(\+91|91)?[6-9]\d{9}$/;
+  return indianPhoneRegex.test(phone.replace(/\s+/g, ''));
+};
+
+// Zod schema for form validation
+export const vacancyFormSchema = z.object({
+  businessName: z
+    .string()
+    .min(2, 'Business name must be at least 2 characters')
+    .max(50, 'Business name must be less than 50 characters')
+    .regex(/^[a-zA-Z\s]+$/, 'Business name can only contain letters and spaces'),
+  
+  yourName: z
+    .string()
+    .min(2, 'Your name must be at least 2 characters')
+    .max(30, 'Your name must be less than 30 characters')
+    .regex(/^[a-zA-Z\s]+$/, 'Name can only contain letters and spaces'),
+  
+  phoneNumber: z
+    .string()
+    .refine(validateIndianPhone, 'Please enter a valid Indian phone number'),
+  
+  requirement: z
+    .string()
+    .min(1, 'Please select a requirement'),
+  
+  numberOfOpenings: z
+    .number()
+    .min(1, 'Number of openings must be at least 1')
+    .max(999, 'Number of openings cannot exceed 999'),
+  
+  city: z
+    .string()
+    .min(2, 'City name must be at least 2 characters')
+    .max(30, 'City name must be less than 30 characters'),
+  
+  locality: z
+    .string()
+    .min(2, 'Locality must be at least 2 characters')
+    .max(50, 'Locality must be less than 50 characters'),
+  
+  gender: z.enum(['Male', 'Female', 'Any'], {
+    errorMap: () => ({ message: 'Please select a gender preference' }),
+  }),
+  
+  candidateType: z.enum(['Fresher Works', 'Experienced only', 'Any'], {
+    errorMap: () => ({ message: 'Please select candidate type' }),
+  }),
+  
+  requiredExperience: z.string().optional(),
+}).refine(
+  (data) => {
+    if (data.candidateType === 'Experienced only') {
+      return data.requiredExperience && data.requiredExperience.length > 0;
+    }
+    return true;
+  },
+  {
+    message: 'Required experience is mandatory for experienced candidates',
+    path: ['requiredExperience'],
+  }
+); 

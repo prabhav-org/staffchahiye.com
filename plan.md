@@ -541,41 +541,448 @@ const FeaturesSection = () => (
 
 This comprehensive plan ensures the new AI-first tech platform section perfectly matches the reference image while maintaining code quality, performance, and accessibility standards.
 
-### Testimonials & metrics section
-COMPREHENSIVE ANALYSIS & EXECUTION PLAN
-Based on the reference image, I need to completely restructure the testimonial & stats section. Here are the key differences I observe:
-📊 Current vs Reference Analysis:
-Current Issues:
-Background: Currently black, should be white/light
-Layout: Stats are in a grid, should have vertical separators on desktop
-Testimonial: No photo, should have a professional headshot on the left
-Content: Different text and metrics
-Typography: Different font sizes and hierarchy
-Mobile Layout: No proper mobile-first responsive design
-Reference Image Requirements:
-Header: "Why hire from apna?" (we'll adapt to "Why use StaffChahiye?")
-Subtitle: Descriptive text about the platform
-Stats Layout: 4 metrics with vertical separators on desktop, stacked on mobile
-Metrics: "5 Lakhs+", "200+", "Upto 5X", "80%" with specific descriptions
-Testimonial: Left side photo + right side text with company logo
-Background: White/light background instead of black
-🔧 DETAILED EXECUTION PLAN:
-Phase 1: Update Section Structure & Background
-Change from black background to white
-Update text colors accordingly
-Restructure the layout to match reference
-Phase 2: Implement Stats with Vertical Separators
-Create horizontal layout with vertical dividers for desktop
-Implement mobile-first responsive design (stacked layout)
-Update metrics to match reference values
-Phase 3: Add Professional Testimonial with Photo
-Add testimonial photo on the left
-Restructure testimonial text layout
-Add company logo (TATA 1mg style)
-Implement proper mobile layout (photo above text)
-Phase 4: Typography & Spacing Refinements
-Match font sizes and weights to reference
-Implement proper spacing and padding
-Add subtle design elements
-Let me start implementing these changes:
+---
+
+# 🚀 PHASE 3: MODAL & FORM IMPLEMENTATION PLAN
+
+## 📋 **Plan Overview**
+**Objective**: Create a modal component with job requirement form, triggered from phone validation and "Post a job now" button, following StaffChahiye design aesthetics.
+
+## 🏗️ **Phase 3A: Component Architecture & File Structure**
+
+### **Files to Create:**
+```
+src/
+├── components/
+│   ├── ui/
+│   │   ├── Modal.tsx           # Reusable modal wrapper using Radix Dialog
+│   │   ├── Select.tsx          # Custom select component with StaffChahiye styling
+│   │   ├── Input.tsx           # Custom input component with validation states
+│   │   └── Toast.tsx           # Toast notification component
+│   ├── VacancyModal.tsx # Main modal component with form
+│   └── forms/
+│       ├── VacancyForm.tsx  # Form component with validation
+│       └── types.ts            # TypeScript interfaces for form data
+├── hooks/
+│   ├── usePhoneValidation.ts   # Indian phone number validation hook
+│   └── useJobSubmission.ts     # API submission hook
+├── utils/
+│   ├── validation.ts           # Validation schemas using Zod
+│   └── api.ts                  # API client configuration
+└── constants/
+    └── jobOptions.ts           # Static data for dropdowns
+```
+
+### **Files to Modify:**
+- `src/App.tsx` - Add modal state management and triggers
+- `src/index.css` - Add modal-specific styling
+
+## 🎨 **Phase 3B: Design System Integration**
+
+### **Modal Styling Strategy:**
+- **Desktop**: 80% viewport width, max 600px, centered with backdrop blur
+- **Mobile**: Full screen (100vh) with top-right close button
+- **Color Scheme**: Black (#101010), White (#fff), Orange (#FFA940)
+- **Typography**: Inter font, consistent with existing hierarchy
+- **Animations**: Smooth fade-in/out with scale transform
+
+### **Form Component Styling:**
+- Input fields: Rounded corners, border-gray-300, focus:ring-orange
+- Select dropdowns: Custom arrow, consistent border styling
+- Validation states: Red error borders, green success states
+- Spacing: Tailwind consistent spacing (mb-4, py-3, px-4)
+
+## 🔧 **Phase 3C: State Management & Validation**
+
+### **Form Schema (using Zod):**
+```typescript
+interface VacancyForm {
+  businessName: string;        // required, min 2 chars
+  yourName: string;           // required, min 2 chars
+  phoneNumber: string;        // required, Indian phone validation
+  requirement: string;        // required, from predefined list
+  numberOfOpenings: number;   // required, min 1, max 999
+  city: string;              // required, min 2 chars
+  locality: string;          // required, min 2 chars
+  gender: 'Male' | 'Female' | 'Any';  // required
+  candidateType: 'Fresher Works' | 'Experienced only' | 'Any';  // required
+  requiredExperience: string; // required when candidateType is 'Experienced only'
+}
+```
+
+### **Validation Rules:**
+- **Phone**: Indian format (+91 or 10-digit starting with 6-9)
+- **Required fields**: All fields marked with * are mandatory
+- **Number validation**: numberOfOpenings must be positive integer
+- **Text fields**: Minimum length requirements, no special characters in names
+
+### **Job Requirement Options (from reference images):**
+```typescript
+const vacancy = [
+  'Waiter / Steward',
+  'Kitchen Helper', 
+  'House Keeping',
+  'Indian Chef',
+  'Chinese Chef',
+  'Continental Chef',
+  'Tandoor Chef',
+  'All Rounder Chef',
+  'Reception',
+  'Manager / Supervisor'
+];
+
+const candidateTypes = [
+  'Fresher Works',
+  'Experienced only', 
+  'Any'
+];
+
+const genderOptions = [
+  'Male',
+  'Female',
+  'Any'
+];
+```
+
+## 📱 **Phase 3D: Modal Trigger Integration**
+
+### **Trigger Points:**
+1. **Hero Section**: Phone validation → Continue button
+   - Validate Indian phone number format
+   - Show error message if invalid: "Please enter a valid Indian phone number"
+   - Open modal if valid
+
+2. **AI Platform Section**: "Post a job now" button
+   - Direct modal open without validation
+   - Pre-populate phone if available from hero section
+
+### **State Management:**
+```typescript
+// App.tsx state additions
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [phoneNumber, setPhoneNumber] = useState('');
+const [phoneError, setPhoneError] = useState('');
+
+// Phone validation function
+const validateIndianPhone = (phone: string): boolean => {
+  const indianPhoneRegex = /^(\+91|91)?[6-9]\d{9}$/;
+  return indianPhoneRegex.test(phone.replace(/\s+/g, ''));
+};
+```
+
+## 🌐 **Phase 3E: API Integration**
+
+### **Mock API Implementation:**
+- **Endpoint**: `https://api.thestaffcompany.com/job-requirements`
+- **Method**: POST
+- **Headers**: Content-Type: application/json
+- **Payload**: Complete form data as JSON
+- **Response**: Success/error status with toast notification
+
+### **API Client Structure:**
+```typescript
+// utils/api.ts
+const API_BASE_URL = 'https://api.thestaffcompany.com';
+
+export const submitVacancy = async (data: VacancyForm) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/job-requirements`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    
+    if (!response.ok) {
+      throw new Error('Submission failed');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    throw new Error('Network error occurred');
+  }
+};
+```
+
+### **Error Handling:**
+- Network errors: "Connection failed, please try again"
+- Validation errors: Field-specific error messages
+- Success: "Job requirement submitted successfully!"
+
+## 🎯 **Phase 3F: User Experience Features**
+
+### **Modal Behavior:**
+- **Desktop**: Centered modal with backdrop blur
+- **Mobile**: Full-screen overlay with close button
+- **Backdrop**: Click outside to close (dismissible)
+- **Keyboard**: Esc key to close, Tab navigation within form
+- **Focus Management**: Auto-focus first field, trap focus in modal
+
+### **Form UX Enhancements:**
+- **Progressive validation**: Real-time feedback as user types
+- **Conditional fields**: Show experience field only for "Experienced only"
+- **Loading states**: Submit button shows spinner during API call
+- **Error recovery**: Clear errors on field focus/change
+
+### **Mobile Optimization:**
+- Touch-friendly button sizes (min 44px)
+- Smooth scroll behavior within modal
+- iOS safe area handling
+- Viewport zoom prevention on input focus
+
+## 📊 **Phase 3G: Implementation Priority & Timeline**
+
+### **Priority 1 (Core Functionality):**
+1. Basic modal component with Radix Dialog
+2. Form structure with all required fields
+3. Phone number validation for trigger
+4. Basic styling following design system
+
+### **Priority 2 (Enhanced Features):**
+1. Dropdown options with proper job categories
+2. Form validation with error states
+3. API integration with mock endpoint
+4. Toast notifications for success/error
+
+### **Priority 3 (Polish & UX):**
+1. Advanced animations and transitions
+2. Mobile-specific optimizations
+3. Accessibility enhancements
+4. Error handling edge cases
+
+## 🧰 **Phase 3H: Technical Implementation Details**
+
+### **Dependencies to Utilize:**
+- `@radix-ui/react-dialog` - Modal foundation
+- `react-hook-form` - Form state management
+- `@hookform/resolvers` + `zod` - Validation
+- `sonner` - Toast notifications
+- `lucide-react` - Icons (close, chevron-down)
+
+### **Component Structure:**
+```tsx
+// VacancyModal.tsx
+const VacancyModal = ({ isOpen, onClose, initialPhone }) => {
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="modal-container">
+        <DialogHeader>
+          <DialogTitle>Tell us your hiring requirements</DialogTitle>
+          <DialogClose className="modal-close-btn" />
+        </DialogHeader>
+        <VacancyForm 
+          initialPhone={initialPhone}
+          onSubmit={handleSubmit}
+          onClose={onClose}
+        />
+      </DialogContent>
+    </Dialog>
+  );
+};
+```
+
+### **CSS Classes (to add to index.css):**
+```css
+/* Modal Styles */
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 90%;
+  max-width: 600px;
+  z-index: 50;
+}
+
+@media (max-width: 768px) {
+  .modal-container {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 0 3px rgba(255, 169, 64, 0.1);
+}
+
+.form-input.error {
+  border-color: #ef4444;
+}
+
+.form-error {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.submit-btn {
+  width: 100%;
+  background: var(--brand-orange);
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #e6941a;
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-btn-loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+```
+
+## ✅ **Phase 3I: Quality Assurance Checklist**
+
+### **Functional Testing:**
+- [ ] Modal opens on phone validation success
+- [ ] Modal opens on "Post a job now" button click
+- [ ] Phone number validation works correctly
+- [ ] All form fields validate properly
+- [ ] Form submission calls API endpoint
+- [ ] Toast notifications appear on success/error
+- [ ] Modal closes properly on success
+- [ ] Background blur effect works
+
+### **Design Verification:**
+- [ ] Modal follows StaffChahiye color scheme
+- [ ] Typography consistent with existing design
+- [ ] Form fields match reference image styling
+- [ ] Mobile full-screen layout works
+- [ ] Desktop centered modal works
+- [ ] Close button positioned correctly
+- [ ] Loading states are visually clear
+
+### **Accessibility & UX:**
+- [ ] Focus management works properly
+- [ ] Keyboard navigation (Tab, Esc) works
+- [ ] Screen reader compatibility
+- [ ] Touch-friendly on mobile devices
+- [ ] Error messages are clear and helpful
+- [ ] Form recovery after errors works
+- [ ] WCAG color contrast compliance
+
+### **Performance Validation:**
+- [ ] Modal animations are smooth
+- [ ] No layout shift during modal open/close
+- [ ] API calls don't block UI
+- [ ] Form validation is responsive
+- [ ] Mobile performance is optimized
+- [ ] Memory leaks prevention (event cleanup)
+
+## 📈 **Expected Code Changes Summary:**
+
+- **New Files Created**: 8-10 new TypeScript/React files
+- **Lines Added**: ~400-500 lines across all components
+- **CSS Added**: ~100 lines for modal and form styling
+- **App.tsx Modified**: ~50 lines for modal integration
+- **Dependencies Used**: Existing Radix UI, react-hook-form, zod
+- **API Integration**: Mock endpoint with proper error handling
+
+## 🎯 **Code Quality Standards:**
+
+### **DRY Principle Implementation:**
+- Reusable form input components
+- Shared validation logic
+- Common styling utilities
+- Centralized API error handling
+
+### **TypeScript Strict Typing:**
+- All form interfaces properly typed
+- API response/request types defined
+- Event handler types specified
+- Component prop types enforced
+
+### **Performance Optimizations:**
+- Lazy loading of modal component
+- Memoized form validation functions
+- Efficient re-render prevention
+- Minimal bundle size impact
+
+---
+
+This comprehensive plan ensures the modal and form implementation perfectly matches the requirements while maintaining high code quality, performance, and accessibility standards. The implementation will follow StaffChahiye's design system and provide an excellent user experience across all devices.
+
  
