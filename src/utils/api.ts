@@ -5,7 +5,7 @@ const API_BASE_URL = 'https://api.thestaffcompany.com';
 export interface ApiResponse {
   success: boolean;
   message: string;
-  data?: any;
+  data?: unknown;
 }
 
 export const submitVacancy = async (data: VacancyForm): Promise<ApiResponse> => {

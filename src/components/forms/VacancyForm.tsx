@@ -4,13 +4,21 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { vacancyFormSchema } from '../../utils/validation';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
-import { vacancyTypes, candidateTypes, genderOptions, experienceOptions } from '../../constants/jobOptions';
+import {
+  vacancyTypes,
+  candidateTypes,
+  genderOptions,
+  experienceOptions,
+  minimumQualificationOptions,
+  workingHoursOptions,
+  otherBenefitsOptions
+} from '../../constants/jobOptions';
 import type { VacancyForm as VacancyFormData, VacancyFormProps } from './types';
 
-export const VacancyForm: React.FC<VacancyFormProps> = ({ 
-  initialPhone, 
-  onSubmit, 
-  onClose 
+export const VacancyForm: React.FC<VacancyFormProps> = ({
+  initialPhone,
+  onSubmit,
+  onClose
 }) => {
   const {
     register,
@@ -24,10 +32,17 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
       phoneNumber: initialPhone || '',
       candidateType: 'Any',
       gender: 'Any',
+      minimumQualification: 'Any',
+      otherBenefits: 'None',
+      remarks: '',
+      // Set default for salary to avoid NaN issues if not provided in defaults
+      minSalary: 0,
+      maxSalary: 0,
     },
   });
 
   const candidateType = watch('candidateType');
+  const minSalary = watch('minSalary');
 
   // Set initial phone number if provided
   useEffect(() => {
@@ -54,54 +69,56 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
         </p>
       </div>
 
+      <Input
+        label="Business Name"
+        required
+        {...register('businessName')}
+        error={errors.businessName?.message}
+        placeholder="Enter your business name"
+      />
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input
-          label="Business Name"
-          required
-          {...register('businessName')}
-          error={errors.businessName?.message}
-          placeholder="Enter your business name"
-        />
-
-        <Input
-          label="Your Name"
+          label="Person of Contact"
           required
           {...register('yourName')}
           error={errors.yourName?.message}
           placeholder="Enter your full name"
         />
+
+        <Input
+          label="Phone Number"
+          type="tel"
+          required
+          {...register('phoneNumber')}
+          error={errors.phoneNumber?.message}
+          placeholder="Enter 10 digit mobile number"
+        />
       </div>
 
-      <Input
-        label="Phone Number"
-        type="tel"
-        required
-        {...register('phoneNumber')}
-        error={errors.phoneNumber?.message}
-        placeholder="Enter 10 digit mobile number"
-      />
+      <div className="grid grid-cols-2 gap-4">
+        <Select
+          label="Requirement"
+          required
+          options={vacancyTypes}
+          {...register('requirement')}
+          error={errors.requirement?.message}
+          placeholder="Select job category"
+        />
 
-      <Select
-        label="Requirement"
-        required
-        options={vacancyTypes}
-        {...register('requirement')}
-        error={errors.requirement?.message}
-        placeholder="Select job category"
-      />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input
-          label="Number of Openings"
+          label="Staff Required"
           type="number"
           required
           {...register('numberOfOpenings', { valueAsNumber: true })}
           error={errors.numberOfOpenings?.message}
-          placeholder="Total number of vacancy"
+          placeholder="Total number of vacancies"
           min="1"
           max="999"
         />
+      </div>
 
+      <div className="grid grid-cols-2 gap-4">
         <Input
           label="City"
           required
@@ -109,17 +126,17 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
           error={errors.city?.message}
           placeholder="City Name"
         />
+
+        <Input
+          label="Locality"
+          required
+          {...register('locality')}
+          error={errors.locality?.message}
+          placeholder="Enter Your Locality"
+        />
       </div>
 
-      <Input
-        label="Locality"
-        required
-        {...register('locality')}
-        error={errors.locality?.message}
-        placeholder="Enter Your Locality"
-      />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         <Select
           label="Gender"
           required
@@ -129,11 +146,20 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
         />
 
         <Select
-          label="Type of Candidate Required"
+          label="Candidate Type"
           required
           options={candidateTypes}
           {...register('candidateType')}
           error={errors.candidateType?.message}
+        />
+
+        <Select
+          label="Qualifications"
+          required
+          options={minimumQualificationOptions}
+          {...register('minimumQualification')}
+          error={errors.minimumQualification?.message}
+          placeholder="Select qualifications"
         />
       </div>
 
@@ -149,6 +175,53 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
           />
         </div>
       )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4">
+          <Input
+            label="Minimum Salary"
+            type="number"
+            required
+            {...register('minSalary', { valueAsNumber: true })}
+            error={errors.minSalary?.message}
+            placeholder="e.g., 15000"
+            min="0"
+          />
+          <Input
+            label="Maximum Salary"
+            type="number"
+            required
+            {...register('maxSalary', { valueAsNumber: true })}
+            error={errors.maxSalary?.message}
+            placeholder="e.g., 25000"
+            min={minSalary || 0}
+          />
+        </div>
+        <Select
+          label="Working Hours"
+          required
+          options={workingHoursOptions}
+          {...register('workingHours')}
+          error={errors.workingHours?.message}
+          placeholder="Select working hours"
+        />
+      </div>
+
+      <Select
+        label="Other Benefits"
+        required
+        options={otherBenefitsOptions}
+        {...register('otherBenefits')}
+        error={errors.otherBenefits?.message}
+        placeholder="Select other benefits"
+      />
+
+      <Input
+        label="Remarks"
+        {...register('remarks')}
+        error={errors.remarks?.message}
+        placeholder="Any specific requirements or notes"
+      />
 
       <div className="pt-4 border-t border-gray-200">
         <button

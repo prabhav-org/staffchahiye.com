@@ -52,6 +52,24 @@ export const vacancyFormSchema = z.object({
   }),
   
   requiredExperience: z.string().optional(),
+
+  minimumQualification: z.string().min(1, 'Please select minimum qualification'),
+
+  minSalary: z
+    .number()
+    .min(0, 'Minimum salary cannot be negative')
+    .max(9999999, 'Minimum salary is too high'),
+
+  maxSalary: z
+    .number()
+    .min(0, 'Maximum salary cannot be negative')
+    .max(9999999, 'Maximum salary is too high'),
+  
+  workingHours: z.string().min(1, 'Please select working hours'),
+
+  otherBenefits: z.string().min(1, 'Please select other benefits'),
+
+  remarks: z.string().optional(), // Can be optional
 }).refine(
   (data) => {
     if (data.candidateType === 'Experienced only') {
@@ -62,5 +80,11 @@ export const vacancyFormSchema = z.object({
   {
     message: 'Required experience is mandatory for experienced candidates',
     path: ['requiredExperience'],
+  }
+).refine(
+  (data) => data.minSalary <= data.maxSalary,
+  {
+    message: 'Minimum salary cannot be greater than maximum salary',
+    path: ['minSalary'],
   }
 ); 

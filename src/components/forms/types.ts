@@ -9,6 +9,12 @@ export interface VacancyForm {
   gender: 'Male' | 'Female' | 'Any';  // required
   candidateType: 'Fresher Works' | 'Experienced only' | 'Any';  // required
   requiredExperience: string; // required when candidateType is 'Experienced only'
+  minimumQualification: string; // required
+  minSalary: number;         // required
+  maxSalary: number;         // required
+  workingHours: string;      // required
+  otherBenefits: string;     // required
+  remarks: string;           // required
 }
 
 export interface VacancyModalProps {
@@ -19,6 +25,6 @@ export interface VacancyModalProps {
 
 export interface VacancyFormProps {
   initialPhone?: string;
-  onSubmit: (data: VacancyForm) => Promise<void>;
+  onSubmit: (data: VacancyForm) => Promise<boolean>;
   onClose: () => void;
 }
