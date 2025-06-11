@@ -19,7 +19,7 @@ function App() {
 
   const features = [
     {
-      title: "1. Tell us your staff requirements in <30 seconds",
+      title: "1. Tell us your staff requirements in < 30 seconds",
       image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&h=400&fit=crop&auto=format"
     },
     {
