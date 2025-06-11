@@ -19,7 +19,7 @@ function App() {
 
   const features = [
     {
-      title: "1. Tell us your staff requirements in <30 seconds",
+      title: "1. Tell us your staff requirements in < 30 seconds",
       image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&h=400&fit=crop&auto=format"
     },
     {
@@ -47,7 +47,7 @@ function App() {
     },
     {
       question: "I want to hire more than 10 candidates, do you have any bulk-hiring plans?",
-      answer: "Yes! Get in touch with our team to discover high-volume/bulk-hiring solutions."
+      answer: "Yes, sure! Get in touch with our team to discover high-volume/bulk-hiring solutions."
     }
   ];
 
