@@ -7,7 +7,7 @@ import type { VacancyModalProps } from './forms/types';
 
 export const VacancyModal: React.FC<VacancyModalProps> = ({ 
   isOpen, 
-  onClose, 
+  onClose,
   initialPhone 
 }) => {
   const { handleSubmit } = useVacancySubmission();

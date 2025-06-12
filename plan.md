@@ -984,5 +984,3 @@ const VacancyModal = ({ isOpen, onClose, initialPhone }) => {
 ---
 
 This comprehensive plan ensures the modal and form implementation perfectly matches the requirements while maintaining high code quality, performance, and accessibility standards. The implementation will follow StaffChahiye's design system and provide an excellent user experience across all devices.
-
- 
