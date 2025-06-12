@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Toaster } from "sonner";
 import { VacancyModal } from "./components/VacancyModal";
 import { usePhoneValidation } from "./hooks/usePhoneValidation";
+import logo from './assets/Untitled design (3).svg';
 
 function App() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -10,11 +11,11 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Phone validation hook
-  const { 
-    phoneNumber, 
-    phoneError, 
-    validatePhone, 
-    handlePhoneChange 
+  const {
+    phoneNumber,
+    phoneError,
+    validatePhone,
+    handlePhoneChange
   } = usePhoneValidation();
 
   const features = [
@@ -23,7 +24,7 @@ function App() {
       image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&h=400&fit=crop&auto=format"
     },
     {
-      title: "Get pre-screened candidates right on your whatsapp", 
+      title: "Get pre-screened candidates right on your whatsapp",
       image: "/section2_wapp.png"
     },
     {
@@ -66,7 +67,7 @@ function App() {
   const handleFeatureClick = (index: number) => {
     setActiveFeature(index);
     setIsPaused(true);
-    
+
     // Resume auto-rotation after 3 seconds of user inactivity
     setTimeout(() => {
       setIsPaused(false);
@@ -99,9 +100,9 @@ function App() {
     <div className="min-h-screen flex flex-col bg-white">
       {/* Toast Notifications */}
       <Toaster position="top-right" richColors />
-      
+
       {/* Vacancy Modal */}
-      <VacancyModal 
+      <VacancyModal
         isOpen={isModalOpen}
         onClose={handleModalClose}
         initialPhone={phoneNumber}
@@ -109,18 +110,20 @@ function App() {
 
       {/* Hero Section */}
       <section className="w-full bg-white border-b border-gray-100">
-        {/* Logo & Nav */}
         <header className="max-w-7xl mx-auto px-6 my-8 lg:px-8 py-3 flex items-center justify-between relative nav-separator">
-          <div className="text-xl font-extrabold text-black tracking-tight" style={{ color: 'var(--brand-orange)' }}>
-            StaffChahiye
+          {/* Logo container */}
+          <div className="h-14 flex items-start">
+            <img src={logo} alt="logo" className="h-full w-auto object-contain" />
           </div>
+          {/* Navigation */}
           <nav className="flex items-center gap-6 text-sm font-medium">
             <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Product</a>
             <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a>
             <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
           </nav>
         </header>
-        
+
+
         {/* Hero Content */}
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 lg:py-10">
           {/* Hero Content Row - Two Column Layout */}
@@ -130,7 +133,7 @@ function App() {
               {/* Hero Text */}
               <div className="mb-8">
                 <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-                  Hire candidates in under &lt;30 minutes with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
+                  Hire candidates in under 30 minutes with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
                 </h1>
                 <p className="text-base lg:text-lg text-gray-600 leading-relaxed">Streamline your recruitment with AI-driven precision. Single solution from Fresher to experienced hiring.</p>
               </div>
@@ -156,16 +159,15 @@ function App() {
                 <div className="mb-2 font-bold text-lg lg:text-xl text-gray-900">Let's get started</div>
                 <div className="mb-4 text-sm lg:text-base text-gray-600">Hire much faster with StaffChahiye</div>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <input 
-                    type="tel" 
+                  <input
+                    type="tel"
                     value={phoneNumber}
                     onChange={(e) => handlePhoneChange(e.target.value)}
-                    placeholder="Enter 10 digit mobile number" 
-                    className={`flex-1 px-4 py-3 text-sm lg:text-base border rounded-lg text-gray-900 focus:ring-2 focus:ring-[var(--brand-orange)] focus:border-[var(--brand-orange)] focus:outline-none transition-all ${
-                      phoneError ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    placeholder="Enter 10 digit mobile number"
+                    className={`flex-1 px-4 py-3 text-sm lg:text-base border rounded-lg text-gray-900 focus:ring-2 focus:ring-[var(--brand-orange)] focus:border-[var(--brand-orange)] focus:outline-none transition-all ${phoneError ? 'border-red-500' : 'border-gray-300'
+                      }`}
                   />
-                  <button 
+                  <button
                     onClick={handleContinueClick}
                     className="bg-[var(--brand-orange)] text-white px-6 py-3 text-sm lg:text-base rounded-lg font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap"
                   >
@@ -182,7 +184,7 @@ function App() {
                 </div>
               </div>
             </div>
-            
+
             {/* Right Column: YouTube Video (Desktop) */}
             <div className="hidden lg:block flex-1">
               <div className="video-responsive h-full min-h-[500px]">
@@ -228,7 +230,7 @@ function App() {
           </div>
         </div>
       </section>
-      
+
       {/* AI-First Tech Platform Section */}
       <section className="feature-section py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -253,7 +255,7 @@ function App() {
               <div className="space-y-0 mb-8">
                 {features.map((feature, index) => (
                   <React.Fragment key={index}>
-                    <div 
+                    <div
                       className={`feature-point-clickable ${activeFeature === index ? 'active' : ''}`}
                       onClick={() => handleFeatureClick(index)}
                     >
@@ -266,7 +268,7 @@ function App() {
                   </React.Fragment>
                 ))}
               </div>
-              <button 
+              <button
                 onClick={handlePostJobClick}
                 className="cta-button"
               >
@@ -277,7 +279,7 @@ function App() {
             {/* Right Column: Illustration */}
             <div className="lg:order-2 order-2">
               <div className="enhanced-illustration-container">
-                <img 
+                <img
                   src={features[activeFeature].image}
                   alt={features[activeFeature].title}
                   className="w-full h-full object-cover rounded-2xl shadow-lg transition-all duration-500 ease-in-out"
@@ -344,7 +346,7 @@ function App() {
               {/* Testimonial Photo */}
               <div className="flex-shrink-0 order-1 lg:order-1">
                 <div className="testimonial-photo w-32 h-32 lg:w-40 lg:h-40 rounded-2xl overflow-hidden">
-                  <img 
+                  <img
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&auto=format&face=center"
                     alt="Dr Varun - SVP, Medical Affairs"
                     className="w-full h-full object-cover"
@@ -358,7 +360,7 @@ function App() {
                   <p className="testimonial-quote text-lg lg:text-xl text-gray-800 leading-relaxed mb-6">
                     We are closely working with StaffChahiye for talent discovery and hiring across job families. Their quickest turn-around time is enabling us to uninterruptedly continue our daily functions and services, especially during the present times.
                   </p>
-                  
+
                   {/* Dotted separator line */}
                   <div className="dotted-separator flex items-center justify-center lg:justify-start mb-6">
                     <div className="flex space-x-1">
@@ -405,11 +407,11 @@ function App() {
             <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-8">
               Frequently asked questions
             </h2>
-            
+
             {/* FAQ Items */}
             <div className="space-y-0">
               {faqData.map((faq, index) => (
-                <div 
+                <div
                   key={index}
                   className="faq-item border-b border-gray-200 last:border-b-0 px-2"
                 >
@@ -421,22 +423,20 @@ function App() {
                       {faq.question}
                     </h3>
                     <div className="flex-shrink-0">
-                      <svg 
-                        className={`faq-chevron w-6 h-6 text-gray-400 transition-transform duration-300 ${
-                          expandedFAQ === index ? 'rotated' : ''
-                        }`}
-                        fill="none" 
-                        stroke="currentColor" 
+                      <svg
+                        className={`faq-chevron w-6 h-6 text-gray-400 transition-transform duration-300 ${expandedFAQ === index ? 'rotated' : ''
+                          }`}
+                        fill="none"
+                        stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>
                   </button>
-                  
-                  <div className={`faq-answer overflow-hidden transition-all duration-300 ease-in-out ${
-                    expandedFAQ === index ? 'max-h-96 opacity-100 expanded' : 'max-h-0 opacity-0'
-                  }`}>
+
+                  <div className={`faq-answer overflow-hidden transition-all duration-300 ease-in-out ${expandedFAQ === index ? 'max-h-96 opacity-100 expanded' : 'max-h-0 opacity-0'
+                    }`}>
                     <div className="pb-6 lg:pb-8 pr-14">
                       <p className="text-base lg:text-lg text-gray-600 leading-relaxed">
                         {faq.answer}
@@ -447,7 +447,7 @@ function App() {
               ))}
             </div>
           </div>
-          
+
           {/* Tri-color Bottom Bar */}
           <div className="flex justify-center">
             <div className="tri-color-bar w-full max-w-2xl h-1"></div>
@@ -469,39 +469,39 @@ function App() {
                   StaffChahiye
                 </div>
               </div>
-              
+
               {/* Social Media Icons */}
               <div className="flex gap-4">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <span className="sr-only">Facebook</span>
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                   </svg>
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <span className="sr-only">LinkedIn</span>
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                   </svg>
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <span className="sr-only">Twitter</span>
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <span className="sr-only">Instagram</span>
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12.017 0C8.396 0 7.989.013 7.041.072 6.094.131 5.42.333 4.844.63c-.611.324-1.13.748-1.65 1.268a4.493 4.493 0 00-1.268 1.65c-.297.576-.499 1.25-.558 2.197C.975 7.613.96 8.02.96 11.641c0 3.622.014 4.029.072 4.977.06.946.262 1.62.558 2.197.324.611.748 1.13 1.268 1.65a4.493 4.493 0 001.65 1.268c.576.297 1.25.499 2.197.558.948.059 1.355.072 4.976.072 3.622 0 4.029-.014 4.977-.072.946-.06 1.62-.262 2.197-.558a4.493 4.493 0 001.65-1.268 4.493 4.493 0 001.268-1.65c.297-.576.499-1.25.558-2.197.059-.948.072-1.355.072-4.976 0-3.622-.014-4.029-.072-4.977-.06-.946-.262-1.62-.558-2.197a4.493 4.493 0 00-1.268-1.65A4.493 4.493 0 0019.5.63c-.576-.297-1.25-.499-2.197-.558C16.355.013 15.948 0 12.327 0H12.017zm-.017 2.17c3.548 0 3.97.014 5.373.072.918.042 1.416.196 1.747.327.44.171.754.375 1.084.705.33.33.534.644.705 1.084.131.331.285.829.327 1.747.058 1.403.072 1.825.072 5.373 0 3.548-.014 3.97-.072 5.373-.042.918-.196 1.416-.327 1.747-.171.44-.375.754-.705 1.084a2.919 2.919 0 01-1.084.705c-.331.131-.829.285-1.747.327-1.403.058-1.825.072-5.373.072-3.548 0-3.97-.014-5.373-.072-.918-.042-1.416-.196-1.747-.327a2.919 2.919 0 01-1.084-.705 2.919 2.919 0 01-.705-1.084c-.131-.331-.285-.829-.327-1.747-.058-1.403-.072-1.825-.072-5.373 0-3.548.014-3.97.072-5.373.042-.918.196-1.416.327-1.747.171-.44.375-.754.705-1.084a2.919 2.919 0 011.084-.705c.331-.131.829-.285 1.747-.327 1.403-.058 1.825-.072 5.373-.072z"/>
-                    <path d="M12.017 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12.017 16a4 4 0 110-8 4 4 0 010 8z"/>
-                    <path d="M19.846 5.595a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+                    <path d="M12.017 0C8.396 0 7.989.013 7.041.072 6.094.131 5.42.333 4.844.63c-.611.324-1.13.748-1.65 1.268a4.493 4.493 0 00-1.268 1.65c-.297.576-.499 1.25-.558 2.197C.975 7.613.96 8.02.96 11.641c0 3.622.014 4.029.072 4.977.06.946.262 1.62.558 2.197.324.611.748 1.13 1.268 1.65a4.493 4.493 0 001.65 1.268c.576.297 1.25.499 2.197.558.948.059 1.355.072 4.976.072 3.622 0 4.029-.014 4.977-.072.946-.06 1.62-.262 2.197-.558a4.493 4.493 0 001.65-1.268 4.493 4.493 0 001.268-1.65c.297-.576.499-1.25.558-2.197.059-.948.072-1.355.072-4.976 0-3.622-.014-4.029-.072-4.977-.06-.946-.262-1.62-.558-2.197a4.493 4.493 0 00-1.268-1.65A4.493 4.493 0 0019.5.63c-.576-.297-1.25-.499-2.197-.558C16.355.013 15.948 0 12.327 0H12.017zm-.017 2.17c3.548 0 3.97.014 5.373.072.918.042 1.416.196 1.747.327.44.171.754.375 1.084.705.33.33.534.644.705 1.084.131.331.285.829.327 1.747.058 1.403.072 1.825.072 5.373 0 3.548-.014 3.97-.072 5.373-.042.918-.196 1.416-.327 1.747-.171.44-.375.754-.705 1.084a2.919 2.919 0 01-1.084.705c-.331.131-.829.285-1.747.327-1.403.058-1.825.072-5.373.072-3.548 0-3.97-.014-5.373-.072-.918-.042-1.416-.196-1.747-.327a2.919 2.919 0 01-1.084-.705 2.919 2.919 0 01-.705-1.084c-.131-.331-.285-.829-.327-1.747-.058-1.403-.072-1.825-.072-5.373 0-3.548.014-3.97.072-5.373.042-.918.196-1.416.327-1.747.171-.44.375-.754.705-1.084a2.919 2.919 0 011.084-.705c.331-.131.829-.285 1.747-.327 1.403-.058 1.825-.072 5.373-.072z" />
+                    <path d="M12.017 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12.017 16a4 4 0 110-8 4 4 0 010 8z" />
+                    <path d="M19.846 5.595a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
                   </svg>
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <span className="sr-only">YouTube</span>
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                   </svg>
                 </a>
               </div>

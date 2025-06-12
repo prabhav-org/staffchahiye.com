@@ -189,7 +189,7 @@ This plan prioritizes minimal code changes while achieving maximum impact, follo
 **Mobile (<768px)**: Hero Text → Stats → Input → Video → Marquee
 
 ### 🎨 Design System:
-- **Colors**: Black (#101010), White (#fff), Orange (#FFA940)
+- **Colors**: Black (#101010), White (#fff), Orange (#ff914d)
 - **Typography**: Inter font family
 - **Spacing**: Consistent Tailwind utilities
 - **Animations**: Smooth 20s marquee, hover transitions
@@ -582,7 +582,7 @@ src/
 ### **Modal Styling Strategy:**
 - **Desktop**: 80% viewport width, max 600px, centered with backdrop blur
 - **Mobile**: Full screen (100vh) with top-right close button
-- **Color Scheme**: Black (#101010), White (#fff), Orange (#FFA940)
+- **Color Scheme**: Black (#101010), White (#fff), Orange (#ff914d)
 - **Typography**: Inter font, consistent with existing hierarchy
 - **Animations**: Smooth fade-in/out with scale transform
 
