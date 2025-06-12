@@ -235,7 +235,7 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
               Submitting...
             </div>
           ) : (
-            'Submit Requirements'
+            'Submit & Continue'
           )}
         </button>
       </div>
