@@ -16,6 +16,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSliding, setIsSliding] = useState(false);
   const [direction, setDirection] = useState("right"); // or "left"
+  const [nextIndex, setNextIndex] = useState<number|null>(null);
 
   // Phone validation hook
   const {
@@ -101,12 +102,26 @@ function App() {
   const [testimonialIndex, setTestimonialIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
+    if (!isSliding) {
+      const interval = setInterval(() => {
+        setDirection("right");
+        setNextIndex((testimonialIndex + 1) % testimonials.length);
+        setIsSliding(true);
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [testimonials.length, testimonialIndex, isSliding]);
 
+  useEffect(() => {
+    if (isSliding && nextIndex !== null) {
+      const timeout = setTimeout(() => {
+        setTestimonialIndex(nextIndex);
+        setIsSliding(false);
+        setNextIndex(null);
+      }, 400); // match duration-400
+      return () => clearTimeout(timeout);
+    }
+  }, [isSliding, nextIndex]);
 
   // Auto-rotation effect - cycle through features every 3 seconds
   useEffect(() => {
@@ -150,6 +165,20 @@ function App() {
   // Handle modal close
   const handleModalClose = () => {
     setIsModalOpen(false);
+  };
+
+  const handlePrev = () => {
+    if (isSliding) return;
+    setDirection("left");
+    setNextIndex((testimonialIndex - 1 + testimonials.length) % testimonials.length);
+    setIsSliding(true);
+  };
+
+  const handleNext = () => {
+    if (isSliding) return;
+    setDirection("right");
+    setNextIndex((testimonialIndex + 1) % testimonials.length);
+    setIsSliding(true);
   };
 
   return (
@@ -443,8 +472,8 @@ function App() {
                     {/* Current card */}
                     <div className={`
                       testimonial-container rounded-2xl p-8 lg:p-12 absolute inset-0 w-full transition-all duration-400 ease-in-out
-                      ${transitioning
-                        ? (slideDirection === "right"
+                      ${isSliding
+                        ? (direction === "right"
                             ? "-translate-x-32 opacity-0"
                             : "translate-x-32 opacity-0")
                         : "translate-x-0 opacity-100"}
@@ -491,10 +520,10 @@ function App() {
                       </div>
                     </div>
                     {/* Next card (only during transition) */}
-                    {transitioning && nextIndex !== null && (
+                    {isSliding && nextIndex !== null && (
                       <div className={`
                         testimonial-container rounded-2xl p-8 lg:p-12 absolute inset-0 w-full transition-all duration-400 ease-in-out
-                        ${slideDirection === "right"
+                        ${direction === "right"
                           ? "translate-x-32 opacity-0"
                           : "-translate-x-32 opacity-0"}
                         z-20
@@ -543,7 +572,7 @@ function App() {
                     {/* Slideshow Controls */}
                     <button
                       onClick={handlePrev}
-                      disabled={transitioning}
+                      disabled={isSliding}
                       className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2"
                       aria-label="Previous"
                     >
@@ -553,7 +582,7 @@ function App() {
                     </button>
                     <button
                       onClick={handleNext}
-                      disabled={transitioning}
+                      disabled={isSliding}
                       className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2"
                       aria-label="Next"
                     >
