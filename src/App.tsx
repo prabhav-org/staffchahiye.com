@@ -223,17 +223,22 @@ function App() {
                 {/* Marquee Brands Section */}
                 <div className="bg-gray-50 py-6">
                   <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="mb-4 text-center">
+                    <div className="mb-12 mt-6 text-center">
                       <h3 className="text-sm lg:text-base font-semibold text-gray-900">Trusted by 1000+ enterprises and 7 lakhs+ MSMEs for hiring</h3>
                     </div>
                     <div className="overflow-hidden">
                       <div className="flex items-center whitespace-nowrap marquee">
-                        <img src="https://ext.same-assets.com/2583224959/3153208819.png" alt="logo1" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
-                        <img src="https://ext.same-assets.com/2583224959/1201393804.png" alt="logo2" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
-                        <img src="https://ext.same-assets.com/2583224959/2358811312.png" alt="logo3" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
-                        <img src="https://ext.same-assets.com/2583224959/3153208819.png" alt="logo4" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
-                        <img src="https://ext.same-assets.com/2583224959/1201393804.png" alt="logo5" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
-                        <img src="https://ext.same-assets.com/2583224959/2358811312.png" alt="logo6" className="h-8 mx-8 opacity-60 hover:opacity-100 transition-opacity" />
+                        <img src="/Brands/Adani-Green-Energy-PNG-Image.png" alt="logo1" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/barbeque-nation-seeklogo.png" alt="logo2" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/bhu.jpg" alt="logo3" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/Bikanervala_logo main.png" alt="logo4" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/haldirams-seeklogo.png" alt="logo5" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/IRCTC-Symbol.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/OYO_Rooms_(logo).png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/Radisson_Blu_logo.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/Saravanaa_Bhavan_Logo.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/Taj_Hotels_logo.svg.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/logo_nsdc.svg" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
                       </div>
                     </div>
                   </div>
