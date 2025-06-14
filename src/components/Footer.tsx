@@ -54,30 +54,30 @@ const Footer: React.FC = () => {
             <div>
               <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY CITY</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Mumbai</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Delhi</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Varanasi</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Lucknow</a></li>
+                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Mumbai</a></li>
+                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Delhi</a></li>
+                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Varanasi</a></li>
+                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Lucknow</a></li>
               </ul>
             </div>
             <div>
               <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY JOBS</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Waiter</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Helper</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Chef/Cook</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Housekeeping</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Other</a></li>
+                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Waiter</a></li>
+                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Helper</a></li>
+                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Chef/Cook</a></li>
+                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Housekeeping</a></li>
+                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Other</a></li>
               </ul>
             </div>
             {/* Get to Know Us Links */}
             <div>
               <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">PAGES</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Blogs</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Help</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
+                {/* <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Blogs</a></li> */}
+                <li><a href="/contact-us" className="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
+                <li><a href="/contact-us" className="text-gray-400 hover:text-white transition-colors text-sm">Help</a></li>
+                <li><a href="/about-us" className="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
               </ul>
             </div>
           </div>
