@@ -10,6 +10,7 @@ import RefundPolicy from "./components/RefundPolicy";
 import Pricing from "./components/Pricing";
 import Blogs from "./components/Blogs";
 import ContactUs from "./components/ContactUs";
+import AboutUs from "./components/AboutUs";
 import logo from './assets/Untitled design (3).svg';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   const [isSliding, setIsSliding] = useState(false);
   const [direction, setDirection] = useState("right"); // or "left"
   const [nextIndex, setNextIndex] = useState<number|null>(null);
+  const [showMoreRoles, setShowMoreRoles] = useState<boolean>(false);
 
   // Phone validation hook
   const {
@@ -239,8 +241,9 @@ function App() {
                   {/* Navigation - Desktop */}
                   <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
                     <a href="/" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Home</a>
-                    <a href="/pricing" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
-                    <a href="/blogs" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a>
+                    <a href="/about-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">About Us</a>
+                    {/* <a href="/pricing" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
+                    <a href="/blogs" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a> */}
                     <a href="/contact-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Contact Us</a>
                   </nav>
 
@@ -248,8 +251,9 @@ function App() {
                   <div className={`lg:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-100 shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                     <nav className="flex flex-col py-4">
                       <a href="/" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Home</a>
-                      <a href="/blogs" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Blogs</a>
-                      <a href="/pricing" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a>
+                      <a href="/about-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">About Us</a>
+                      {/* <a href="/blogs" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Blogs</a> */}
+                      {/* <a href="/pricing" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a> */}
                       <a href="/contact-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Contact Us</a>
                     </nav>
                   </div>
@@ -273,15 +277,15 @@ function App() {
                       {/* Statistics Section */}
                       <div className="flex flex-wrap items-center gap-6 lg:gap-8 mb-8">
                         <div>
-                          <div className="text-xl lg:text-2xl font-bold text-gray-900">1Lakh+</div>
+                          <div className="text-xl lg:text-2xl font-bold text-gray-900">50,000+</div>
                           <div className="text-xs lg:text-sm text-gray-500">Pre-Screened candidates</div>
                         </div>
                         <div>
-                          <div className="text-xl lg:text-2xl font-bold text-gray-900">5,000+</div>
+                          <div className="text-xl lg:text-2xl font-bold text-gray-900">1,000+</div>
                           <div className="text-xs lg:text-sm text-gray-500">Businesses</div>
                         </div>
                         <div>
-                          <div className="text-xl lg:text-2xl font-bold text-gray-900">300+</div>
+                          <div className="text-xl lg:text-2xl font-bold text-gray-900">50+</div>
                           <div className="text-xs lg:text-sm text-gray-500">Available cities</div>
                         </div>
                       </div>
@@ -423,6 +427,85 @@ function App() {
                         />
                       </div>
                     </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Role Selection Section - Enhanced */}
+              <section className="py-20 bg-gradient-to-br from-orange-50 via-white to-orange-100 relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                  <svg width="100%" height="100%" className="opacity-10" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="80%" cy="20%" r="200" fill="#fdba74" />
+                    <circle cx="20%" cy="80%" r="150" fill="#fbbf24" />
+                  </svg>
+                </div>
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                  <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-900">
+                    <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">What kind of a role do you want?</span>
+                    <div className="mx-auto mt-2 w-24 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full"></div>
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    {[
+                      { name: 'Waiter', image: '/JOBS/waiter.png' },
+                      { name: 'Chef', image: '/JOBS/chef.webp' },
+                      { name: 'Housekeeping', image: '/JOBS/housekeeping.webp' },
+                      { name: 'Driver', image: '/JOBS/driver.webp' },
+                      { name: 'Helper', image: '/JOBS/helper.webp' },
+                      { name: 'Labour', image: '/JOBS/manufacturing.webp' },
+                      { name: 'Kitchen Staff', image: '/JOBS/cook_chef.webp' },
+                      { name: 'Security Guard', image: '/JOBS/security_guard.webp' },
+                    ].map((role, idx) => (
+                      <div
+                        key={role.name}
+                        className={`transition-all duration-300 ${
+                          idx >= 4 && !showMoreRoles ? 'hidden md:block' : ''
+                        }`}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => setIsModalOpen(true)}
+                          className="w-full bg-white rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 hover:border-orange-400 border border-transparent transition-all duration-300 flex flex-col animate-fade-in focus:outline-none focus:ring-2 focus:ring-orange-400"
+                          style={{ animationDelay: `${idx * 80}ms` }}
+                        >
+                          {/* Image container */}
+                          <div className="h-44 w-full bg-gray-200 flex items-center justify-center rounded-t-2xl overflow-hidden">
+                            <img
+                              src={role.image}
+                              alt={role.name}
+                              className="object-cover w-full h-full"
+                            />
+                          </div>
+                          <div className="p-6 flex-1 flex flex-col justify-center items-center">
+                            <div className="font-bold text-xl text-gray-900 mb-1">{role.name}</div>
+                          </div>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Show More Button - Only visible on mobile when there are more roles to show */}
+                  <div className="mt-8 text-center md:hidden">
+                    <button
+                      type="button"
+                      onClick={() => setShowMoreRoles(!showMoreRoles)}
+                      className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors"
+                    >
+                      {showMoreRoles ? 'Show Less' : 'Show More Jobs'}
+                      <svg
+                        className={`ml-2 w-5 h-5 transition-transform duration-300 ${
+                          showMoreRoles ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
                   </div>
                 </div>
               </section>
@@ -768,6 +851,7 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/about-us" element={<AboutUs />} />
         </Routes>
       </BrowserRouter>
     </div>

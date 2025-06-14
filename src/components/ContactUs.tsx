@@ -10,6 +10,7 @@ const ContactUs: React.FC = () => {
         subject: '',
         message: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -19,10 +20,22 @@ const ContactUs: React.FC = () => {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission here
-        console.log('Form submitted:', formData);
+        setIsSubmitting(true);
+        
+        // Simulate form submission
+        setTimeout(() => {
+            setIsSubmitting(false);
+            alert('Thank you for your message! We will get back to you soon.');
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                subject: '',
+                message: ''
+            });
+        }, 1000);
     };
 
     return (
@@ -38,7 +51,7 @@ const ContactUs: React.FC = () => {
                                 <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transform scale-x-75"></div>
                             </h1>
                             <p className="text-lg text-gray-600 mt-6">Get in touch with us for any questions or concerns</p>
-                            <p className="text-sm text-orange-500 mt-2">Handled by SuZzan</p>
+                            <p className="text-sm text-orange-500 mt-2">Managed by Sujan Kumar</p>
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -67,7 +80,7 @@ const ContactUs: React.FC = () => {
                                             </div>
                                             <div>
                                                 <h3 className="text-lg font-semibold text-gray-900 group-hover:text-orange-500 transition-colors">Call Us</h3>
-                                                <p className="text-gray-600 mt-1 hover:text-orange-500 transition-colors">+91 xyz</p>
+                                                <p className="text-gray-600 mt-1 hover:text-orange-500 transition-colors">+91 7304216059</p>
                                             </div>
                                         </div>
 
@@ -80,7 +93,7 @@ const ContactUs: React.FC = () => {
                                             </div>
                                             <div>
                                                 <h3 className="text-lg font-semibold text-gray-900 group-hover:text-orange-500 transition-colors">Visit Us</h3>
-                                                <p className="text-gray-600 mt-1 hover:text-orange-500 transition-colors">India</p>
+                                                <p className="text-gray-600 mt-1 hover:text-orange-500 transition-colors">AIC, 5th Floor, CDC Building, BHU, Varanasi, India - 221005</p>
                                             </div>
                                         </div>
                                     </div>
@@ -189,9 +202,22 @@ const ContactUs: React.FC = () => {
                                     <div className="flex justify-center pt-4">
                                         <button
                                             type="submit"
-                                            className="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-lg hover:from-orange-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                            disabled={isSubmitting}
+                                            className={`px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-lg hover:from-orange-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl ${
+                                                isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
+                                            }`}
                                         >
-                                            Send Message
+                                            {isSubmitting ? (
+                                                <div className="flex items-center">
+                                                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                    </svg>
+                                                    Sending...
+                                                </div>
+                                            ) : (
+                                                'Send Message'
+                                            )}
                                         </button>
                                     </div>
                                 </form>
