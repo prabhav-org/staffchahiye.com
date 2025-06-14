@@ -7,6 +7,9 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 import TermsAndConditions from "./components/TermsAndConditions";
 import RefundPolicy from "./components/RefundPolicy";
+import Pricing from "./components/Pricing";
+import Blogs from "./components/Blogs";
+import ContactUs from "./components/ContactUs";
 import logo from './assets/Untitled design (3).svg';
 
 function App() {
@@ -235,18 +238,19 @@ function App() {
 
                   {/* Navigation - Desktop */}
                   <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
-                    <a href="app.tsx" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Home</a>
-                    <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
-                    <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a>
-                    <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Contact Us</a>
+                    <a href="/" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Home</a>
+                    <a href="/pricing" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
+                    <a href="/blogs" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a>
+                    <a href="/contact-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Contact Us</a>
                   </nav>
 
                   {/* Mobile Menu */}
                   <div className={`lg:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-100 shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                     <nav className="flex flex-col py-4">
-                      <a href="#" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Product</a>
-                      <a href="#" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Blogs</a>
-                      <a href="#" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a>
+                      <a href="/" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Home</a>
+                      <a href="/blogs" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Blogs</a>
+                      <a href="/pricing" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a>
+                      <a href="/contact-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Contact Us</a>
                     </nav>
                   </div>
                 </header>
@@ -356,7 +360,7 @@ function App() {
                         <img src="/Brands/OYO_Rooms_(logo).png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
                         <img src="/Brands/Radisson_Blu_logo.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
                         <img src="/Brands/Saravanaa_Bhavan_Logo.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/Taj_Hotels_logo.svg.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/Taj_Hotels_Untitled design (3).svg.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
                         <img src="/Brands/logo_nsdc.svg" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
                       </div>
                     </div>
@@ -761,6 +765,9 @@ function App() {
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
         </Routes>
       </BrowserRouter>
     </div>
