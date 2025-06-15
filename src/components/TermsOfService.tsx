@@ -100,7 +100,7 @@ const TermsOfService: React.FC = () => {
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4">14. Governing Law & Dispute Resolution</h2>
-                <p className="mb-2">These Terms are governed by the laws of India. Any dispute shall be resolved exclusively in the court of Uttar Pradesh, India.</p>
+                <p className="mb-2">These Terms are governed by the laws of India. Any dispute shall be resolved exclusively in the courts of Uttar Pradesh, India.</p>
               </section>
 
               <section className="mb-8">

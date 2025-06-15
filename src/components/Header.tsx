@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/Untitled design (3).svg';
+import logo from '../assets/logo.svg';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
