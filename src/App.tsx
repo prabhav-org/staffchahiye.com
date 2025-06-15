@@ -6,6 +6,11 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 import TermsAndConditions from "./components/TermsAndConditions";
+import RefundPolicy from "./components/RefundPolicy";
+import Pricing from "./components/Pricing";
+import Blogs from "./components/Blogs";
+import ContactUs from "./components/ContactUs";
+import AboutUs from "./components/AboutUs";
 import logo from './assets/Untitled design (3).svg';
 
 function App() {
@@ -17,6 +22,7 @@ function App() {
   const [isSliding, setIsSliding] = useState(false);
   const [direction, setDirection] = useState("right"); // or "left"
   const [nextIndex, setNextIndex] = useState<number|null>(null);
+  const [showMoreRoles, setShowMoreRoles] = useState<boolean>(false);
 
   // Phone validation hook
   const {
@@ -63,40 +69,44 @@ function App() {
   const testimonials = [
     {
       image: "/testimonials/Picture1.jpg",
-      quote: "We hired waitstaff and kitchen helpers for our annual corporate event, and the team was absolutely professional. They were punctual, well-trained, and handled everything smoothly. Our guests were genuinely impressed. Highly recommended for hassle-free staffing!",
+      quote: "We hired waitstaff and kitchen helpers for our annual corporate event, and the team was absolutely professional. They handled everything smoothly. Our guests were genuinely impressed!",
       author: "Aman Raghuvanshi",
       role: "Manager",
-      company: "Bikanerwala"
+      company: "Bikanerwala",
+      logo: "/Brands/Bikanervala_logo main.png"
     },
     {
       image: "/testimonials/Picture2.jpg",
-      quote: "Finding good chefs and kitchen staff is always tough, but this service made it incredibly easy. The chef they provided was skilled, hygienic, and well-mannered. Definitely coming back for future staffing needs",
+      quote: "Finding good chefs and kitchen staff is always tough, but they made it incredibly easy. The chef was skilled and well-mannered. Definitely coming back for future staffing needs",
       author: "Sameer Khanna",
       role: "Manager",
-      company: "Barbeque Nation"
+      company: "Barbeque Nation",
+      logo: "/Brands/barbeque-nation-seeklogo.png"
     },
     {
       image: "/testimonials/Picture3.jpg",
       quote: "Reliable and professional staff every time. Whether it's a last-minute kitchen helper or a full housekeeping team, they always deliver quality. Great coordination and service.",
       author: "Ajay Sahu",
       role: "HR",
-      company: "Radisson Blu"
+      company: "Radisson Blu",
+      logo: "/Brands/Radisson_Blu_logo.png"
     },
     {
       image: "/testimonials/Picture4.jpg",
-      quote: "Being a  hotel, it's hard to find reliable housekeeping and kitchen help on short notice. But this service has been our go-to. Their team is responsive and always sends well-trained people",
+      quote: "Being a hotel, it's hard to find reliable housekeeping and kitchen help on short notice. But this service has been our go-to. Their team is responsive and always sends well-trained people",
       author: "Tushar Sharma",
       role: "Operations Head",
-      company: "OYO"
+      company: "OYO",
+      logo: "/Brands/OYO_Rooms_(logo).png"
     },
     {
       image: "/testimonials/Picture5.jpg",
-      quote: "We hired additional kitchen helpers and servers for a big outdoor catering event. They arrived on time, were proactive, and didn't need much supervision. Their energy and attitude made a big difference.",
+      quote: "We hired additional kitchen helpers and servers for a big outdoor catering event. They arrived on time and didn't need much supervision. Their energy and attitude made a big difference.",
       author: "Jasleen Kaur",
       role: "Manager",
-      company: "Haldiram's"
+      company: "Haldiram's",
+      logo: "/Brands/haldirams-seeklogo.png"
     }
-    // Add more as needed
   ];
 
   const [testimonialIndex, setTestimonialIndex] = useState(0);
@@ -230,17 +240,21 @@ function App() {
 
                   {/* Navigation - Desktop */}
                   <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
-                    <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Product</a>
-                    <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a>
-                    <a href="#" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
+                    <a href="/" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Home</a>
+                    <a href="/about-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">About Us</a>
+                    {/* <a href="/pricing" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
+                    <a href="/blogs" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a> */}
+                    <a href="/contact-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Contact Us</a>
                   </nav>
 
                   {/* Mobile Menu */}
                   <div className={`lg:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-100 shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                     <nav className="flex flex-col py-4">
-                      <a href="#" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Product</a>
-                      <a href="#" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Blogs</a>
-                      <a href="#" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a>
+                      <a href="/" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Home</a>
+                      <a href="/about-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">About Us</a>
+                      {/* <a href="/blogs" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Blogs</a> */}
+                      {/* <a href="/pricing" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a> */}
+                      <a href="/contact-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Contact Us</a>
                     </nav>
                   </div>
                 </header>
@@ -255,7 +269,7 @@ function App() {
                       {/* Hero Text */}
                       <div className="mb-8">
                         <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-                          Hire candidates in under 30 minutes with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
+                          Hire candidates in &lt;30 minutes with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
                         </h1>
                         <p className="text-base lg:text-lg text-gray-600 leading-relaxed">Streamline your recruitment with AI-driven precision. Single solution from Fresher to experienced hiring.</p>
                       </div>
@@ -263,15 +277,15 @@ function App() {
                       {/* Statistics Section */}
                       <div className="flex flex-wrap items-center gap-6 lg:gap-8 mb-8">
                         <div>
-                          <div className="text-xl lg:text-2xl font-bold text-gray-900">1Lakh+</div>
+                          <div className="text-xl lg:text-2xl font-bold text-gray-900">50,000+</div>
                           <div className="text-xs lg:text-sm text-gray-500">Pre-Screened candidates</div>
                         </div>
                         <div>
-                          <div className="text-xl lg:text-2xl font-bold text-gray-900">5,000+</div>
+                          <div className="text-xl lg:text-2xl font-bold text-gray-900">1,000+</div>
                           <div className="text-xs lg:text-sm text-gray-500">Businesses</div>
                         </div>
                         <div>
-                          <div className="text-xl lg:text-2xl font-bold text-gray-900">500+</div>
+                          <div className="text-xl lg:text-2xl font-bold text-gray-900">50+</div>
                           <div className="text-xs lg:text-sm text-gray-500">Available cities</div>
                         </div>
                       </div>
@@ -337,7 +351,7 @@ function App() {
                 <div className="bg-gray-50 py-6">
                   <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="mb-12 mt-6 text-center">
-                      <h3 className="text-sm lg:text-base font-semibold text-gray-900">Trusted by 1000+ enterprises and 7 lakhs+ MSMEs for hiring</h3>
+                      <h3 className="text-sm lg:text-base font-semibold text-gray-900">Trusted by 1000+ businesses for hiring</h3>
                     </div>
                     <div className="overflow-hidden">
                       <div className="flex items-center whitespace-nowrap marquee">
@@ -350,7 +364,7 @@ function App() {
                         <img src="/Brands/OYO_Rooms_(logo).png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
                         <img src="/Brands/Radisson_Blu_logo.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
                         <img src="/Brands/Saravanaa_Bhavan_Logo.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/Taj_Hotels_logo.svg.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/Brands/Taj_Hotels_Untitled design (3).svg.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
                         <img src="/Brands/logo_nsdc.svg" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
                       </div>
                     </div>
@@ -417,6 +431,85 @@ function App() {
                 </div>
               </section>
 
+              {/* Role Selection Section - Enhanced */}
+              <section className="py-20 bg-gradient-to-br from-orange-50 via-white to-orange-100 relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                  <svg width="100%" height="100%" className="opacity-10" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="80%" cy="20%" r="200" fill="#fdba74" />
+                    <circle cx="20%" cy="80%" r="150" fill="#fbbf24" />
+                  </svg>
+                </div>
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                  <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-900">
+                    <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">What kind of a role do you want?</span>
+                    <div className="mx-auto mt-2 w-24 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full"></div>
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    {[
+                      { name: 'Waiter', image: '/JOBS/waiter.png' },
+                      { name: 'Chef', image: '/JOBS/chef.webp' },
+                      { name: 'Housekeeping', image: '/JOBS/housekeeping.webp' },
+                      { name: 'Driver', image: '/JOBS/driver.webp' },
+                      { name: 'Helper', image: '/JOBS/helper.webp' },
+                      { name: 'Labour', image: '/JOBS/manufacturing.webp' },
+                      { name: 'Kitchen Staff', image: '/JOBS/cook_chef.webp' },
+                      { name: 'Security Guard', image: '/JOBS/security_guard.webp' },
+                    ].map((role, idx) => (
+                      <div
+                        key={role.name}
+                        className={`transition-all duration-300 ${
+                          idx >= 4 && !showMoreRoles ? 'hidden md:block' : ''
+                        }`}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => setIsModalOpen(true)}
+                          className="w-full bg-white rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 hover:border-orange-400 border border-transparent transition-all duration-300 flex flex-col animate-fade-in focus:outline-none focus:ring-2 focus:ring-orange-400"
+                          style={{ animationDelay: `${idx * 80}ms` }}
+                        >
+                          {/* Image container */}
+                          <div className="h-44 w-full bg-gray-200 flex items-center justify-center rounded-t-2xl overflow-hidden">
+                            <img
+                              src={role.image}
+                              alt={role.name}
+                              className="object-cover w-full h-full"
+                            />
+                          </div>
+                          <div className="p-6 flex-1 flex flex-col justify-center items-center">
+                            <div className="font-bold text-xl text-gray-900 mb-1">{role.name}</div>
+                          </div>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Show More Button - Only visible on mobile when there are more roles to show */}
+                  <div className="mt-8 text-center md:hidden">
+                    <button
+                      type="button"
+                      onClick={() => setShowMoreRoles(!showMoreRoles)}
+                      className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors"
+                    >
+                      {showMoreRoles ? 'Show Less' : 'Show More Jobs'}
+                      <svg
+                        className={`ml-2 w-5 h-5 transition-transform duration-300 ${
+                          showMoreRoles ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </section>
+
               {/* Testimonial & Stats Section */}
               <section className="py-16 lg:py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -468,10 +561,10 @@ function App() {
                   </div>
 
                   {/* Testimonial Slideshow */}
-                  <div className="relative h-[340px]">
+                  <div className="relative h-[340px] lg:h-[280px] overflow-hidden">
                     {/* Current card */}
                     <div className={`
-                      testimonial-container rounded-2xl p-8 lg:p-12 absolute inset-0 w-full transition-all duration-400 ease-in-out
+                      testimonial-container rounded-2xl p-4 lg:p-6 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                       ${isSliding
                         ? (direction === "right"
                             ? "-translate-x-32 opacity-0"
@@ -479,10 +572,10 @@ function App() {
                         : "translate-x-0 opacity-100"}
                       z-10
                     `}>
-                      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
+                      <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 h-full">
                         {/* Testimonial Photo */}
-                        <div className="flex-shrink-0 order-1 lg:order-1">
-                          <div className="testimonial-photo w-32 h-32 lg:w-40 lg:h-40 rounded-2xl overflow-hidden">
+                        <div className="flex-shrink-0">
+                          <div className="testimonial-photo w-24 h-24 lg:w-28 lg:h-28 rounded-2xl overflow-hidden">
                             <img
                               src={testimonials[testimonialIndex].image}
                               alt={testimonials[testimonialIndex].author}
@@ -491,47 +584,41 @@ function App() {
                           </div>
                         </div>
                         {/* Testimonial Content */}
-                        <div className="flex-1 order-2 lg:order-2 text-center lg:text-left">
-                          <div className="mb-6">
-                            <p className="testimonial-quote text-lg lg:text-xl text-gray-800 leading-relaxed mb-6">
+                        <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[200px] lg:max-h-[200px] flex flex-col justify-center">
+                          <div className="mb-2 lg:mb-3">
+                            <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-2 lg:mb-3">
                               {testimonials[testimonialIndex].quote}
                             </p>
-                            {/* Dotted separator line */}
-                            <div className="dotted-separator flex items-center justify-center lg:justify-start mb-6">
-                              <div className="flex space-x-1">
-                                {[...Array(20)].map((_, i) => (
-                                  <div key={i} className="w-1 h-1 bg-gray-300 rounded-full"></div>
-                                ))}
-                              </div>
-                              <div className="ml-4">
-                                <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                                </svg>
-                              </div>
-                            </div>
                           </div>
                           {/* Author Info */}
-                          <div className="mb-6">
-                            <div className="font-semibold text-gray-900 text-lg">{testimonials[testimonialIndex].author}</div>
-                            <div className="text-gray-600">{testimonials[testimonialIndex].role}</div>
-                            <div className="text-gray-600">{testimonials[testimonialIndex].company}</div>
+                          <div className="mb-2 lg:mb-3">
+                            <div className="font-semibold text-gray-900 text-base lg:text-lg">{testimonials[testimonialIndex].author}</div>
+                            <div className="text-gray-600 text-sm lg:text-base">{testimonials[testimonialIndex].role}</div>
+                            <div className="mt-1">
+                              <img 
+                                src={testimonials[testimonialIndex].logo} 
+                                alt={testimonials[testimonialIndex].company}
+                                className="h-7 lg:h-8 object-contain"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
+
                     {/* Next card (only during transition) */}
                     {isSliding && nextIndex !== null && (
                       <div className={`
-                        testimonial-container rounded-2xl p-8 lg:p-12 absolute inset-0 w-full transition-all duration-400 ease-in-out
+                        testimonial-container rounded-2xl p-4 lg:p-6 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                         ${direction === "right"
                           ? "translate-x-32 opacity-0"
                           : "-translate-x-32 opacity-0"}
                         z-20
                       `}>
-                        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
+                        <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 h-full">
                           {/* Testimonial Photo */}
-                          <div className="flex-shrink-0 order-1 lg:order-1">
-                            <div className="testimonial-photo w-32 h-32 lg:w-40 lg:h-40 rounded-2xl overflow-hidden">
+                          <div className="flex-shrink-0">
+                            <div className="testimonial-photo w-24 h-24 lg:w-28 lg:h-28 rounded-2xl overflow-hidden">
                               <img
                                 src={testimonials[nextIndex].image}
                                 alt={testimonials[nextIndex].author}
@@ -540,56 +627,52 @@ function App() {
                             </div>
                           </div>
                           {/* Testimonial Content */}
-                          <div className="flex-1 order-2 lg:order-2 text-center lg:text-left">
-                            <div className="mb-6">
-                              <p className="testimonial-quote text-lg lg:text-xl text-gray-800 leading-relaxed mb-6">
+                          <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[200px] lg:max-h-[200px] flex flex-col justify-center">
+                            <div className="mb-2 lg:mb-3">
+                              <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-2 lg:mb-3">
                                 {testimonials[nextIndex].quote}
                               </p>
-                              {/* Dotted separator line */}
-                              <div className="dotted-separator flex items-center justify-center lg:justify-start mb-6">
-                                <div className="flex space-x-1">
-                                  {[...Array(20)].map((_, i) => (
-                                    <div key={i} className="w-1 h-1 bg-gray-300 rounded-full"></div>
-                                  ))}
-                                </div>
-                                <div className="ml-4">
-                                  <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                                  </svg>
-                                </div>
-                              </div>
                             </div>
                             {/* Author Info */}
-                            <div className="mb-6">
-                              <div className="font-semibold text-gray-900 text-lg">{testimonials[nextIndex].author}</div>
-                              <div className="text-gray-600">{testimonials[nextIndex].role}</div>
-                              <div className="text-gray-600">{testimonials[nextIndex].company}</div>
+                            <div className="mb-2 lg:mb-3">
+                              <div className="font-semibold text-gray-900 text-base lg:text-lg">{testimonials[nextIndex].author}</div>
+                              <div className="text-gray-600 text-sm lg:text-base">{testimonials[nextIndex].role}</div>
+                              <div className="mt-1">
+                                <img 
+                                  src={testimonials[nextIndex].logo} 
+                                  alt={testimonials[nextIndex].company}
+                                  className="h-7 lg:h-8 object-contain"
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     )}
-                    {/* Slideshow Controls */}
-                    <button
-                      onClick={handlePrev}
-                      disabled={isSliding}
-                      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2"
-                      aria-label="Previous"
-                    >
-                      <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-                    <button
-                      onClick={handleNext}
-                      disabled={isSliding}
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2"
-                      aria-label="Next"
-                    >
-                      <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
+
+                    {/* Slideshow Controls - Positioned on sides */}
+                    <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 z-[100] pointer-events-none">
+                      <button
+                        onClick={handlePrev}
+                        disabled={isSliding}
+                        className="bg-gray-200/50 hover:bg-gray-300/50 backdrop-blur-sm rounded-full p-2 pointer-events-auto transition-colors"
+                        aria-label="Previous"
+                      >
+                        <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={handleNext}
+                        disabled={isSliding}
+                        className="bg-gray-200/50 hover:bg-gray-300/50 backdrop-blur-sm rounded-full p-2 pointer-events-auto transition-colors"
+                        aria-label="Next"
+                      >
+                        <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -656,17 +739,12 @@ function App() {
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
                     {/* Logo + Social Media Icons */}
                     <div className="md:col-span-1">
-                      <div className="flex items-center mb-6">
-                        <div className="bg-white rounded-lg p-2 mr-4">
-                          <div className="font-extrabold text-lg text-black">SC</div>
-                        </div>
-                        <div className="font-extrabold text-xl" style={{ color: 'var(--brand-orange)' }}>
-                          StaffChahiye
-                        </div>
+                      <div className="flex items-start mb-6 -ml-4">
+                        <img src="/footerLogo.png" alt="StaffChahiye" className="h-16 lg:h-20" />
                       </div>
 
                       {/* Social Media Icons */}
-                      <div className="flex gap-4">
+                      <div className="flex gap-4 items-start">
                         <a href="#" className="text-gray-400 hover:text-white transition-colors">
                           <span className="sr-only">Facebook</span>
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -706,30 +784,30 @@ function App() {
                     <div>
                       <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY CITY</h3>
                       <ul className="space-y-3">
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Mumbai</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Delhi</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Varanasi</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Lucknow</a></li>
+                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Mumbai</a></li>
+                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Delhi</a></li>
+                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Varanasi</a></li>
+                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Lucknow</a></li>
                       </ul>
                     </div>
                     <div>
                       <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY JOBS</h3>
                       <ul className="space-y-3">
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Waiter</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Helper</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Chef/Cook</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Housekeeping</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Other</a></li>
+                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Waiter</a></li>
+                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Helper</a></li>
+                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Chef/Cook</a></li>
+                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Housekeeping</a></li>
+                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Other</a></li>
                       </ul>
                     </div>
                     {/* Get to Know Us Links */}
                     <div>
                       <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">PAGES</h3>
                       <ul className="space-y-3">
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Blogs</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Help</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
+                        {/* <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Blogs</a></li> */}
+                        <li><a href="/contact-us" className="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
+                        <li><a href="/contact-us" className="text-gray-400 hover:text-white transition-colors text-sm">Help</a></li>
+                        <li><a href="/about-us" className="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
                       </ul>
                     </div>
 
@@ -741,7 +819,7 @@ function App() {
                   <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                       <div className="text-gray-400 text-sm">
-                        © 2024 StaffChahiye | All rights reserved.
+                        © 2024 StaffChahiye | All rights reserved | Managed by Sujan Kumar
                       </div>
                       <div className="flex gap-6 text-sm">
                         <Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy policy</Link>
@@ -769,6 +847,11 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/about-us" element={<AboutUs />} />
         </Routes>
       </BrowserRouter>
     </div>

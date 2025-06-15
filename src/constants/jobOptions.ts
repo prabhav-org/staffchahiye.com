@@ -51,13 +51,11 @@ export const workingHoursOptions = [
 ];
 
 export const otherBenefitsOptions = [
-  'None',
+  'Food Included',
+  'Accommodation Included',
   'Provident Fund (PF)',
-  'Employee State Insurance (ESI)',
-  'Food / Meal Allowance',
-  'Accommodation',
-  'Travel Allowance',
-  'Health Insurance',
+  'Paid Leaves',
   'Bonus',
-  'Paid Time Off (PTO)'
+  'Travel Allowance',
+  'Health Allowance'
 ]; 
