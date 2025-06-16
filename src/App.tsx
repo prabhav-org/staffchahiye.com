@@ -209,19 +209,19 @@ function App() {
             <React.Fragment>
               {/* Hero Section */}
               <section className="w-full bg-white border-b border-gray-100">
-                <header className="max-w-7xl mx-auto px-6 lg:px-8 h-30 py-2 flex items-center justify-between relative nav-separator">
+                <header className="max-w-7xl mx-auto px-6 lg:px-8 h-16 lg:h-30 py-2 flex items-center justify-between relative nav-separator">
                   {/* Logo container */}
-                  <div className="h-20 flex items-center overflow-hidden mx-3 py-2">
-                    <img src={logo} alt="logo" className="h-20 w-auto object-contain m-0 p-0 align-middle" />
+                  <div className="h-12 lg:h-20 flex items-center overflow-hidden mx-3 py-2">
+                    <img src={logo} alt="logo" className="h-12 lg:h-20 w-auto object-contain m-0 p-0 align-middle" />
                   </div>
                   
                   {/* Hamburger Menu Button (Mobile) */}
                   <button 
-                    className="lg:hidden flex items-center justify-center h-15 w-15 p-0 m-0 rounded-md hover:bg-gray-100 focus:outline-none mx-3 py-2"
+                    className="lg:hidden flex items-center justify-center h-8 w-8 p-0 m-0 rounded-md hover:bg-gray-100 focus:outline-none mx-3 py-2"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                   >
                     <svg 
-                      className="w-10 h-10 text-gray-700" 
+                      className="w-6 h-6 text-gray-700" 
                       fill="none" 
                       strokeLinecap="round" 
                       strokeLinejoin="round" 
@@ -242,8 +242,6 @@ function App() {
                   <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
                     <a href="/" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Home</a>
                     <a href="/about-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">About Us</a>
-                    {/* <a href="/pricing" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
-                    <a href="/blogs" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a> */}
                     <a href="/contact-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Contact Us</a>
                   </nav>
 
@@ -252,8 +250,6 @@ function App() {
                     <nav className="flex flex-col py-4">
                       <a href="/" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Home</a>
                       <a href="/about-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">About Us</a>
-                      {/* <a href="/blogs" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Blogs</a> */}
-                      {/* <a href="/pricing" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a> */}
                       <a href="/contact-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Contact Us</a>
                     </nav>
                   </div>
