@@ -321,7 +321,7 @@ function App() {
                     <div className="hidden lg:block flex-1">
                       <div className="video-responsive h-full min-h-[500px]">
                         <iframe
-                          src="https://www.youtube.com/embed/lcjdwSY2AzM"
+                          src="https://www.youtube.com/embed/Ges88aDHRHg?si=PZAj4wI2HJqmJV3w"
                           title="StaffChahiye Demo Video"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
@@ -334,7 +334,7 @@ function App() {
                   <div className="block lg:hidden mb-8">
                     <div className="video-responsive">
                       <iframe
-                        src="https://www.youtube.com/embed/lcjdwSY2AzM"
+                        src="https://www.youtube.com/embed/Ges88aDHRHg?si=PZAj4wI2HJqmJV3w"
                         title="StaffChahiye Demo Video"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -440,7 +440,7 @@ function App() {
                     <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">What kind of a role do you want?</span>
                     <div className="mx-auto mt-2 w-24 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full"></div>
                   </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                  <div className="grid grid-cols-2 gap-6 px-4">
                     {[
                       { name: 'Waiter', image: '/JOBS/waiter.png' },
                       { name: 'Chef', image: '/JOBS/chef.webp' },
@@ -450,35 +450,28 @@ function App() {
                       { name: 'Labour', image: '/JOBS/manufacturing.webp' },
                       { name: 'Kitchen Staff', image: '/JOBS/cook_chef.webp' },
                       { name: 'Security Guard', image: '/JOBS/security_guard.webp' },
-                    ].map((role, idx) => (
+                    ].map((role, index) => (
                       <div
-                        key={role.name}
-                        className={`transition-all duration-300 ${
-                          idx >= 4 && !showMoreRoles ? 'hidden md:block' : ''
+                        key={index}
+                        className={`bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
+                          index >= 4 && !showMoreRoles ? 'hidden md:block' : ''
                         }`}
                       >
-                        <button
-                          type="button"
-                          onClick={() => setIsModalOpen(true)}
-                          className="w-full bg-white rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 hover:border-orange-400 border border-transparent transition-all duration-300 flex flex-col animate-fade-in focus:outline-none focus:ring-2 focus:ring-orange-400"
-                          style={{ animationDelay: `${idx * 80}ms` }}
-                        >
-                          {/* Image container */}
-                          <div className="h-44 w-full bg-gray-200 flex items-center justify-center rounded-t-2xl overflow-hidden">
-                            <img
-                              src={role.image}
-                              alt={role.name}
-                              className="object-cover w-full h-full"
-                            />
-                          </div>
-                          <div className="p-6 flex-1 flex flex-col justify-center items-center">
-                            <div className="font-bold text-xl text-gray-900 mb-1">{role.name}</div>
-                          </div>
-                        </button>
+                        <div className="relative h-40 overflow-hidden rounded-t-2xl">
+                          <img
+                            src={role.image}
+                            alt={role.name}
+                            className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        </div>
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold text-gray-900 text-center">{role.name}</h3>
+                        </div>
                       </div>
                     ))}
                   </div>
-                  {/* Show More Button - Only visible on mobile when there are more roles to show */}
+
                   <div className="mt-8 text-center md:hidden">
                     <button
                       type="button"
@@ -541,26 +534,41 @@ function App() {
 
                     {/* Mobile Layout - Stacked */}
                     <div className="lg:hidden space-y-8">
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-orange-600 mb-2">1Lakh+</div>
-                        <div className="text-sm text-gray-600">New candidates join StaffChahiye every month.</div>
+                      <div className="bg-white rounded-2xl p-6 shadow-lg">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 font-bold text-xl">1</div>
+                          <div className="ml-4">
+                            <div className="text-2xl font-bold text-orange-400">1Lakh+</div>
+                            <div className="text-sm text-gray-600">New candidates join StaffChahiye every month.</div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-orange-600 mb-2">200+</div>
-                        <div className="text-sm text-gray-600">Job categories to publish your job.</div>
+                      <div className="bg-white rounded-2xl p-6 shadow-lg">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 font-bold text-xl">2</div>
+                          <div className="ml-4">
+                            <div className="text-2xl font-bold text-orange-400">200+</div>
+                            <div className="text-sm text-gray-600">Job categories to publish your job.</div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-orange-600 mb-2">80%</div>
-                        <div className="text-sm text-gray-600">Business get qualified candidates within 24 hrs</div>
+                      <div className="bg-white rounded-2xl p-6 shadow-lg">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 font-bold text-xl">3</div>
+                          <div className="ml-4">
+                            <div className="text-2xl font-bold text-orange-400">80%</div>
+                            <div className="text-sm text-gray-600">Business get qualified candidates within 24 hrs</div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Testimonial Slideshow */}
-                  <div className="relative h-[340px] lg:h-[280px] overflow-hidden">
+                  <div className="relative h-[400px] lg:h-[320px] overflow-hidden">
                     {/* Current card */}
                     <div className={`
-                      testimonial-container rounded-2xl p-4 lg:p-6 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
+                      testimonial-container rounded-2xl p-6 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                       ${isSliding
                         ? (direction === "right"
                             ? "-translate-x-32 opacity-0"
@@ -568,10 +576,10 @@ function App() {
                         : "translate-x-0 opacity-100"}
                       z-10
                     `}>
-                      <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 h-full">
+                      <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 h-full">
                         {/* Testimonial Photo */}
                         <div className="flex-shrink-0">
-                          <div className="testimonial-photo w-24 h-24 lg:w-28 lg:h-28 rounded-2xl overflow-hidden">
+                          <div className="testimonial-photo w-28 h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden shadow-lg">
                             <img
                               src={testimonials[testimonialIndex].image}
                               alt={testimonials[testimonialIndex].author}
@@ -580,21 +588,21 @@ function App() {
                           </div>
                         </div>
                         {/* Testimonial Content */}
-                        <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[200px] lg:max-h-[200px] flex flex-col justify-center">
-                          <div className="mb-2 lg:mb-3">
-                            <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-2 lg:mb-3">
+                        <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[280px] lg:max-h-[240px] flex flex-col justify-center">
+                          <div className="mb-4">
+                            <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-4">
                               {testimonials[testimonialIndex].quote}
                             </p>
                           </div>
                           {/* Author Info */}
-                          <div className="mb-2 lg:mb-3">
-                            <div className="font-semibold text-gray-900 text-base lg:text-lg">{testimonials[testimonialIndex].author}</div>
-                            <div className="text-gray-600 text-sm lg:text-base">{testimonials[testimonialIndex].role}</div>
-                            <div className="mt-1">
+                          <div className="mb-2">
+                            <div className="font-semibold text-gray-900 text-lg">{testimonials[testimonialIndex].author}</div>
+                            <div className="text-gray-600 text-base">{testimonials[testimonialIndex].role}</div>
+                            <div className="mt-2">
                               <img 
                                 src={testimonials[testimonialIndex].logo} 
                                 alt={testimonials[testimonialIndex].company}
-                                className="h-7 lg:h-8 object-contain"
+                                className="h-8 lg:h-10 object-contain"
                               />
                             </div>
                           </div>
@@ -605,16 +613,16 @@ function App() {
                     {/* Next card (only during transition) */}
                     {isSliding && nextIndex !== null && (
                       <div className={`
-                        testimonial-container rounded-2xl p-4 lg:p-6 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
+                        testimonial-container rounded-2xl p-6 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                         ${direction === "right"
                           ? "translate-x-32 opacity-0"
                           : "-translate-x-32 opacity-0"}
                         z-20
                       `}>
-                        <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 h-full">
+                        <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 h-full">
                           {/* Testimonial Photo */}
                           <div className="flex-shrink-0">
-                            <div className="testimonial-photo w-24 h-24 lg:w-28 lg:h-28 rounded-2xl overflow-hidden">
+                            <div className="testimonial-photo w-28 h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden shadow-lg">
                               <img
                                 src={testimonials[nextIndex].image}
                                 alt={testimonials[nextIndex].author}
@@ -623,21 +631,21 @@ function App() {
                             </div>
                           </div>
                           {/* Testimonial Content */}
-                          <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[200px] lg:max-h-[200px] flex flex-col justify-center">
-                            <div className="mb-2 lg:mb-3">
-                              <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-2 lg:mb-3">
+                          <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[280px] lg:max-h-[240px] flex flex-col justify-center">
+                            <div className="mb-4">
+                              <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-4">
                                 {testimonials[nextIndex].quote}
                               </p>
                             </div>
                             {/* Author Info */}
-                            <div className="mb-2 lg:mb-3">
-                              <div className="font-semibold text-gray-900 text-base lg:text-lg">{testimonials[nextIndex].author}</div>
-                              <div className="text-gray-600 text-sm lg:text-base">{testimonials[nextIndex].role}</div>
-                              <div className="mt-1">
+                            <div className="mb-2">
+                              <div className="font-semibold text-gray-900 text-lg">{testimonials[nextIndex].author}</div>
+                              <div className="text-gray-600 text-base">{testimonials[nextIndex].role}</div>
+                              <div className="mt-2">
                                 <img 
                                   src={testimonials[nextIndex].logo} 
                                   alt={testimonials[nextIndex].company}
-                                  className="h-7 lg:h-8 object-contain"
+                                  className="h-8 lg:h-10 object-contain"
                                 />
                               </div>
                             </div>
@@ -651,7 +659,7 @@ function App() {
                       <button
                         onClick={handlePrev}
                         disabled={isSliding}
-                        className="bg-gray-200/50 hover:bg-gray-300/50 backdrop-blur-sm rounded-full p-2 pointer-events-auto transition-colors"
+                        className="bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg pointer-events-auto transition-colors"
                         aria-label="Previous"
                       >
                         <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -661,7 +669,7 @@ function App() {
                       <button
                         onClick={handleNext}
                         disabled={isSliding}
-                        className="bg-gray-200/50 hover:bg-gray-300/50 backdrop-blur-sm rounded-full p-2 pointer-events-auto transition-colors"
+                        className="bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg pointer-events-auto transition-colors"
                         aria-label="Next"
                       >
                         <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
