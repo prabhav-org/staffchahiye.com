@@ -50,7 +50,7 @@ function App() {
   const faqData = [
     {
       question: "Why should I use StaffChahiye over others?",
-      answer: "StaffChahiye boasts the largest pool of active candidates, achieving a candidate base of over 1 lakh in just five years. The platform personalizes the hiring experience, allowing you to opt for callbacks from relevant candidates, send bulk WhatsApp messages, or use the dashboard to shortlist candidates effectively. Additionally, you can enhance your job visibility by posting premium or super premium jobs, tailored to meet your specific hiring needs."
+      answer: "StaffChahiye boasts one of the largest pool of realtime-updated screened candidates database. The platform personalizes the hiring experience, allowing you to connect with the most relevant candidates over phone or WhatsApp, or use the dashboard to shortlist candidates effectively."
     },
     {
       question: "What happens if I don't receive enough candidates?",
@@ -209,19 +209,19 @@ function App() {
             <React.Fragment>
               {/* Hero Section */}
               <section className="w-full bg-white border-b border-gray-100">
-                <header className="max-w-7xl mx-auto px-6 lg:px-8 h-30 py-2 flex items-center justify-between relative nav-separator">
+                <header className="max-w-7xl mx-auto px-6 lg:px-8 h-16 lg:h-30 py-2 flex items-center justify-between relative nav-separator">
                   {/* Logo container */}
-                  <div className="h-20 flex items-center overflow-hidden mx-3 py-2">
-                    <img src={logo} alt="logo" className="h-20 w-auto object-contain m-0 p-0 align-middle" />
+                  <div className="h-12 lg:h-20 flex items-center overflow-hidden mx-3 py-2">
+                    <img src={logo} alt="logo" className="h-12 lg:h-20 w-auto object-contain m-0 p-0 align-middle" />
                   </div>
                   
                   {/* Hamburger Menu Button (Mobile) */}
                   <button 
-                    className="lg:hidden flex items-center justify-center h-15 w-15 p-0 m-0 rounded-md hover:bg-gray-100 focus:outline-none mx-3 py-2"
+                    className="lg:hidden flex items-center justify-center h-8 w-8 p-0 m-0 rounded-md hover:bg-gray-100 focus:outline-none mx-3 py-2"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                   >
                     <svg 
-                      className="w-10 h-10 text-gray-700" 
+                      className="w-6 h-6 text-gray-700" 
                       fill="none" 
                       strokeLinecap="round" 
                       strokeLinejoin="round" 
@@ -242,8 +242,7 @@ function App() {
                   <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
                     <a href="/" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Home</a>
                     <a href="/about-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">About Us</a>
-                    {/* <a href="/pricing" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
-                    <a href="/blogs" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a> */}
+                    <a href="/pricing" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
                     <a href="/contact-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Contact Us</a>
                   </nav>
 
@@ -252,8 +251,7 @@ function App() {
                     <nav className="flex flex-col py-4">
                       <a href="/" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Home</a>
                       <a href="/about-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">About Us</a>
-                      {/* <a href="/blogs" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Blogs</a> */}
-                      {/* <a href="/pricing" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a> */}
+                      <a href="/pricing" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a>
                       <a href="/contact-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Contact Us</a>
                     </nav>
                   </div>
@@ -325,7 +323,7 @@ function App() {
                     <div className="hidden lg:block flex-1">
                       <div className="video-responsive h-full min-h-[500px]">
                         <iframe
-                          src="https://www.youtube.com/embed/lcjdwSY2AzM"
+                          src="https://www.youtube.com/embed/Ges88aDHRHg?si=PZAj4wI2HJqmJV3w"
                           title="StaffChahiye Demo Video"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
@@ -338,7 +336,7 @@ function App() {
                   <div className="block lg:hidden mb-8">
                     <div className="video-responsive">
                       <iframe
-                        src="https://www.youtube.com/embed/lcjdwSY2AzM"
+                        src="https://www.youtube.com/embed/Ges88aDHRHg?si=PZAj4wI2HJqmJV3w"
                         title="StaffChahiye Demo Video"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -444,7 +442,7 @@ function App() {
                     <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">What kind of a role do you want?</span>
                     <div className="mx-auto mt-2 w-24 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full"></div>
                   </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                  <div className="grid grid-cols-2 gap-6 px-4">
                     {[
                       { name: 'Waiter', image: '/JOBS/waiter.png' },
                       { name: 'Chef', image: '/JOBS/chef.webp' },
@@ -454,35 +452,28 @@ function App() {
                       { name: 'Un/Semi-skilled', image: '/JOBS/manufacturing.webp' },
                       { name: 'Kitchen Staff', image: '/JOBS/cook_chef.webp' },
                       { name: 'Security Guard', image: '/JOBS/security_guard.webp' },
-                    ].map((role, idx) => (
+                    ].map((role, index) => (
                       <div
-                        key={role.name}
-                        className={`transition-all duration-300 ${
-                          idx >= 4 && !showMoreRoles ? 'hidden md:block' : ''
+                        key={index}
+                        className={`bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
+                          index >= 4 && !showMoreRoles ? 'hidden md:block' : ''
                         }`}
                       >
-                        <button
-                          type="button"
-                          onClick={() => setIsModalOpen(true)}
-                          className="w-full bg-white rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 hover:border-orange-400 border border-transparent transition-all duration-300 flex flex-col animate-fade-in focus:outline-none focus:ring-2 focus:ring-orange-400"
-                          style={{ animationDelay: `${idx * 80}ms` }}
-                        >
-                          {/* Image container */}
-                          <div className="h-44 w-full bg-gray-200 flex items-center justify-center rounded-t-2xl overflow-hidden">
-                            <img
-                              src={role.image}
-                              alt={role.name}
-                              className="object-cover w-full h-full"
-                            />
-                          </div>
-                          <div className="p-6 flex-1 flex flex-col justify-center items-center">
-                            <div className="font-bold text-xl text-gray-900 mb-1">{role.name}</div>
-                          </div>
-                        </button>
+                        <div className="relative h-40 overflow-hidden rounded-t-2xl">
+                          <img
+                            src={role.image}
+                            alt={role.name}
+                            className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        </div>
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold text-gray-900 text-center">{role.name}</h3>
+                        </div>
                       </div>
                     ))}
                   </div>
-                  {/* Show More Button - Only visible on mobile when there are more roles to show */}
+
                   <div className="mt-8 text-center md:hidden">
                     <button
                       type="button"
@@ -561,10 +552,10 @@ function App() {
                   </div>
 
                   {/* Testimonial Slideshow */}
-                  <div className="relative h-[340px] lg:h-[280px] overflow-hidden">
+                  <div className="relative h-[400px] lg:h-[320px] overflow-hidden">
                     {/* Current card */}
                     <div className={`
-                      testimonial-container rounded-2xl p-4 lg:p-6 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
+                      testimonial-container rounded-2xl p-6 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                       ${isSliding
                         ? (direction === "right"
                             ? "-translate-x-32 opacity-0"
@@ -572,10 +563,10 @@ function App() {
                         : "translate-x-0 opacity-100"}
                       z-10
                     `}>
-                      <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 h-full">
+                      <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 h-full">
                         {/* Testimonial Photo */}
                         <div className="flex-shrink-0">
-                          <div className="testimonial-photo w-24 h-24 lg:w-28 lg:h-28 rounded-2xl overflow-hidden">
+                          <div className="testimonial-photo w-28 h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden shadow-lg">
                             <img
                               src={testimonials[testimonialIndex].image}
                               alt={testimonials[testimonialIndex].author}
@@ -584,21 +575,21 @@ function App() {
                           </div>
                         </div>
                         {/* Testimonial Content */}
-                        <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[200px] lg:max-h-[200px] flex flex-col justify-center">
-                          <div className="mb-2 lg:mb-3">
-                            <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-2 lg:mb-3">
+                        <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[280px] lg:max-h-[240px] flex flex-col justify-center">
+                          <div className="mb-4">
+                            <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-4">
                               {testimonials[testimonialIndex].quote}
                             </p>
                           </div>
                           {/* Author Info */}
-                          <div className="mb-2 lg:mb-3">
-                            <div className="font-semibold text-gray-900 text-base lg:text-lg">{testimonials[testimonialIndex].author}</div>
-                            <div className="text-gray-600 text-sm lg:text-base">{testimonials[testimonialIndex].role}</div>
-                            <div className="mt-1">
+                          <div className="mb-2">
+                            <div className="font-semibold text-gray-900 text-lg">{testimonials[testimonialIndex].author}</div>
+                            <div className="text-gray-600 text-base">{testimonials[testimonialIndex].role}</div>
+                            <div className="mt-2">
                               <img 
                                 src={testimonials[testimonialIndex].logo} 
                                 alt={testimonials[testimonialIndex].company}
-                                className="h-7 lg:h-8 object-contain"
+                                className="h-8 lg:h-10 object-contain"
                               />
                             </div>
                           </div>
@@ -609,16 +600,16 @@ function App() {
                     {/* Next card (only during transition) */}
                     {isSliding && nextIndex !== null && (
                       <div className={`
-                        testimonial-container rounded-2xl p-4 lg:p-6 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
+                        testimonial-container rounded-2xl p-6 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                         ${direction === "right"
                           ? "translate-x-32 opacity-0"
                           : "-translate-x-32 opacity-0"}
                         z-20
                       `}>
-                        <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 h-full">
+                        <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 h-full">
                           {/* Testimonial Photo */}
                           <div className="flex-shrink-0">
-                            <div className="testimonial-photo w-24 h-24 lg:w-28 lg:h-28 rounded-2xl overflow-hidden">
+                            <div className="testimonial-photo w-28 h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden shadow-lg">
                               <img
                                 src={testimonials[nextIndex].image}
                                 alt={testimonials[nextIndex].author}
@@ -627,21 +618,21 @@ function App() {
                             </div>
                           </div>
                           {/* Testimonial Content */}
-                          <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[200px] lg:max-h-[200px] flex flex-col justify-center">
-                            <div className="mb-2 lg:mb-3">
-                              <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-2 lg:mb-3">
+                          <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[280px] lg:max-h-[240px] flex flex-col justify-center">
+                            <div className="mb-4">
+                              <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-4">
                                 {testimonials[nextIndex].quote}
                               </p>
                             </div>
                             {/* Author Info */}
-                            <div className="mb-2 lg:mb-3">
-                              <div className="font-semibold text-gray-900 text-base lg:text-lg">{testimonials[nextIndex].author}</div>
-                              <div className="text-gray-600 text-sm lg:text-base">{testimonials[nextIndex].role}</div>
-                              <div className="mt-1">
+                            <div className="mb-2">
+                              <div className="font-semibold text-gray-900 text-lg">{testimonials[nextIndex].author}</div>
+                              <div className="text-gray-600 text-base">{testimonials[nextIndex].role}</div>
+                              <div className="mt-2">
                                 <img 
                                   src={testimonials[nextIndex].logo} 
                                   alt={testimonials[nextIndex].company}
-                                  className="h-7 lg:h-8 object-contain"
+                                  className="h-8 lg:h-10 object-contain"
                                 />
                               </div>
                             </div>
@@ -655,7 +646,7 @@ function App() {
                       <button
                         onClick={handlePrev}
                         disabled={isSliding}
-                        className="bg-gray-200/50 hover:bg-gray-300/50 backdrop-blur-sm rounded-full p-2 pointer-events-auto transition-colors"
+                        className="bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg pointer-events-auto transition-colors"
                         aria-label="Previous"
                       >
                         <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -665,7 +656,7 @@ function App() {
                       <button
                         onClick={handleNext}
                         disabled={isSliding}
-                        className="bg-gray-200/50 hover:bg-gray-300/50 backdrop-blur-sm rounded-full p-2 pointer-events-auto transition-colors"
+                        className="bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg pointer-events-auto transition-colors"
                         aria-label="Next"
                       >
                         <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -745,25 +736,25 @@ function App() {
 
                       {/* Social Media Icons */}
                       <div className="flex gap-4 items-start">
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://www.facebook.com/people/StaffChahiyecom/61573601822928/" className="text-gray-400 hover:text-white transition-colors">
                           <span className="sr-only">Facebook</span>
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                           </svg>
                         </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://www.linkedin.com/company/staffchahiye/" className="text-gray-400 hover:text-white transition-colors">
                           <span className="sr-only">LinkedIn</span>
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                           </svg>
                         </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        {/* <a href="#" className="text-gray-400 hover:text-white transition-colors">
                           <span className="sr-only">Twitter</span>
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                           </svg>
-                        </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        </a> */}
+                        <a href="https://www.instagram.com/staffchahiye" className="text-gray-400 hover:text-white transition-colors">
                           <span className="sr-only">Instagram</span>
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12.017 0C8.396 0 7.989.013 7.041.072 6.094.131 5.42.333 4.844.63c-.611.324-1.13.748-1.65 1.268a4.493 4.493 0 00-1.268 1.65c-.297.576-.499 1.25-.558 2.197C.975 7.613.96 8.02.96 11.641c0 3.622.014 4.029.072 4.977.06.946.262 1.62.558 2.197.324.611.748 1.13 1.268 1.65a4.493 4.493 0 001.65 1.268c.576.297 1.25.499 2.197.558.948.059 1.355.072 4.976.072 3.622 0 4.029-.014 4.977-.072.946-.06 1.62-.262 2.197-.558a4.493 4.493 0 001.65-1.268 4.493 4.493 0 001.268-1.65c.297-.576.499-1.25-.558-2.197.059-.948.072-1.355.072-4.976 0-3.622-.014-4.029-.072-4.977-.06-.946-.262-1.62-.558-2.197a4.493 4.493 0 00-1.268-1.65A4.493 4.493 0 0019.5.63c-.576-.297-1.25-.499-2.197-.558C16.355.013 15.948 0 12.327 0H12.017zm-.017 2.17c3.548 0 3.97.014 5.373.072.918.042 1.416.196 1.747.327.44.171.754.375 1.084.705.33.33.534.644.705 1.084.131.331.285.829.327 1.747.058 1.403.072 1.825.072 5.373 0 3.548-.014 3.97-.072 5.373-.042.918-.196 1.416-.327 1.747-.171.44-.375.754-.705 1.084a2.919 2.919 0 01-1.084.705c-.331.131-.829.285-1.747.327-1.403.058-1.825.072-5.373.072-3.548 0-3.97-.014-5.373-.072-.918-.042-1.416-.196-1.747-.327a2.919 2.919 0 01-1.084-.705 2.919 2.919 0 01-.705-1.084c-.131-.331-.285-.829-.327-1.747-.058-1.403-.072-1.825-.072-5.373 0-3.548.014-3.97.072-5.373.042-.918.196-1.416.327-1.747.171-.44.375-.754.705-1.084a2.919 2.919 0 011.084-.705c.331-.131.829-.285 1.747-.327 1.403-.058 1.825-.072 5.373-.072z" />
@@ -771,7 +762,7 @@ function App() {
                             <path d="M19.846 5.595a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
                           </svg>
                         </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://www.youtube.com/channel/UC5684PS7y0OSH1V_WE8uPmA" className="text-gray-400 hover:text-white transition-colors">
                           <span className="sr-only">YouTube</span>
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />

@@ -31,14 +31,14 @@ const RefundPolicy: React.FC = () => {
                                 <div className="space-y-4">
                                     <div className="flex items-center space-x-3">
                                         <span className="text-orange-500">📧</span>
-                                        <a href="mailto:support@staffchahiye.com" className="text-gray-600 hover:text-orange-500 transition-colors">
-                                            support@staffchahiye.com
+                                        <a href="mailto:team@staffchahiye.com" className="text-gray-600 hover:text-orange-500 transition-colors">
+                                            team@staffchahiye.com
                                         </a>
                                     </div>
                                     <div className="flex items-center space-x-3">
                                         <span className="text-orange-500">📞</span>
-                                        <a href="tel:+919999999999" className="text-gray-600 hover:text-orange-500 transition-colors">
-                                            +91 99999 99999
+                                        <a href="tel:+917304216050" className="text-gray-600 hover:text-orange-500 transition-colors">
+                                            +91 7304216050
                                         </a>
                                     </div>
                                 </div>
