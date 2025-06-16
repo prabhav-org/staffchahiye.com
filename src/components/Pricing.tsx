@@ -67,9 +67,9 @@ const Pricing: React.FC = () => {
                                                 </svg>
                                                 <span className="text-gray-700">Background checks included</span>
 
-                                            </li>
-
                                             </li> */}
+
+                                            </li>
 
                                             <li className="flex items-center">
                                                 <svg className="w-5 h-5 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
