@@ -42,8 +42,8 @@ const Header: React.FC = () => {
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
           <Link to="/" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Home</Link>
           <Link to="/about-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">About Us</Link>
-          {/* <a href="/pricing" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
-          <a href="/blogs" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a> */}
+          <a href="/pricing" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Pricing</a>
+          {/* <a href="/blogs" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Blogs</a> */}
           <Link to="/contact-us" className="text-gray-700 hover:text-[var(--brand-orange)] transition-colors">Contact Us</Link>
         </nav>
 
@@ -52,8 +52,8 @@ const Header: React.FC = () => {
           <nav className="flex flex-col py-4">
             <Link to="/" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Home</Link>
             <Link to="/about-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">About Us</Link>
-            {/* <a href="/blogs" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Blogs</a>
-            <a href="/pricing" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a> */}
+            {/* <a href="/blogs" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Blogs</a> */}
+            <a href="/pricing" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Pricing</a>
             <Link to="/contact-us" className="px-6 py-3 text-gray-700 hover:text-[var(--brand-orange)] hover:bg-gray-50 transition-colors">Contact Us</Link>
           </nav>
         </div>
