@@ -8,9 +8,9 @@ const AboutUs: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const {
         phoneNumber,
-        phoneError,
-        validatePhone,
-        handlePhoneChange
+        // phoneError,
+        // validatePhone,
+        // handlePhoneChange
     } = usePhoneValidation();
 
     const handleModalClose = () => {
@@ -108,11 +108,11 @@ const AboutUs: React.FC = () => {
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Lightning Fast</h3>
                             <p className="text-gray-600">Connect with verified staff within 30 minutes of posting your job</p>
                         </div>
-                        <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        {/* <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                             <div className="text-orange-500 text-4xl mb-4 transform hover:scale-110 transition-transform">✓</div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Verified Staff</h3>
                             <p className="text-gray-600">All staff undergo thorough verification and background checks</p>
-                        </div>
+                        </div> */}
                         <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                             <div className="text-orange-500 text-4xl mb-4 transform hover:scale-110 transition-transform">💼</div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Business Focused</h3>

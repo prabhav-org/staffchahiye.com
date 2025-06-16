@@ -51,7 +51,7 @@ const ContactUs: React.FC = () => {
                                 <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transform scale-x-75"></div>
                             </h1>
                             <p className="text-lg text-gray-600 mt-6">Get in touch with us for any questions or concerns</p>
-                            <p className="text-sm text-orange-500 mt-2">Managed by Sujan Kumar</p>
+                            <p className="text-sm text-orange-500 mt-2">Managed by SUJAN KUMAR</p>
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

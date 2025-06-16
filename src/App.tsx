@@ -11,7 +11,7 @@ import Pricing from "./components/Pricing";
 import Blogs from "./components/Blogs";
 import ContactUs from "./components/ContactUs";
 import AboutUs from "./components/AboutUs";
-import logo from './assets/Untitled design (3).svg';
+import logo from './assets/logo.svg';
 
 function App() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -39,7 +39,7 @@ function App() {
     },
     {
       title: "Get pre-screened candidates right on your whatsapp",
-      image: "\Untitled design (100).png"
+      image: "section2_wapp.png"
     },
     {
       title: "Connect with them and start your hiring process in less than 30 minutes!",
@@ -50,7 +50,7 @@ function App() {
   const faqData = [
     {
       question: "Why should I use StaffChahiye over others?",
-      answer: "StaffChahiye boasts the largest pool of active candidates, achieving a candidate base of over 1 lakh in just five years. The platform personalizes the hiring experience, allowing you to opt for callbacks from relevant candidates, send bulk WhatsApp messages, or use the dashboard to shortlist candidates effectively. Additionally, you can enhance your job visibility by posting premium or super premium jobs, tailored to meet your specific hiring needs."
+      answer: "StaffChahiye boasts one of the largest pool of realtime-updated screened candidates database. The platform personalizes the hiring experience, allowing you to connect with the most relevant candidates over phone or WhatsApp, or use the dashboard to shortlist candidates effectively."
     },
     {
       question: "What happens if I don't receive enough candidates?",
@@ -73,7 +73,7 @@ function App() {
       author: "Aman Raghuvanshi",
       role: "Manager",
       company: "Bikanerwala",
-      logo: "/Brands/Bikanervala_logo main.png"
+      logo: "/brands/Bikanervala_logo main.png"
     },
     {
       image: "/testimonials/Picture2.jpg",
@@ -81,7 +81,7 @@ function App() {
       author: "Sameer Khanna",
       role: "Manager",
       company: "Barbeque Nation",
-      logo: "/Brands/barbeque-nation-seeklogo.png"
+      logo: "/brands/barbeque-nation-seeklogo.png"
     },
     {
       image: "/testimonials/Picture3.jpg",
@@ -89,7 +89,7 @@ function App() {
       author: "Ajay Sahu",
       role: "HR",
       company: "Radisson Blu",
-      logo: "/Brands/Radisson_Blu_logo.png"
+      logo: "/brands/Radisson_Blu_logo.png"
     },
     {
       image: "/testimonials/Picture4.jpg",
@@ -97,7 +97,7 @@ function App() {
       author: "Tushar Sharma",
       role: "Operations Head",
       company: "OYO",
-      logo: "/Brands/OYO_Rooms_(logo).png"
+      logo: "/brands/OYO_Rooms_(logo).png"
     },
     {
       image: "/testimonials/Picture5.jpg",
@@ -105,7 +105,7 @@ function App() {
       author: "Jasleen Kaur",
       role: "Manager",
       company: "Haldiram's",
-      logo: "/Brands/haldirams-seeklogo.png"
+      logo: "/brands/haldirams-seeklogo.png"
     }
   ];
 
@@ -283,7 +283,7 @@ function App() {
                           <div className="text-xs lg:text-sm text-gray-500">Businesses</div>
                         </div>
                         <div>
-                          <div className="text-xl lg:text-2xl font-bold text-gray-900">50+</div>
+                          <div className="text-xl lg:text-2xl font-bold text-gray-900">100+</div>
                           <div className="text-xs lg:text-sm text-gray-500">Available cities</div>
                         </div>
                       </div>
@@ -353,17 +353,17 @@ function App() {
                     </div>
                     <div className="overflow-hidden">
                       <div className="flex items-center whitespace-nowrap marquee">
-                        <img src="/Brands/Adani-Green-Energy-PNG-Image.png" alt="logo1" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/barbeque-nation-seeklogo.png" alt="logo2" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/bhu.jpg" alt="logo3" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/Bikanervala_logo main.png" alt="logo4" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/haldirams-seeklogo.png" alt="logo5" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/IRCTC-Symbol.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/OYO_Rooms_(logo).png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/Radisson_Blu_logo.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/Saravanaa_Bhavan_Logo.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/Taj_Hotels_Untitled design (3).svg.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
-                        <img src="/Brands/logo_nsdc.svg" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/Adani-Green-Energy-PNG-Image.png" alt="logo1" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/barbeque-nation-seeklogo.png" alt="logo2" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/bhu.jpg" alt="logo3" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/Bikanervala_logo main.png" alt="logo4" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/haldirams-seeklogo.png" alt="logo5" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/IRCTC-Symbol.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/OYO_Rooms_(logo).png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/Radisson_Blu_logo.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/Saravanaa_Bhavan_Logo.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/Taj_Hotels_logo.svg.png" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
+                        <img src="/brands/logo_nsdc.svg" alt="logo6" className="h-18 mx-10 opacity-100 transition-opacity duration-100" />
                       </div>
                     </div>
                   </div>
@@ -449,7 +449,7 @@ function App() {
                       { name: 'Housekeeping', image: '/JOBS/housekeeping.webp' },
                       { name: 'Driver', image: '/JOBS/driver.webp' },
                       { name: 'Helper', image: '/JOBS/helper.webp' },
-                      { name: 'Labour', image: '/JOBS/manufacturing.webp' },
+                      { name: 'Un/Semi-skilled', image: '/JOBS/manufacturing.webp' },
                       { name: 'Kitchen Staff', image: '/JOBS/cook_chef.webp' },
                       { name: 'Security Guard', image: '/JOBS/security_guard.webp' },
                     ].map((role, index) => (
@@ -520,15 +520,15 @@ function App() {
                     <div className="hidden lg:flex items-center justify-center">
                       <div className="flex items-center divide-x divide-gray-200">
                         <div className="px-8 text-center">
-                          <div className="text-3xl xl:text-4xl font-bold text-orange-400 mb-2">1Lakh+</div>
+                          <div className="text-3xl xl:text-4xl font-bold text-orange-400 mb-2">10,000+</div>
                           <div className="text-sm text-gray-600">New candidates join StaffChahiye every month.</div>
                         </div>
                         <div className="px-8 text-center">
-                          <div className="text-3xl xl:text-4xl font-bold text-orange-400 mb-2">200+</div>
-                          <div className="text-sm text-gray-600">Job categories to publish your job.</div>
+                          <div className="text-3xl xl:text-4xl font-bold text-orange-400 mb-2">100+</div>
+                          <div className="text-sm text-gray-600">Cities to publish your job.</div>
                         </div>
                         <div className="px-8 text-center">
-                          <div className="text-3xl xl:text-4xl font-bold text-orange-400 mb-2">80%</div>
+                          <div className="text-3xl xl:text-4xl font-bold text-orange-400 mb-2">92%</div>
                           <div className="text-sm text-gray-600">Business get qualified candidates within 24 hrs</div>
                         </div>
                       </div>
@@ -536,32 +536,18 @@ function App() {
 
                     {/* Mobile Layout - Stacked */}
                     <div className="lg:hidden space-y-8">
-                      <div className="bg-white rounded-2xl p-6 shadow-lg">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 font-bold text-xl">1</div>
-                          <div className="ml-4">
-                            <div className="text-2xl font-bold text-orange-400">1Lakh+</div>
-                            <div className="text-sm text-gray-600">New candidates join StaffChahiye every month.</div>
-                          </div>
-                        </div>
+
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-orange-600 mb-2">10,000+</div>
+                        <div className="text-sm text-gray-600">New candidates join StaffChahiye every month.</div>
                       </div>
-                      <div className="bg-white rounded-2xl p-6 shadow-lg">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 font-bold text-xl">2</div>
-                          <div className="ml-4">
-                            <div className="text-2xl font-bold text-orange-400">200+</div>
-                            <div className="text-sm text-gray-600">Job categories to publish your job.</div>
-                          </div>
-                        </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-orange-600 mb-2">100+</div>
+                        <div className="text-sm text-gray-600">Cities to publish your job.</div>
                       </div>
-                      <div className="bg-white rounded-2xl p-6 shadow-lg">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 font-bold text-xl">3</div>
-                          <div className="ml-4">
-                            <div className="text-2xl font-bold text-orange-400">80%</div>
-                            <div className="text-sm text-gray-600">Business get qualified candidates within 24 hrs</div>
-                          </div>
-                        </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-orange-600 mb-2">92%</div>
+                        <div className="text-sm text-gray-600">Business get qualified candidates within 24 hrs</div>
                       </div>
                     </div>
                   </div>
@@ -825,7 +811,7 @@ function App() {
                   <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                       <div className="text-gray-400 text-sm">
-                        © 2024 StaffChahiye | All rights reserved | Managed by Sujan Kumar
+                        © 2024 StaffChahiye | All rights reserved | Managed by SUJAN KUMAR
                       </div>
                       <div className="flex gap-6 text-sm">
                         <Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy policy</Link>
