@@ -115,7 +115,7 @@ const Pricing: React.FC = () => {
                                     >
                                         Get Started Now
                                     </button>
-                                    <p className="mt-4 text-sm text-gray-600">No hidden fees. Pay only when you hire.</p>
+                                    <p className="mt-4 text-sm text-gray-600">No hidden fees.</p>
                                 </div>
                             </div>
                         </div>

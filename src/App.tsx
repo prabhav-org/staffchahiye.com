@@ -442,7 +442,7 @@ function App() {
                     <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">What kind of a role do you want?</span>
                     <div className="mx-auto mt-2 w-24 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full"></div>
                   </h2>
-                  <div className="grid grid-cols-2 gap-6 px-4">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
                     {[
                       { name: 'Waiter', image: '/JOBS/waiter.png' },
                       { name: 'Chef', image: '/JOBS/chef.webp' },
