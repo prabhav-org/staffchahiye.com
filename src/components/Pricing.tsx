@@ -47,6 +47,7 @@ const Pricing: React.FC = () => {
                                 <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                                     <div className="flex-1">
                                         <div className="text-4xl font-bold text-gray-900 mb-2">₹700</div>
+
                                         <p className="text-gray-600 mb-6">per staff</p>
                                         
                                         <ul className="space-y-4">
@@ -56,23 +57,35 @@ const Pricing: React.FC = () => {
                                                 </svg>
                                                 <span className="text-gray-700">Verified staff profiles</span>
                                             </li>
+
+                                            <li className="flex items-center">
+
                                             {/* <li className="flex items-center">
+
                                                 <svg className="w-5 h-5 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                                                 </svg>
                                                 <span className="text-gray-700">Background checks included</span>
+
+                                            </li>
+
                                             </li> */}
+
                                             <li className="flex items-center">
                                                 <svg className="w-5 h-5 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                                                 </svg>
+
                                                 <span className="text-gray-700">Quick staff matching within 30 minutes</span>
+
                                             </li>
                                             <li className="flex items-center">
                                                 <svg className="w-5 h-5 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                                                 </svg>
+
                                                 <span className="text-gray-700">Custom support from team</span>
+
                                             </li>
                                         </ul>
                                     </div>

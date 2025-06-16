@@ -536,6 +536,7 @@ function App() {
 
                     {/* Mobile Layout - Stacked */}
                     <div className="lg:hidden space-y-8">
+
                       <div className="text-center">
                         <div className="text-3xl font-bold text-orange-600 mb-2">10,000+</div>
                         <div className="text-sm text-gray-600">New candidates join StaffChahiye every month.</div>
