@@ -66,7 +66,7 @@ const TermsAndConditions: React.FC = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">5. No Refund Policy</h2>
                   <p className="text-gray-600">
-                    Once a payment is made, it is non-refundable, unless the staff fails to show up or cannot be replaced within 24 hours. All refund cases will be handled at our sole discretion.
+                    We strive for the best service to you ie, to connect you with the best staff for your needs. Please remember, StaffChahiye.com doesn't guarantee for you to hire the staff we connect you with. Once a payment is made, it is non-refundable.
                   </p>
                 </section>
 
@@ -116,7 +116,7 @@ const TermsAndConditions: React.FC = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">11. Governing Law</h2>
                   <p className="text-gray-600">
-                    These Terms shall be governed by and construed in accordance with the laws of India. All disputes shall be subject to the jurisdiction of Delhi courts.
+                    These Terms shall be governed by and construed in accordance with the laws of India. All disputes shall be subject to the jurisdiction of courts of Uttar Pradesh, India.
                   </p>
                 </section>
 

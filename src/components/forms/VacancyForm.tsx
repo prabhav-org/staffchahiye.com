@@ -79,7 +79,7 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input
-          label="Person of Contact"
+          label="Contact Name" 
           required
           {...register('yourName')}
           error={errors.yourName?.message}
@@ -96,7 +96,7 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         <Select
           label="Requirement"
           required
@@ -106,7 +106,7 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
           placeholder="Select job category"
         />
 
-        <Input
+        {/* <Input
           label="Staff Required"
           type="number"
           required
@@ -115,7 +115,7 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
           placeholder="Total number of vacancies"
           min="1"
           max="999"
-        />
+        /> */}
       </div>
 
       <div className="grid grid-cols-2 gap-4">
