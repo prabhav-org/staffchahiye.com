@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { VacancyModal } from './VacancyModal';
+import { usePhoneValidation } from '../hooks/usePhoneValidation';
 
 const TermsOfService: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {
+    phoneNumber,
+  } = usePhoneValidation();
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handlePostJobClick = () => {
+    setIsModalOpen(true);
+  };
+
   return (
-    <div>
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
       <Header />
-      <main className="min-h-screen">
-        <div className="min-h-screen flex flex-col">
-        {/* <NavBar /> */}
-        <main className="flex-grow pt-24 pb-12">
-          <div className="container-custom max-w-4xl mx-auto">
+      <main className="flex-grow pt-16 pb-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl shadow-xl p-8">
             <h1 className="text-3xl md:text-4xl font-bold mb-8">Terms of Service</h1>
             
             <div className="prose prose-lg max-w-none">
@@ -114,11 +127,14 @@ const TermsOfService: React.FC = () => {
               </section>
             </div>
           </div>
-        </main>
-        {/* <Footer /> */}
-      </div>
+        </div>
       </main>
-      <Footer />
+      <Footer handlePostJobClick={handlePostJobClick} />
+      <VacancyModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        initialPhone={phoneNumber}
+      />
     </div>
   );
 };

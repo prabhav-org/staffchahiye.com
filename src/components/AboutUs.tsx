@@ -17,6 +17,10 @@ const AboutUs: React.FC = () => {
         setIsModalOpen(false);
     };
 
+    const handlePostJobClick = () => {
+        setIsModalOpen(true);
+    };
+
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
             <Header />
@@ -137,7 +141,7 @@ const AboutUs: React.FC = () => {
                     </div>
                 </div>
             </main>
-            <Footer />
+            <Footer handlePostJobClick={handlePostJobClick} />
             <VacancyModal
                 isOpen={isModalOpen}
                 onClose={handleModalClose}

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { VacancyModal } from './VacancyModal';
+import { usePhoneValidation } from '../hooks/usePhoneValidation';
 
 const ContactUs: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +13,10 @@ const ContactUs: React.FC = () => {
         message: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const {
+        phoneNumber,
+    } = usePhoneValidation();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -36,6 +42,14 @@ const ContactUs: React.FC = () => {
                 message: ''
             });
         }, 1000);
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    };
+
+    const handlePostJobClick = () => {
+        setIsModalOpen(true);
     };
 
     return (
@@ -226,7 +240,12 @@ const ContactUs: React.FC = () => {
                     </div>
                 </div>
             </main>
-            <Footer />
+            <Footer handlePostJobClick={handlePostJobClick} />
+            <VacancyModal
+                isOpen={isModalOpen}
+                onClose={handleModalClose}
+                initialPhone={phoneNumber}
+            />
         </div>
     );
 };
