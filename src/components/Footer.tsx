@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Product Links */}
-            <div>
+            {/* <div>
               <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY CITY</h3>
               <ul className="space-y-3">
                 <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Mumbai</a></li>
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
                 <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Varanasi</a></li>
                 <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Lucknow</a></li>
               </ul>
-            </div>
+            </div> */}
             <div>
               <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY JOBS</h3>
               <ul className="space-y-3">
