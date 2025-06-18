@@ -442,7 +442,7 @@ function App() {
                     <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">What kind of a role do you want?</span>
                     <div className="mx-auto mt-2 w-24 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full"></div>
                   </h2>
-                  <div className="grid grid-cols-2 gap-6 px-4">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
                     {[
                       { name: 'Waiter', image: '/JOBS/waiter.png' },
                       { name: 'Chef', image: '/JOBS/chef.webp' },
@@ -773,7 +773,7 @@ function App() {
                     </div>
 
                     {/* Product Links */}
-                    <div>
+                    {/* <div>
                       <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY CITY</h3>
                       <ul className="space-y-3">
                         <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Mumbai</a></li>
@@ -781,15 +781,15 @@ function App() {
                         <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Varanasi</a></li>
                         <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Lucknow</a></li>
                       </ul>
-                    </div>
+                    </div> */}
                     <div>
                       <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY JOBS</h3>
                       <ul className="space-y-3">
-                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Waiter</a></li>
-                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Helper</a></li>
-                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Chef/Cook</a></li>
-                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Housekeeping</a></li>
-                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Other</a></li>
+                        <li><button onClick={handlePostJobClick} className="text-gray-400 hover:text-white transition-colors text-sm">Waiter</button></li>
+                        <li><button onClick={handlePostJobClick} className="text-gray-400 hover:text-white transition-colors text-sm">Helper</button></li>
+                        <li><button onClick={handlePostJobClick} className="text-gray-400 hover:text-white transition-colors text-sm">Chef/Cook</button></li>
+                        <li><button onClick={handlePostJobClick} className="text-gray-400 hover:text-white transition-colors text-sm">Housekeeping</button></li>
+                        <li><button onClick={handlePostJobClick} className="text-gray-400 hover:text-white transition-colors text-sm">Other</button></li>
                       </ul>
                     </div>
                     {/* Get to Know Us Links */}
