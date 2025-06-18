@@ -13,7 +13,7 @@ export interface VacancyForm {
   minSalary: number;         // required
   maxSalary: number;         // required
   workingHours: string;      // required
-  otherBenefits: string;     // required
+  otherBenefits: string[];   // required, array of selected benefits
   remarks: string;           // required
 }
 
