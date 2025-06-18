@@ -49,20 +49,24 @@ function App() {
 
   const faqData = [
     {
-      question: "Why should I use StaffChahiye over others?",
-      answer: "StaffChahiye boasts one of the largest pool of realtime-updated screened candidates database. The platform personalizes the hiring experience, allowing you to connect with the most relevant candidates over phone or WhatsApp, or use the dashboard to shortlist candidates effectively."
+      question: "How does StaffChahiye.com work?",
+      answer: "Just tell us what kind of staff you need. We’ll send pre-screened candidates directly to your WhatsApp so you can connect and start hiring instantly."
     },
     {
-      question: "What happens if I don't receive enough candidates?",
-      answer: "Our support team will work to boost your job post and help improve reach and relevance."
+      question: "How fast can I get candidates?",
+      answer: "Typically within 30 minutes. We’re built for speed so you never have to delay hiring again."
     },
     {
-      question: "In which cities can I hire via StaffChahiye?",
-      answer: "We operate in 100+ cities and towns across India."
+      question: "What kind of staff can I hire?",
+      answer: "We provide operational and support staff like: Waiters & kitchen helpers Housekeeping staff Retail & counter staff , Delivery executives, Receptionists, and more."
     },
     {
-      question: "I want to hire more than 10 candidates, do you have any bulk-hiring plans?",
-      answer: "Yes, sure! Get in touch with our team to discover high-volume/bulk-hiring solutions."
+      question: " Are the candidates verified or trained?",
+      answer: "Yes. All candidates are pre-screened for basic suitability, experience, and intent to join."
+    },
+    {
+      question: "Do you support bulk hiring?",
+      answer: "Absolutely. Whether you need one staff member or a full team, we can help."
     }
   ];
 
