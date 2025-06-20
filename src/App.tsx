@@ -11,6 +11,7 @@ import Pricing from "./components/Pricing";
 import Blogs from "./components/Blogs";
 import ContactUs from "./components/ContactUs";
 import AboutUs from "./components/AboutUs";
+import Dashboard from "./components/Dashboard";
 import logo from './assets/logo.svg';
 
 function App() {
@@ -50,11 +51,11 @@ function App() {
   const faqData = [
     {
       question: "How does StaffChahiye.com work?",
-      answer: "Just tell us what kind of staff you need. We’ll send pre-screened candidates directly to your WhatsApp so you can connect and start hiring instantly."
+      answer: "Just tell us what kind of staff you need. We'll send pre-screened candidates directly to your WhatsApp so you can connect and start hiring instantly."
     },
     {
       question: "How fast can I get candidates?",
-      answer: "Typically within 30 minutes. We’re built for speed so you never have to delay hiring again."
+      answer: "Typically within 30 minutes. We're built for speed so you never have to delay hiring again."
     },
     {
       question: "What kind of staff can I hire?",
@@ -273,7 +274,7 @@ function App() {
                         <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
                           Hire candidates in under &lt;30 minutes with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
                         </h1>
-                        <p className="text-base lg:text-lg text-gray-600 leading-relaxed">We help you find and connect with candidates who are pre-screened and match your specific job requirements, saving you time and effort in the hiring process.</p>
+                        <p className="text-base lg:text-lg text-gray-600 leading-relaxed">We help you find and connect with candidates who are pre-screened and match your specific job requirements, saving you time and effort in the hiring process.</p>
                       </div>
 
                       {/* Statistics Section */}
@@ -462,6 +463,8 @@ function App() {
                         className={`bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
                           index >= 4 && !showMoreRoles ? 'hidden md:block' : ''
                         }`}
+                        onClick={() => setIsModalOpen(true)}
+                        style={{ cursor: 'pointer' }}
                       >
                         <div className="relative h-40 overflow-hidden rounded-t-2xl">
                           <img
@@ -833,6 +836,7 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>

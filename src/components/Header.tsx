@@ -16,21 +16,21 @@ const Header: React.FC = () => {
             <img src={logo} alt="logo" className="h-12 lg:h-20 w-auto object-contain m-0 p-0 align-middle" />
           </Link>
         </div>
-        
+
         {/* Hamburger Menu Button (Mobile) */}
-        <button 
+        <button
           className="lg:hidden flex items-center justify-center h-8 w-8 p-0 m-0 rounded-md hover:bg-gray-100 focus:outline-none mx-3 py-2"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <svg 
-            className="w-6 h-6 text-gray-700" 
-            fill="none" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth="2" 
-            viewBox="0 0 24 24" 
+          <svg
+            className="w-6 h-6 text-gray-700"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
             stroke="currentColor"
-            style={{display: 'block', margin: 'auto'}}
+            style={{ display: 'block', margin: 'auto'}}
           >
             {isMenuOpen ? (
               <path d="M6 18L18 6M6 6l12 12" />
