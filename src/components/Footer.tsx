@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  handlePostJobClick: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ handlePostJobClick }) => {
   return (
     <>
       <footer className="bg-gray-900 text-white">
@@ -63,11 +67,11 @@ const Footer: React.FC = () => {
             <div>
               <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY JOBS</h3>
               <ul className="space-y-3">
-                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Waiter</a></li>
-                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Helper</a></li>
-                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Chef/Cook</a></li>
-                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Housekeeping</a></li>
-                <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Other</a></li>
+                <li><button onClick={handlePostJobClick} className="text-gray-400 hover:text-white transition-colors text-sm">Waiter</button></li>
+                <li><button onClick={handlePostJobClick} className="text-gray-400 hover:text-white transition-colors text-sm">Helper</button></li>
+                <li><button onClick={handlePostJobClick} className="text-gray-400 hover:text-white transition-colors text-sm">Chef/Cook</button></li>
+                <li><button onClick={handlePostJobClick} className="text-gray-400 hover:text-white transition-colors text-sm">Housekeeping</button></li>
+                <li><button onClick={handlePostJobClick} className="text-gray-400 hover:text-white transition-colors text-sm">Other</button></li>
               </ul>
             </div>
             {/* Get to Know Us Links */}

@@ -11,6 +11,7 @@ import Pricing from "./components/Pricing";
 import Blogs from "./components/Blogs";
 import ContactUs from "./components/ContactUs";
 import AboutUs from "./components/AboutUs";
+import Dashboard from "./components/Dashboard";
 import logo from './assets/logo.svg';
 
 function App() {
@@ -34,11 +35,11 @@ function App() {
 
   const features = [
     {
-      title: "1. Tell us your staff requirements in < 30 seconds",
+      title: "Tell us what kind of staff you need.",
       image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&h=400&fit=crop&auto=format"
     },
     {
-      title: "Get pre-screened candidates right on your whatsapp",
+      title: "We send you ready-to-hire profiles instantly.",
       image: "section2_wapp.png"
     },
     {
@@ -49,20 +50,24 @@ function App() {
 
   const faqData = [
     {
-      question: "Why should I use StaffChahiye over others?",
-      answer: "StaffChahiye boasts one of the largest pool of realtime-updated screened candidates database. The platform personalizes the hiring experience, allowing you to connect with the most relevant candidates over phone or WhatsApp, or use the dashboard to shortlist candidates effectively."
+      question: "How does StaffChahiye.com work?",
+      answer: "Just tell us what kind of staff you need. We'll send pre-screened candidates directly to your WhatsApp so you can connect and start hiring instantly."
     },
     {
-      question: "What happens if I don't receive enough candidates?",
-      answer: "Our support team will work to boost your job post and help improve reach and relevance."
+      question: "How fast can I get candidates?",
+      answer: "Typically within 30 minutes. We're built for speed so you never have to delay hiring again."
     },
     {
-      question: "In which cities can I hire via StaffChahiye?",
-      answer: "We operate in 100+ cities and towns across India."
+      question: "What kind of staff can I hire?",
+      answer: "We provide operational and support staff like: Waiters & kitchen helpers Housekeeping staff Retail & counter staff , Delivery executives, Receptionists, and more."
     },
     {
-      question: "I want to hire more than 10 candidates, do you have any bulk-hiring plans?",
-      answer: "Yes, sure! Get in touch with our team to discover high-volume/bulk-hiring solutions."
+      question: " Are the candidates verified or trained?",
+      answer: "Yes. All candidates are pre-screened for basic suitability, experience, and intent to join."
+    },
+    {
+      question: "Do you support bulk hiring?",
+      answer: "Absolutely. Whether you need one staff member or a full team, we can help."
     }
   ];
 
@@ -267,9 +272,9 @@ function App() {
                       {/* Hero Text */}
                       <div className="mb-8">
                         <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-                          Hire candidates in &lt;30 minutes with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
+                          Hire candidates in under &lt;30 minutes with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
                         </h1>
-                        <p className="text-base lg:text-lg text-gray-600 leading-relaxed">Streamline your recruitment with AI-driven precision. Single solution from Fresher to experienced hiring.</p>
+                        <p className="text-base lg:text-lg text-gray-600 leading-relaxed">We help you find and connect with candidates who are pre-screened and match your specific job requirements, saving you time and effort in the hiring process.</p>
                       </div>
 
                       {/* Statistics Section */}
@@ -458,6 +463,8 @@ function App() {
                         className={`bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
                           index >= 4 && !showMoreRoles ? 'hidden md:block' : ''
                         }`}
+                        onClick={() => setIsModalOpen(true)}
+                        style={{ cursor: 'pointer' }}
                       >
                         <div className="relative h-40 overflow-hidden rounded-t-2xl">
                           <img
@@ -493,7 +500,7 @@ function App() {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
+                          d="M19 9l-7-7 7-7"
                         />
                       </svg>
                     </button>
@@ -749,12 +756,6 @@ function App() {
                             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                           </svg>
                         </a>
-                        {/* <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                          <span className="sr-only">Twitter</span>
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                          </svg>
-                        </a> */}
                         <a href="https://www.instagram.com/staffchahiye" className="text-gray-400 hover:text-white transition-colors">
                           <span className="sr-only">Instagram</span>
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -772,16 +773,6 @@ function App() {
                       </div>
                     </div>
 
-                    {/* Product Links */}
-                    {/* <div>
-                      <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY CITY</h3>
-                      <ul className="space-y-3">
-                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Mumbai</a></li>
-                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Delhi</a></li>
-                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Varanasi</a></li>
-                        <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Hire in Lucknow</a></li>
-                      </ul>
-                    </div> */}
                     <div>
                       <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY JOBS</h3>
                       <ul className="space-y-3">
@@ -844,6 +835,7 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>

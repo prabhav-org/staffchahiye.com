@@ -67,7 +67,9 @@ export const vacancyFormSchema = z.object({
   
   workingHours: z.string().min(1, 'Please select working hours'),
 
-  otherBenefits: z.string().min(1, 'Please select other benefits'),
+  otherBenefits: z.array(z.string())
+    .min(1, 'Please select at least one benefit')
+    .max(7, 'You can select up to 7 benefits'),
 
   remarks: z.string().optional(), // Can be optional
 }).refine(

@@ -17,6 +17,10 @@ const Pricing: React.FC = () => {
         setIsModalOpen(false);
     };
 
+    const handlePostJobClick = () => {
+        setIsModalOpen(true);
+    };
+
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
             <Header />
@@ -59,33 +63,17 @@ const Pricing: React.FC = () => {
                                             </li>
 
                                             <li className="flex items-center">
-
-                                            {/* <li className="flex items-center">
-
                                                 <svg className="w-5 h-5 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                                                 </svg>
-                                                <span className="text-gray-700">Background checks included</span>
-
-                                            </li> */}
-
-                                            </li>
-
-                                            <li className="flex items-center">
-                                                <svg className="w-5 h-5 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-
                                                 <span className="text-gray-700">Quick staff matching within 30 minutes</span>
-
                                             </li>
+
                                             <li className="flex items-center">
                                                 <svg className="w-5 h-5 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                                                 </svg>
-
                                                 <span className="text-gray-700">Custom support from team</span>
-
                                             </li>
                                         </ul>
                                     </div>
@@ -135,7 +123,7 @@ const Pricing: React.FC = () => {
                     </div>
                 </div>
             </main>
-            <Footer />
+            <Footer handlePostJobClick={handlePostJobClick} />
             <VacancyModal
                 isOpen={isModalOpen}
                 onClose={handleModalClose}

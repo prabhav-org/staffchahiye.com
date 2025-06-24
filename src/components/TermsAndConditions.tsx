@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { VacancyModal } from './VacancyModal';
+import { usePhoneValidation } from '../hooks/usePhoneValidation';
 
 const TermsAndConditions: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {
+    phoneNumber,
+  } = usePhoneValidation();
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handlePostJobClick = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
       <Header />
@@ -134,7 +149,12 @@ const TermsAndConditions: React.FC = () => {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer handlePostJobClick={handlePostJobClick} />
+      <VacancyModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        initialPhone={phoneNumber}
+      />
     </div>
   );
 };

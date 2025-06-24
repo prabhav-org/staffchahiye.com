@@ -33,7 +33,7 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
       candidateType: 'Any',
       gender: 'Any',
       minimumQualification: 'Any',
-      otherBenefits: 'None',
+      otherBenefits: [],
       remarks: '',
       // Set default for salary to avoid NaN issues if not provided in defaults
       minSalary: 0,
@@ -207,14 +207,27 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
         />
       </div>
 
-      <Select
-        label="Other Benefits"
-        required
-        options={otherBenefitsOptions}
-        {...register('otherBenefits')}
-        error={errors.otherBenefits?.message}
-        placeholder="Select other benefits"
-      />
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">
+          Other Benefits <span className="text-red-500">*</span>
+        </label>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+          {otherBenefitsOptions.map((benefit) => (
+            <label key={benefit} className="flex items-center space-x-2 p-2 border rounded-md hover:bg-gray-50 cursor-pointer">
+              <input
+                type="checkbox"
+                value={benefit}
+                {...register('otherBenefits')}
+                className="h-4 w-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded"
+              />
+              <span className="text-sm text-gray-700">{benefit}</span>
+            </label>
+          ))}
+        </div>
+        {errors.otherBenefits && (
+          <p className="mt-1 text-sm text-red-500">{errors.otherBenefits.message}</p>
+        )}
+      </div>
 
       <Input
         label="Remarks"
