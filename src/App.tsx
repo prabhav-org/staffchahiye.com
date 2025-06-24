@@ -773,7 +773,6 @@ function App() {
                       </div>
                     </div>
 
-                    {/* Product Links */}
                     <div>
                       <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">HIRE BY JOBS</h3>
                       <ul className="space-y-3">
