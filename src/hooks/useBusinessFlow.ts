@@ -1,0 +1,203 @@
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { 
+  submitVacancy, 
+  sendOtp, 
+  verifyOtp, 
+  continueToPayment,
+  type FormSubmissionResponse,
+  type PaymentResponse 
+} from '../utils/api';
+import type { VacancyForm } from '../components/forms/types';
+
+export type FlowStep = 'form' | 'otp' | 'payment' | 'completed';
+
+interface BusinessFlowState {
+  currentStep: FlowStep;
+  recordId: string | null;
+  phoneNumber: string | null;
+  paymentUrl: string | null;
+  isProcessing: boolean;
+}
+
+export const useBusinessFlow = () => {
+  const [state, setState] = useState<BusinessFlowState>({
+    currentStep: 'form',
+    recordId: null,
+    phoneNumber: null,
+    paymentUrl: null,
+    isProcessing: false,
+  });
+
+  // Step 1: Submit form
+  const handleFormSubmit = async (formData: VacancyForm): Promise<boolean> => {
+    setState(prev => ({ ...prev, isProcessing: true }));
+    
+    try {
+      const result = await submitVacancy(formData);
+      
+      if (result.success && result.data?.recordId && result.data?.phoneNumber) {
+        setState(prev => ({
+          ...prev,
+          currentStep: 'otp',
+          recordId: result.data!.recordId,
+          phoneNumber: result.data!.phoneNumber,
+          isProcessing: false,
+        }));
+        
+        toast.success(result.message);
+        return true;
+      } else {
+        toast.error(result.message);
+        setState(prev => ({ ...prev, isProcessing: false }));
+        return false;
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('Failed to submit form. Please try again.');
+      setState(prev => ({ ...prev, isProcessing: false }));
+      return false;
+    }
+  };
+
+  // Step 2: Send OTP
+  const handleSendOtp = async (phoneNumber: string): Promise<boolean> => {
+    setState(prev => ({ ...prev, isProcessing: true }));
+    
+    try {
+      const result = await sendOtp(phoneNumber);
+      
+      if (result.success) {
+        toast.success(result.message);
+        setState(prev => ({ ...prev, isProcessing: false }));
+        return true;
+      } else {
+        toast.error(result.message);
+        setState(prev => ({ ...prev, isProcessing: false }));
+        return false;
+      }
+    } catch (error) {
+      console.error('OTP send error:', error);
+      toast.error('Failed to send OTP. Please try again.');
+      setState(prev => ({ ...prev, isProcessing: false }));
+      return false;
+    }
+  };
+
+  // Step 3: Verify OTP
+  const handleVerifyOtp = async (otp: string): Promise<boolean> => {
+    if (!state.phoneNumber) {
+      toast.error('Phone number not found. Please restart the process.');
+      return false;
+    }
+
+    setState(prev => ({ ...prev, isProcessing: true }));
+    
+    try {
+      const result = await verifyOtp(state.phoneNumber, otp);
+      
+      if (result.success) {
+        toast.success(result.message);
+        setState(prev => ({ 
+          ...prev, 
+          currentStep: 'payment',
+          isProcessing: false 
+        }));
+        return true;
+      } else {
+        toast.error(result.message);
+        setState(prev => ({ ...prev, isProcessing: false }));
+        return false;
+      }
+    } catch (error) {
+      console.error('OTP verification error:', error);
+      toast.error('Failed to verify OTP. Please try again.');
+      setState(prev => ({ ...prev, isProcessing: false }));
+      return false;
+    }
+  };
+
+  // Step 4: Continue to payment
+  const handleContinueToPayment = async (): Promise<boolean> => {
+    if (!state.recordId) {
+      toast.error('Record ID not found. Please restart the process.');
+      return false;
+    }
+
+    setState(prev => ({ ...prev, isProcessing: true }));
+    
+    try {
+      const result = await continueToPayment(state.recordId);
+      
+      if (result.success && result.data?.paymentUrl) {
+        setState(prev => ({
+          ...prev,
+          currentStep: 'completed',
+          paymentUrl: result.data!.paymentUrl,
+          isProcessing: false,
+        }));
+        
+        toast.success(result.message);
+        
+        // Redirect to payment URL
+        window.open(result.data!.paymentUrl, '_blank');
+        
+        return true;
+      } else {
+        toast.error(result.message);
+        setState(prev => ({ ...prev, isProcessing: false }));
+        return false;
+      }
+    } catch (error) {
+      console.error('Payment initialization error:', error);
+      toast.error('Failed to initialize payment. Please try again.');
+      setState(prev => ({ ...prev, isProcessing: false }));
+      return false;
+    }
+  };
+
+  // Reset flow
+  const resetFlow = () => {
+    setState({
+      currentStep: 'form',
+      recordId: null,
+      phoneNumber: null,
+      paymentUrl: null,
+      isProcessing: false,
+    });
+  };
+
+  // Go back to previous step
+  const goBack = () => {
+    switch (state.currentStep) {
+      case 'otp':
+        setState(prev => ({ ...prev, currentStep: 'form' }));
+        break;
+      case 'payment':
+        setState(prev => ({ ...prev, currentStep: 'otp' }));
+        break;
+      case 'completed':
+        setState(prev => ({ ...prev, currentStep: 'payment' }));
+        break;
+      default:
+        break;
+    }
+  };
+
+  return {
+    // State
+    currentStep: state.currentStep,
+    recordId: state.recordId,
+    phoneNumber: state.phoneNumber,
+    paymentUrl: state.paymentUrl,
+    isProcessing: state.isProcessing,
+    
+    // Actions
+    handleFormSubmit,
+    handleSendOtp,
+    handleVerifyOtp,
+    handleContinueToPayment,
+    resetFlow,
+    goBack,
+  };
+}; 

@@ -30,12 +30,18 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
     resolver: zodResolver(vacancyFormSchema),
     defaultValues: {
       phoneNumber: initialPhone || '',
+      businessName: '',
+      yourName: '',
+      requirement: '',
+      city: '',
+      locality: '',
       candidateType: 'Any',
       gender: 'Any',
       minimumQualification: 'Any',
-      otherBenefits: [],
+      workingHours: '8 Hours',
+      otherBenefits: ['Food Included'],
       remarks: '',
-      // Set default for salary to avoid NaN issues if not provided in defaults
+      numberOfOpenings: 1,
       minSalary: 0,
       maxSalary: 0,
     },
@@ -53,9 +59,8 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
 
   const onFormSubmit = async (data: VacancyFormData) => {
     const success = await onSubmit(data);
-    if (success !== undefined) {
-      onClose();
-    }
+    // Don't close modal here - let the business flow handle next steps
+    // The modal will automatically transition to OTP step on success
   };
 
   return (
