@@ -18,7 +18,8 @@ import type { VacancyForm as VacancyFormData, VacancyFormProps } from './types';
 export const VacancyForm: React.FC<VacancyFormProps> = ({
   initialPhone,
   onSubmit,
-  onClose
+  onClose,
+  handleSendOtp
 }) => {
   const {
     register,
@@ -59,8 +60,10 @@ export const VacancyForm: React.FC<VacancyFormProps> = ({
 
   const onFormSubmit = async (data: VacancyFormData) => {
     const success = await onSubmit(data);
-    // Don't close modal here - let the business flow handle next steps
-    // The modal will automatically transition to OTP step on success
+    if (success) {
+      // Call handleSendOtp with the phone number from the form data
+      handleSendOtp(data.phoneNumber);
+    }
   };
 
   return (

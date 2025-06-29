@@ -1,6 +1,8 @@
 import type { VacancyForm } from '../components/forms/types';
 
-const API_BASE_URL = '/api/business';
+// const API_BASE_URL = '/api/business';
+// const API_BASE_URL = 'https://api.airtable.com/v0/app1234567890/tbl1234567890';
+const API_BASE_URL = 'http://localhost:4000/api';
 const REQUEST_TIMEOUT = 10000; // 10 seconds
 
 export interface ApiResponse {
@@ -51,7 +53,7 @@ const fetchWithTimeout = async (url: string, options: RequestInit, timeout: numb
 export const submitVacancy = async (data: VacancyForm): Promise<FormSubmissionResponse> => {
   try {
     const response = await fetchWithTimeout(
-      `${API_BASE_URL}/submit-form`,
+      `${API_BASE_URL}/business/submit-form`,
       {
         method: 'POST',
         headers: {
