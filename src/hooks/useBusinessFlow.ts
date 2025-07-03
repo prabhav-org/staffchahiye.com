@@ -6,9 +6,11 @@ import {
   verifyOtp, 
   continueToPayment,
   type FormSubmissionResponse,
-  type PaymentResponse 
+  type PaymentResponse, 
+  verifyPayment
 } from '../utils/api';
 import type { VacancyForm } from '../components/forms/types';
+import { redirect } from 'react-router-dom';
 
 export type FlowStep = 'form' | 'otp' | 'payment' | 'completed';
 
@@ -151,29 +153,33 @@ export const useBusinessFlow = () => {
   };
 
   // Step 4: Continue to payment
-  const handleContinueToPayment = async (): Promise<boolean> => {
+  const handleContinueToPayment = async (amount:number): Promise<boolean> => {
+
+    const phoneNumber =  localStorage.getItem('business_phoneNumber');
     if (!state.recordId) {
       toast.error('Record ID not found. Please restart the process.');
       return false;
     }
 
     setState(prev => ({ ...prev, isProcessing: true }));
+    const redirectUrl = 'http://localhost:5173/';
     
     try {
-      const result = await continueToPayment(state.recordId);
+      const result = await continueToPayment(amount,phoneNumber!,redirectUrl);
+      console.log(result,'for payment purpose');
       
-      if (result.success && result.data?.paymentUrl) {
+      if (result.success && result.data?.data?.redirectUrl) {
         setState(prev => ({
           ...prev,
           currentStep: 'completed',
-          paymentUrl: result.data!.paymentUrl,
+          paymentUrl: result.data!.data.redirectUrl,
           isProcessing: false,
         }));
         
         toast.success(result.message);
         
         // Redirect to payment URL
-        window.open(result.data!.paymentUrl, '_blank');
+        window.open(result.data!.data.redirectUrl, '_blank');
         
         return true;
       } else {
@@ -188,6 +194,38 @@ export const useBusinessFlow = () => {
       return false;
     }
   };
+
+  const handleVerifyPayment = async (orderId:string): Promise<any> => {
+    
+    try {
+      const result = await verifyPayment(orderId);
+      console.log(result,'for payment verifiactiom handleverifypaymnet purpose');
+      
+      if (result.success) {
+        setState(prev => ({
+          ...prev,
+          currentStep: 'completed',
+        
+          isProcessing: false,
+        }));
+        
+        toast.success(result.message);
+        
+     
+        
+        return true;
+      } else {
+        toast.error(result.message);
+        setState(prev => ({ ...prev, isProcessing: false }));
+        return false;
+      }
+    } catch (error) {
+      console.error('Payment verification error:', error);
+      toast.error('Failed to verify payment. Please try again.');
+      setState(prev => ({ ...prev, isProcessing: false }));
+      return false;
+    }
+  }
 
   // Reset flow
   const resetFlow = () => {
@@ -232,6 +270,7 @@ export const useBusinessFlow = () => {
     handleSendOtp,
     handleVerifyOtp,
     handleContinueToPayment,
+    handleVerifyPayment,
     resetFlow,
     goBack,
   };

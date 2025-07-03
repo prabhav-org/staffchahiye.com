@@ -1,3 +1,4 @@
+import { redirect } from 'react-router-dom';
 import type { VacancyForm } from '../components/forms/types';
 
 // const API_BASE_URL = '/api/business';
@@ -208,16 +209,16 @@ export const verifyOtp = async (phoneNumber: string, otp: string, sessionId:stri
 };
 
 // Step 4: Continue to payment
-export const continueToPayment = async (recordId: string): Promise<PaymentResponse> => {
+export const continueToPayment = async (amount:number,phoneNumber:string,redirectUrl:string): Promise<any> => {
   try {
     const response = await fetchWithTimeout(
-      `${API_BASE_URL}/continue-to-payment`,
+      `${API_BASE_URL}/payments/create-order`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ recordId }),
+        body: JSON.stringify({ amount , phoneNumber , redirectUrl }),
       },
       REQUEST_TIMEOUT
     );
@@ -253,5 +254,63 @@ export const continueToPayment = async (recordId: string): Promise<PaymentRespon
       success: false,
       message: 'Failed to initialize payment. Please try again.',
     };
+
+
+   
   }
+
+
+ 
 }; 
+ export const verifyPayment = async (orderId:string):Promise<any> =>{
+
+     try {
+    const response = await fetchWithTimeout(
+      `${API_BASE_URL}/payments/verify-order`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({orderId}),
+      },
+      REQUEST_TIMEOUT
+    );
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP ${response.status}: Payment failed`);
+    }
+    
+    const result = await response.json();
+    return {
+      success: true,
+      message: 'Your Payment is successfull!',
+      data: result,
+    };
+  } catch (error) {
+    console.error('Payment verification error:', error);
+    
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        return {
+          success: false,
+          message: 'Request timed out. Please check your connection and try again.',
+        };
+      }
+      return {
+        success: false,
+        message: error.message,
+      };
+    }
+    
+    return {
+      success: false,
+      message: 'Failed to complete payment. Please try again.',
+    };
+
+
+   
+  }
+
+  }
