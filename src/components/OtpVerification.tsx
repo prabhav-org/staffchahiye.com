@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, RefreshCw } from 'lucide-react';
+import axios from 'axios';
 
 interface OtpVerificationProps {
   phoneNumber: string;
@@ -36,14 +37,29 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
   }, []);
 
   const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, '').slice(0, 6);
+    const value = e.target.value.replace(/\D/g, '').slice(0, 4);
     setOtp(value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (otp.length === 6) {
-      await onVerify(otp);
+    if (otp.length ===4) {
+      try {
+        const response = await onVerify(otp);
+        if (response) {
+          const paymentResponse = await axios.post('/api/continue-to-payment', { phoneNumber });
+          if (paymentResponse.data.paymentLink) {
+            window.location.href = paymentResponse.data.paymentLink;
+          } else {
+            alert('Failed to generate payment link. Please try again.');
+          }
+        } else {
+          alert('OTP verification failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error during OTP verification or payment link generation:', error);
+        alert('An error occurred. Please try again later.');
+      }
     }
   };
 
@@ -86,16 +102,16 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
             type="text"
             value={otp}
             onChange={handleOtpChange}
-            placeholder="Enter 6-digit OTP"
+            placeholder="Enter 4-digit OTP"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none text-center text-lg tracking-widest"
-            maxLength={6}
+            maxLength={4}
             disabled={isProcessing}
           />
         </div>
 
         <button
           type="submit"
-          disabled={otp.length !== 6 || isProcessing}
+          disabled={otp.length <4 || isProcessing}
           className="w-full bg-orange-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
         >
           {isProcessing ? 'Verifying...' : 'Verify OTP'}

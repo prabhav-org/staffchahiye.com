@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { 
   submitVacancy, 
@@ -18,6 +18,7 @@ interface BusinessFlowState {
   phoneNumber: string | null;
   paymentUrl: string | null;
   isProcessing: boolean;
+  sessionId: string | null;
 }
 
 export const useBusinessFlow = () => {
@@ -27,49 +28,72 @@ export const useBusinessFlow = () => {
     phoneNumber: null,
     paymentUrl: null,
     isProcessing: false,
+    sessionId: null,
   });
 
+
+  
   // Step 1: Submit form
   const handleFormSubmit = async (formData: VacancyForm): Promise<boolean> => {
     setState(prev => ({ ...prev, isProcessing: true }));
     
     try {
       const result = await submitVacancy(formData);
-      
-      if (result.success && result.data?.recordId && result.data?.phoneNumber) {
+      console.log('Result from useBusinessFlow:', result);
+    
+      if (result.success && result.data?.recordId && result.data?.sessionId  && result.data?.phoneNumber) {
         setState(prev => ({
           ...prev,
           currentStep: 'otp',
           recordId: result.data!.recordId,
-          phoneNumber: result.data!.phoneNumber,
+          sessionId: result.data!.sessionId,
           isProcessing: false,
+          phoneNumber: result.data!.phoneNumber,
         }));
+        // ✅ Store critical values in localStorage immediately
+        localStorage.setItem('business_sessionId',  result.data?.sessionId);
+     
+
+
         
         toast.success(result.message);
+
+        
+      
         return true;
       } else {
         toast.error(result.message);
         setState(prev => ({ ...prev, isProcessing: false }));
-        return false;
+        return false
+      
       }
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error('Failed to submit form. Please try again.');
       setState(prev => ({ ...prev, isProcessing: false }));
-      return false;
+     return false
     }
   };
 
   // Step 2: Send OTP
-  const handleSendOtp = async (phoneNumber: string): Promise<boolean> => {
+  const handleSendOtp = async (phoneNumber: string ): Promise<boolean> => {
     setState(prev => ({ ...prev, isProcessing: true }));
-    
+    console.log('Sending OTP to:', phoneNumber);
+   const sessionId = localStorage.getItem('business_sessionId');
+      localStorage.setItem('business_phoneNumber',phoneNumber);
+   
     try {
-      const result = await sendOtp(phoneNumber);
+      const result = await sendOtp(phoneNumber, sessionId!);
+
+      console.log(result," send otp");
+      
       
       if (result.success) {
         toast.success(result.message);
         setState(prev => ({ ...prev, isProcessing: false }));
+        console.log(result.data.verificationId, "verifiactionId check")
+        console.log(result.data, "data check for vid")
+         localStorage.setItem('verificationId',result.data.verificationId)
         return true;
       } else {
         toast.error(result.message);
@@ -77,7 +101,7 @@ export const useBusinessFlow = () => {
         return false;
       }
     } catch (error) {
-      console.error('OTP send error:', error);
+      console.error('OTP send error:', error || error);
       toast.error('Failed to send OTP. Please try again.');
       setState(prev => ({ ...prev, isProcessing: false }));
       return false;
@@ -86,15 +110,23 @@ export const useBusinessFlow = () => {
 
   // Step 3: Verify OTP
   const handleVerifyOtp = async (otp: string): Promise<boolean> => {
-    if (!state.phoneNumber) {
-      toast.error('Phone number not found. Please restart the process.');
-      return false;
-    }
+    const verificationId = localStorage.getItem('verificationId')
+ 
+     const phoneNumber =   localStorage.getItem('business_phoneNumber');
+
+    // if (phoneNumber) {
+    //   toast.error('Phone number not found. Please restart the process.');
+    //   return false;
+    // }
 
     setState(prev => ({ ...prev, isProcessing: true }));
+    const sessionId = localStorage.getItem('business_sessionId');
+
+    console.log(otp , phoneNumber, verificationId,sessionId ,"dsta rewutdt")
+    
     
     try {
-      const result = await verifyOtp(state.phoneNumber, otp);
+      const result = await verifyOtp(phoneNumber!, otp, sessionId!, verificationId!);
       
       if (result.success) {
         toast.success(result.message);
@@ -103,6 +135,7 @@ export const useBusinessFlow = () => {
           currentStep: 'payment',
           isProcessing: false 
         }));
+        localStorage.removeItem("verificationId")
         return true;
       } else {
         toast.error(result.message);
@@ -159,11 +192,12 @@ export const useBusinessFlow = () => {
   // Reset flow
   const resetFlow = () => {
     setState({
-      currentStep: 'form',
+      currentStep: 'otp',
       recordId: null,
       phoneNumber: null,
       paymentUrl: null,
       isProcessing: false,
+      sessionId: null,
     });
   };
 
@@ -191,6 +225,7 @@ export const useBusinessFlow = () => {
     phoneNumber: state.phoneNumber,
     paymentUrl: state.paymentUrl,
     isProcessing: state.isProcessing,
+    sessionId: state.sessionId,
     
     // Actions
     handleFormSubmit,

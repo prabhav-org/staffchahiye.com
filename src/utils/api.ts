@@ -1,6 +1,8 @@
 import type { VacancyForm } from '../components/forms/types';
 
-const API_BASE_URL = '/api/business';
+// const API_BASE_URL = '/api/business';
+// const API_BASE_URL = 'https://api.airtable.com/v0/app1234567890/tbl1234567890';
+const API_BASE_URL = 'http://localhost:4000/api';
 const REQUEST_TIMEOUT = 10000; // 10 seconds
 
 export interface ApiResponse {
@@ -13,6 +15,8 @@ export interface FormSubmissionResponse extends ApiResponse {
   data?: {
     recordId: string;
     phoneNumber: string;
+
+    sessionId: string;
   };
 }
 
@@ -51,7 +55,7 @@ const fetchWithTimeout = async (url: string, options: RequestInit, timeout: numb
 export const submitVacancy = async (data: VacancyForm): Promise<FormSubmissionResponse> => {
   try {
     const response = await fetchWithTimeout(
-      `${API_BASE_URL}/submit-form`,
+      `${API_BASE_URL}/business/submit-form`,
       {
         method: 'POST',
         headers: {
@@ -61,17 +65,25 @@ export const submitVacancy = async (data: VacancyForm): Promise<FormSubmissionRe
       },
       REQUEST_TIMEOUT
     );
+    console.log('Raw API Response:', response);
+    const result = await response.json();
+    console.log('Parsed Result:', result);
     
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(errorData.message || `HTTP ${response.status}: Form submission failed`);
     }
     
-    const result = await response.json();
+    console.log('Result from api:', result);
+
     return {
       success: true,
       message: 'Form submitted successfully! Please verify your phone number.',
-      data: result,
+      data: {
+        recordId: result.clientId,
+        sessionId: result.sessionKey,
+        phoneNumber: result.phoneNumber,
+      },
     };
   } catch (error) {
     console.error('Form submission error:', error);
@@ -97,16 +109,16 @@ export const submitVacancy = async (data: VacancyForm): Promise<FormSubmissionRe
 };
 
 // Step 2: Send OTP to phone number
-export const sendOtp = async (phoneNumber: string): Promise<OtpResponse> => {
+export const sendOtp = async (phoneNumber: string, sessionId: string): Promise<any> => {
   try {
     const response = await fetchWithTimeout(
-      `${API_BASE_URL}/send-otp`,
+      `${API_BASE_URL}/business/send-otp`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ phoneNumber }),
+        body: JSON.stringify({ phoneNumber, sessionId }),
       },
       REQUEST_TIMEOUT
     );
@@ -117,10 +129,11 @@ export const sendOtp = async (phoneNumber: string): Promise<OtpResponse> => {
     }
     
     const result = await response.json();
+   
     return {
       success: true,
       message: 'OTP sent successfully!',
-      data: result,
+      data: result.data,
     };
   } catch (error) {
     console.error('OTP send error:', error);
@@ -146,16 +159,16 @@ export const sendOtp = async (phoneNumber: string): Promise<OtpResponse> => {
 };
 
 // Step 3: Verify OTP
-export const verifyOtp = async (phoneNumber: string, otp: string): Promise<ApiResponse> => {
+export const verifyOtp = async (phoneNumber: string, otp: string, sessionId:string, verificationId:string): Promise<ApiResponse> => {
   try {
     const response = await fetchWithTimeout(
-      `${API_BASE_URL}/verify-otp`,
+      `${API_BASE_URL}/business/verify-otp`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ phoneNumber, otp }),
+        body: JSON.stringify({ phoneNumber, otp , sessionId , verificationId }),
       },
       REQUEST_TIMEOUT
     );
@@ -169,7 +182,7 @@ export const verifyOtp = async (phoneNumber: string, otp: string): Promise<ApiRe
     return {
       success: true,
       message: 'Phone number verified successfully!',
-      data: result,
+      data: result.data,
     };
   } catch (error) {
     console.error('OTP verification error:', error);

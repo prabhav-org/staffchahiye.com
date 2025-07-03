@@ -7,10 +7,12 @@ import { PaymentStep } from './PaymentStep';
 import { useBusinessFlow } from '../hooks/useBusinessFlow';
 import type { VacancyModalProps } from './forms/types';
 
-export const VacancyModal: React.FC<VacancyModalProps> = ({ 
+
+export const VacancyModal: React.FC<VacancyModalProps & { sessionId: string }> = ({ 
   isOpen, 
   onClose,
-  initialPhone 
+  initialPhone,
+  sessionId
 }) => {
   const {
     currentStep,
@@ -36,7 +38,7 @@ export const VacancyModal: React.FC<VacancyModalProps> = ({
           <VacancyForm 
             initialPhone={initialPhone}
             onSubmit={handleFormSubmit}
-            onClose={handleClose}
+            handleSendOtp={handleSendOtp}
           />
         );
       
@@ -45,7 +47,7 @@ export const VacancyModal: React.FC<VacancyModalProps> = ({
           <OtpVerification
             phoneNumber={phoneNumber}
             onVerify={handleVerifyOtp}
-            onSendOtp={handleSendOtp}
+            onSendOtp={ handleSendOtp}
             onBack={goBack}
             isProcessing={isProcessing}
           />
