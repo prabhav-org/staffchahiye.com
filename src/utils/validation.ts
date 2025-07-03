@@ -12,13 +12,13 @@ export const vacancyFormSchema = z.object({
     .string()
     .min(2, 'Business name must be at least 2 characters')
     .max(50, 'Business name must be less than 50 characters')
-    .regex(/^[a-zA-Z\s]+$/, 'Business name can only contain letters and spaces'),
+    .regex(/^[a-zA-Z\s\.\-'&]+$/, 'Business name can only contain letters, spaces, dots, hyphens, apostrophes and ampersands'),
   
   yourName: z
     .string()
     .min(2, 'Your name must be at least 2 characters')
     .max(30, 'Your name must be less than 30 characters')
-    .regex(/^[a-zA-Z\s]+$/, 'Name can only contain letters and spaces'),
+    .regex(/^[a-zA-Z\s\.\-']+$/, 'Name can only contain letters, spaces, dots, hyphens and apostrophes'),
   
   phoneNumber: z
     .string()
@@ -31,7 +31,9 @@ export const vacancyFormSchema = z.object({
   numberOfOpenings: z
     .number()
     .min(1, 'Number of openings must be at least 1')
-    .max(999, 'Number of openings cannot exceed 999'),
+    .max(999, 'Number of openings cannot exceed 999')
+    .optional()
+    .default(1), // Default to 1 if not provided
   
   city: z
     .string()

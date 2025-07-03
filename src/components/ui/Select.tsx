@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 interface SelectOption {
   value: string;
@@ -13,7 +13,7 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   placeholder?: string;
 }
 
-export const Select: React.FC<SelectProps> = ({ 
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(({ 
   label, 
   options, 
   error, 
@@ -21,7 +21,7 @@ export const Select: React.FC<SelectProps> = ({
   placeholder,
   className = '', 
   ...props 
-}) => {
+}, ref) => {
   const formattedOptions = options.map(option => 
     typeof option === 'string' 
       ? { value: option, label: option }
@@ -34,6 +34,7 @@ export const Select: React.FC<SelectProps> = ({
         {label} {required && <span className="text-red-500">*</span>}
       </label>
       <select
+        ref={ref}
         className={`form-input form-select ${error ? 'error' : ''} ${className}`}
         {...props}
       >
@@ -51,4 +52,4 @@ export const Select: React.FC<SelectProps> = ({
       {error && <div className="form-error">{error}</div>}
     </div>
   );
-}; 
+}); 
