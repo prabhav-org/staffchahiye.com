@@ -34,7 +34,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
       <div className="bg-gray-50 rounded-lg p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-gray-900">Service Fee</h3>
-          <span className="text-2xl font-bold text-orange-500">₹499</span>
+          <span className="text-2xl font-bold text-orange-500">₹749</span>
         </div>
         
         <div className="space-y-3 text-sm text-gray-600">

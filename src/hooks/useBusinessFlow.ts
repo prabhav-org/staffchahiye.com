@@ -5,8 +5,8 @@ import {
   sendOtp, 
   verifyOtp, 
   continueToPayment,
-  type FormSubmissionResponse,
-  type PaymentResponse 
+  // type FormSubmissionResponse,
+  // type PaymentResponse 
 } from '../utils/api';
 import type { VacancyForm } from '../components/forms/types';
 
@@ -31,7 +31,7 @@ export const useBusinessFlow = () => {
     sessionId: null,
   });
 
-
+  
   
   // Step 1: Submit form
   const handleFormSubmit = async (formData: VacancyForm): Promise<boolean> => {
@@ -122,7 +122,7 @@ export const useBusinessFlow = () => {
     setState(prev => ({ ...prev, isProcessing: true }));
     const sessionId = localStorage.getItem('business_sessionId');
 
-    console.log(otp , phoneNumber, verificationId,sessionId ,"dsta rewutdt")
+    console.log(otp , phoneNumber, verificationId,sessionId ,"logging handleVerifyOtp() in useBusinessFlow.ts")
     
     
     try {

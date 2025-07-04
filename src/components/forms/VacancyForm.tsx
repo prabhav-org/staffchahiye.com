@@ -187,7 +187,7 @@ export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
             />
           </div>
 
-          {candidateType === 'Experienced only' && (
+          {candidateType === 'Experienced Only' && (
             <div className="conditional-field">
               <Select
                 label="Required Experience"

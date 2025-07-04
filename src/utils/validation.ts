@@ -12,13 +12,13 @@ export const vacancyFormSchema = z.object({
     .string()
     .min(2, 'Business name must be at least 2 characters')
     .max(50, 'Business name must be less than 50 characters')
-    .regex(/^[a-zA-Z\s\.\-'&]+$/, 'Business name can only contain letters, spaces, dots, hyphens, apostrophes and ampersands'),
+    .regex(/^[a-zA-Z\s.\-'&]+$/, 'Business name can only contain letters, spaces, dots, hyphens, apostrophes and ampersands'),
   
   yourName: z
     .string()
     .min(2, 'Your name must be at least 2 characters')
     .max(30, 'Your name must be less than 30 characters')
-    .regex(/^[a-zA-Z\s\.\-']+$/, 'Name can only contain letters, spaces, dots, hyphens and apostrophes'),
+    .regex(/^[a-zA-Z\s.\-']+$/, 'Name can only contain letters, spaces, dots, hyphens and apostrophes'),
   
   phoneNumber: z
     .string()
@@ -49,7 +49,7 @@ export const vacancyFormSchema = z.object({
     errorMap: () => ({ message: 'Please select a gender preference' }),
   }),
   
-  candidateType: z.enum(['Fresher Works', 'Experienced only', 'Any'], {
+  candidateType: z.enum(['Fresher Works', 'Experienced Only', 'Any'], {
     errorMap: () => ({ message: 'Please select candidate type' }),
   }),
   
@@ -76,7 +76,7 @@ export const vacancyFormSchema = z.object({
   remarks: z.string().optional(), // Can be optional
 }).refine(
   (data) => {
-    if (data.candidateType === 'Experienced only') {
+    if (data.candidateType === 'Experienced Only') {
       return data.requiredExperience && data.requiredExperience.length > 0;
     }
     return true;

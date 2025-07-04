@@ -32,7 +32,7 @@
 **File**: `src/components/PaymentStep.tsx`
 **Purpose**: Payment information and initiation
 **Features**:
-- Service fee breakdown (₹499)
+- Service fee breakdown (₹749)
 - Payment benefits display
 - PhonePe integration
 - Back navigation to OTP
