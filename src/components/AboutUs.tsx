@@ -46,7 +46,7 @@ const AboutUs: React.FC = () => {
                                 Who We Are
                             </h2>
                             <p className="text-lg text-gray-600">
-                                StaffChahiye is a revolutionary tech-first platform that's transforming the way businesses find and hire staff. We've streamlined the traditional staffing process into a quick, efficient, and reliable solution that connects businesses with verified staff within minutes.
+                                StaffChahiye is a AI-powered platform that's transforming the way businesses find and hire staff. We've streamlined the traditional staffing process into a quick, efficient, and reliable solution that connects businesses with verified staff within minutes.
                             </p>
                             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 border border-orange-100 shadow-lg hover:shadow-xl transition-shadow duration-300">
                                 <h3 className="text-xl font-semibold text-gray-900 mb-3">

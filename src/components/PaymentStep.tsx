@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowLeft, CreditCard, Shield, Clock } from 'lucide-react';
 
 interface PaymentStepProps {
-  onContinue: () => Promise<boolean>;
+  onContinue: (amount : number) => Promise<boolean>;
   onBack: () => void;
   isProcessing: boolean;
 }
@@ -34,7 +34,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
       <div className="bg-gray-50 rounded-lg p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-gray-900">Service Fee</h3>
-          <span className="text-2xl font-bold text-orange-500">₹749</span>
+          <span className="text-2xl font-bold text-orange-500">₹799</span>
         </div>
         
         <div className="space-y-3 text-sm text-gray-600">
@@ -55,7 +55,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
 
       <div className="space-y-4">
         <button
-          onClick={onContinue}
+          onClick={()=>onContinue(799)}
           disabled={isProcessing}
           className="w-full bg-orange-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
         >

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Toaster } from "sonner";
 import { VacancyModal } from "./components/VacancyModal";
 import { usePhoneValidation } from "./hooks/usePhoneValidation";
-import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 import TermsAndConditions from "./components/TermsAndConditions";
@@ -12,8 +12,9 @@ import Blogs from "./components/Blogs";
 import ContactUs from "./components/ContactUs";
 import AboutUs from "./components/AboutUs";
 import Dashboard from "./components/Dashboard";
+import { PaymentSuccess } from "./components/PaymentSuccess";
 import logo from './assets/logo.svg';
-import { OtpRequestForm } from './components/OtpRequestForm';
+// import { OtpRequestForm } from './components/OtpRequestForm';
 import { OtpVerification } from './components/OtpVerification';
 
 function App() {
@@ -858,7 +859,7 @@ function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/verify-otp" element={<OtpVerification phoneNumber={location.state?.phoneNumber} onVerify={handleVerifyOtp} onSendOtp={handleSendOtp} onBack={() => navigate('/')} isProcessing={false} />} />
-        <Route path="/next-route" element={<div>Next Route</div>} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
       </Routes>
     </div>
   );

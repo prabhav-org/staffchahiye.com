@@ -80,8 +80,8 @@ const mockApplicants = [
 ];
 
 const Dashboard: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [showSupportModal, setShowSupportModal] = useState(false);
+  // const [activeTab, setActiveTab] = useState('overview');
+  // const [showSupportModal, setShowSupportModal] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState('All');
   const [selectedStatus, setSelectedStatus] = useState('All');
 

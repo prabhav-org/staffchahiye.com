@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import { 
   submitVacancy, 
   sendOtp, 
   verifyOtp, 
   continueToPayment,
-  // type FormSubmissionResponse,
-  // type PaymentResponse 
 } from '../utils/api';
 import type { VacancyForm } from '../components/forms/types';
 
@@ -31,7 +29,7 @@ export const useBusinessFlow = () => {
     sessionId: null,
   });
 
-  
+
   
   // Step 1: Submit form
   const handleFormSubmit = async (formData: VacancyForm): Promise<boolean> => {
@@ -91,9 +89,12 @@ export const useBusinessFlow = () => {
       if (result.success) {
         toast.success(result.message);
         setState(prev => ({ ...prev, isProcessing: false }));
-        console.log(result.data.verificationId, "verifiactionId check")
-        console.log(result.data, "data check for vid")
-         localStorage.setItem('verificationId',result.data.verificationId)
+        // Safely extract verificationId from API response
+        const verificationId = (result.data as { verificationId?: string } | undefined)?.verificationId;
+        console.log(verificationId, "verificationId check");
+        if (verificationId) {
+          localStorage.setItem('verificationId', verificationId);
+        }
         return true;
       } else {
         toast.error(result.message);
@@ -122,7 +123,7 @@ export const useBusinessFlow = () => {
     setState(prev => ({ ...prev, isProcessing: true }));
     const sessionId = localStorage.getItem('business_sessionId');
 
-    console.log(otp , phoneNumber, verificationId,sessionId ,"logging handleVerifyOtp() in useBusinessFlow.ts")
+    console.log(otp , phoneNumber, verificationId,sessionId ,"dsta rewutdt")
     
     
     try {
@@ -151,33 +152,37 @@ export const useBusinessFlow = () => {
   };
 
   // Step 4: Continue to payment
-  const handleContinueToPayment = async (): Promise<boolean> => {
-    if (!state.recordId) {
-      toast.error('Record ID not found. Please restart the process.');
+  const handleContinueToPayment = async (amount: number): Promise<boolean> => {
+    const phoneNumber = localStorage.getItem('business_phoneNumber');
+    if (!phoneNumber) {
+      toast.error('Phone number not found. Please restart the process.');
       return false;
     }
+    const redirectUrl = `${window.location.origin}/payment-success`;
 
     setState(prev => ({ ...prev, isProcessing: true }));
     
     try {
-      const result = await continueToPayment(state.recordId);
+      const result = await continueToPayment(amount, phoneNumber, redirectUrl);
       
-      if (result.success && result.data?.paymentUrl) {
+      // Extract redirectUrl in a type-safe way (API response returns data.data.redirectUrl)
+      const redirectUrlFromApi = (result.data as { data?: { redirectUrl?: string } } | undefined)?.data?.redirectUrl;
+      if (result.success && redirectUrlFromApi) {
         setState(prev => ({
           ...prev,
           currentStep: 'completed',
-          paymentUrl: result.data!.paymentUrl,
+          paymentUrl: redirectUrlFromApi,
           isProcessing: false,
         }));
         
         toast.success(result.message);
         
         // Redirect to payment URL
-        window.open(result.data!.paymentUrl, '_blank');
+        window.location.href = redirectUrlFromApi;
         
         return true;
       } else {
-        toast.error(result.message);
+        toast.error(result.message || 'Failed to get payment URL.');
         setState(prev => ({ ...prev, isProcessing: false }));
         return false;
       }

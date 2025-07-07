@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, RefreshCw } from 'lucide-react';
-import axios from 'axios';
 
 interface OtpVerificationProps {
   phoneNumber: string;
@@ -43,23 +42,8 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (otp.length ===4) {
-      try {
-        const response = await onVerify(otp);
-        if (response) {
-          const paymentResponse = await axios.post('/api/continue-to-payment', { phoneNumber });
-          if (paymentResponse.data.paymentLink) {
-            window.location.href = paymentResponse.data.paymentLink;
-          } else {
-            alert('Failed to generate payment link. Please try again.');
-          }
-        } else {
-          alert('OTP verification failed. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error during OTP verification or payment link generation:', error);
-        alert('An error occurred. Please try again later.');
-      }
+    if (otp.length === 4) {
+      await onVerify(otp);
     }
   };
 

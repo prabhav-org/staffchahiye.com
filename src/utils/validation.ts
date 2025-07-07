@@ -49,7 +49,7 @@ export const vacancyFormSchema = z.object({
     errorMap: () => ({ message: 'Please select a gender preference' }),
   }),
   
-  candidateType: z.enum(['Fresher Works', 'Experienced Only', 'Any'], {
+  candidateType: z.enum(['Fresher Works', 'Experienced only', 'Any'], {
     errorMap: () => ({ message: 'Please select candidate type' }),
   }),
   
@@ -76,7 +76,7 @@ export const vacancyFormSchema = z.object({
   remarks: z.string().optional(), // Can be optional
 }).refine(
   (data) => {
-    if (data.candidateType === 'Experienced Only') {
+    if (data.candidateType === 'Experienced only') {
       return data.requiredExperience && data.requiredExperience.length > 0;
     }
     return true;

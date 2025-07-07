@@ -1,7 +1,7 @@
 export const vacancyTypes = [
   'Waiter / Steward',
   'Kitchen Helper', 
-  'Housekeeping',
+  'House Keeping',
   'Indian Chef',
   'Chinese Chef',
   'Continental Chef',
@@ -13,7 +13,7 @@ export const vacancyTypes = [
 
 export const candidateTypes = [
   'Fresher Works',
-  'Experienced Only', 
+  'Experienced only', 
   'Any'
 ];
 
