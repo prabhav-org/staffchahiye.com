@@ -14,7 +14,7 @@ export interface VacancyForm {
   maxSalary: number;         // required
   workingHours: string;      // required
   otherBenefits: string[];   // required, array of selected benefits
-  remarks: string;           // required
+  remarks?: string;          // optional
 }
 
 export interface VacancyModalProps {
@@ -27,4 +27,5 @@ export interface VacancyFormProps {
   initialPhone?: string;
   onSubmit: (data: VacancyForm) => Promise<boolean>;
   onClose: () => void;
+  handleSendOtp: (phoneNumber: string) => void;
 }
