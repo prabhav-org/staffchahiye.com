@@ -7,6 +7,7 @@ interface OtpVerificationProps {
   onVerify: (otp: string) => Promise<boolean>;
   onSendOtp: (phoneNumber: string) => Promise<boolean>;
   onBack: () => void;
+
   isProcessing: boolean;
 }
 
@@ -15,6 +16,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
   onVerify,
   onSendOtp,
   onBack,
+ 
   isProcessing,
 }) => {
   const [otp, setOtp] = useState('');
@@ -46,16 +48,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
     if (otp.length ===4) {
       try {
         const response = await onVerify(otp);
-        if (response) {
-          const paymentResponse = await axios.post('/api/continue-to-payment', { phoneNumber });
-          if (paymentResponse.data.paymentLink) {
-            window.location.href = paymentResponse.data.paymentLink;
-          } else {
-            alert('Failed to generate payment link. Please try again.');
-          }
-        } else {
-          alert('OTP verification failed. Please try again.');
-        }
+       
       } catch (error) {
         console.error('Error during OTP verification or payment link generation:', error);
         alert('An error occurred. Please try again later.');

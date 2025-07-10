@@ -15,6 +15,7 @@ import Dashboard from "./components/Dashboard";
 import logo from './assets/logo.svg';
 import { OtpRequestForm } from './components/OtpRequestForm';
 import { OtpVerification } from './components/OtpVerification';
+import PaymentVerification from "./components/PaymentVerification";
 
 function App() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -857,7 +858,7 @@ function App() {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/verify-otp" element={<OtpVerification phoneNumber={location.state?.phoneNumber} onVerify={handleVerifyOtp} onSendOtp={handleSendOtp} onBack={() => navigate('/')} isProcessing={false} />} />
+        <Route path="/verify-payment" element={<PaymentVerification />} />
         <Route path="/next-route" element={<div>Next Route</div>} />
       </Routes>
     </div>

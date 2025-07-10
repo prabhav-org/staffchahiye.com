@@ -14,8 +14,13 @@ export interface ApiResponse {
 
 export interface FormSubmissionResponse extends ApiResponse {
   data?: {
-    recordId: string;
+    record: {
+      id:string,
+
+      fields:any
+    };
     phoneNumber: string;
+    clientId: string
 
     sessionId: string;
   };
@@ -81,7 +86,8 @@ export const submitVacancy = async (data: VacancyForm): Promise<FormSubmissionRe
       success: true,
       message: 'Form submitted successfully! Please verify your phone number.',
       data: {
-        recordId: result.clientId,
+        clientId: result.clientId,
+        record:result.record,
         sessionId: result.sessionKey,
         phoneNumber: result.phoneNumber,
       },
@@ -209,7 +215,7 @@ export const verifyOtp = async (phoneNumber: string, otp: string, sessionId:stri
 };
 
 // Step 4: Continue to payment
-export const continueToPayment = async (amount:number,phoneNumber:string,redirectUrl:string): Promise<any> => {
+export const continueToPayment = async (amount:number,phoneNumber:string,redirectUrl:string,recordId:string,city:string): Promise<any> => {
   try {
     const response = await fetchWithTimeout(
       `${API_BASE_URL}/payments/create-order`,
@@ -218,7 +224,7 @@ export const continueToPayment = async (amount:number,phoneNumber:string,redirec
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ amount , phoneNumber , redirectUrl }),
+        body: JSON.stringify({ amount , phoneNumber , redirectUrl,airtableRecordId:recordId,city }),
       },
       REQUEST_TIMEOUT
     );
@@ -232,7 +238,7 @@ export const continueToPayment = async (amount:number,phoneNumber:string,redirec
     return {
       success: true,
       message: 'Payment link generated successfully!',
-      data: result,
+      data: result.data,
     };
   } catch (error) {
     console.error('Payment initialization error:', error);
@@ -266,7 +272,7 @@ export const continueToPayment = async (amount:number,phoneNumber:string,redirec
 
      try {
     const response = await fetchWithTimeout(
-      `${API_BASE_URL}/payments/verify-order`,
+      `${API_BASE_URL}/payments/check-status`,
       {
         method: 'POST',
         headers: {

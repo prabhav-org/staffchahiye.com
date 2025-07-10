@@ -6,8 +6,7 @@ import {
   verifyOtp, 
   continueToPayment,
   type FormSubmissionResponse,
-  type PaymentResponse, 
-  verifyPayment
+  type PaymentResponse 
 } from '../utils/api';
 import type { VacancyForm } from '../components/forms/types';
 import { redirect } from 'react-router-dom';
@@ -43,17 +42,19 @@ export const useBusinessFlow = () => {
       const result = await submitVacancy(formData);
       console.log('Result from useBusinessFlow:', result);
     
-      if (result.success && result.data?.recordId && result.data?.sessionId  && result.data?.phoneNumber) {
+      if (result.success && result.data?.record && result.data?.sessionId  && result.data?.phoneNumber) {
         setState(prev => ({
           ...prev,
           currentStep: 'otp',
-          recordId: result.data!.recordId,
+          recordId: result.data!.record.id,
           sessionId: result.data!.sessionId,
           isProcessing: false,
           phoneNumber: result.data!.phoneNumber,
         }));
         // ✅ Store critical values in localStorage immediately
         localStorage.setItem('business_sessionId',  result.data?.sessionId);
+        localStorage.setItem('recordId',result.data?.record.id)
+        localStorage.setItem("city",result.data?.record.fields.City)
      
 
 
@@ -153,33 +154,37 @@ export const useBusinessFlow = () => {
   };
 
   // Step 4: Continue to payment
-  const handleContinueToPayment = async (amount:number): Promise<boolean> => {
-
-    const phoneNumber =  localStorage.getItem('business_phoneNumber');
+  const handleContinueToPayment = async (amount: number): Promise<boolean> => {
     if (!state.recordId) {
       toast.error('Record ID not found. Please restart the process.');
       return false;
     }
+    const phoneNumber =   localStorage.getItem('business_phoneNumber');
+    const recordId = localStorage.getItem("recordId");
+    const city = localStorage.getItem('city');
+    console.log(recordId,city,"debgcb fn");
+    
 
     setState(prev => ({ ...prev, isProcessing: true }));
-    const redirectUrl = 'http://localhost:5173/';
-    
+    const redirectUrl = "http://localhost:5173/verify-payment"
     try {
-      const result = await continueToPayment(amount,phoneNumber!,redirectUrl);
-      console.log(result,'for payment purpose');
+      const result = await continueToPayment(amount, phoneNumber!, redirectUrl,recordId!,city!);
+      console.log(result,'payment one');
       
-      if (result.success && result.data?.data?.redirectUrl) {
+      
+      if (result.success && result.data?.redirectUrl) {
         setState(prev => ({
           ...prev,
           currentStep: 'completed',
-          paymentUrl: result.data!.data.redirectUrl,
+          paymentUrl: result.data!.redirectUrl,
           isProcessing: false,
         }));
-        
+        localStorage.setItem('orderId',result.data?.orderId);
         toast.success(result.message);
-        
+         resetFlow()
         // Redirect to payment URL
-        window.open(result.data!.data.redirectUrl, '_blank');
+        window.open(result.data!.redirectUrl, '_self');
+       
         
         return true;
       } else {
@@ -194,38 +199,6 @@ export const useBusinessFlow = () => {
       return false;
     }
   };
-
-  const handleVerifyPayment = async (orderId:string): Promise<any> => {
-    
-    try {
-      const result = await verifyPayment(orderId);
-      console.log(result,'for payment verifiactiom handleverifypaymnet purpose');
-      
-      if (result.success) {
-        setState(prev => ({
-          ...prev,
-          currentStep: 'completed',
-        
-          isProcessing: false,
-        }));
-        
-        toast.success(result.message);
-        
-     
-        
-        return true;
-      } else {
-        toast.error(result.message);
-        setState(prev => ({ ...prev, isProcessing: false }));
-        return false;
-      }
-    } catch (error) {
-      console.error('Payment verification error:', error);
-      toast.error('Failed to verify payment. Please try again.');
-      setState(prev => ({ ...prev, isProcessing: false }));
-      return false;
-    }
-  }
 
   // Reset flow
   const resetFlow = () => {
@@ -270,7 +243,6 @@ export const useBusinessFlow = () => {
     handleSendOtp,
     handleVerifyOtp,
     handleContinueToPayment,
-    handleVerifyPayment,
     resetFlow,
     goBack,
   };
