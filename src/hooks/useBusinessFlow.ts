@@ -51,6 +51,11 @@ export const useBusinessFlow = () => {
         }));
         // ✅ Store critical values in localStorage immediately
         localStorage.setItem('business_sessionId',  result.data?.sessionId);
+        // Persist Airtable record and city locally to avoid extra round-trip later
+        localStorage.setItem('business_airtableRecordId', result.data?.recordId);
+        if (formData.city) {
+          localStorage.setItem('business_city', formData.city);
+        }
      
 
 
@@ -156,6 +161,9 @@ export const useBusinessFlow = () => {
   const handleContinueToPayment = async (amount: number): Promise<boolean> => {
     const phoneNumber = localStorage.getItem('business_phoneNumber');
     const sessionKey = localStorage.getItem('business_sessionId');
+    // Try to fetch cached record & city first (helps if server session expired)
+    let airtableRecordId = localStorage.getItem('business_airtableRecordId');
+    let city = localStorage.getItem('business_city');
     
     if (!phoneNumber) {
       toast.error('Phone number not found. Please restart the process.');
@@ -172,28 +180,36 @@ export const useBusinessFlow = () => {
     setState(prev => ({ ...prev, isProcessing: true }));
     
     try {
-      // Step 1: Get the Airtable record information
-      console.log('Getting record info for session:', sessionKey);
-      
-      const recordInfo = await getRecordInfo(sessionKey);
-      console.log('Record info response:', recordInfo);
-      
-      if (!recordInfo.success || !recordInfo.data) {
-        console.error('Failed to get record info:', recordInfo.message);
-        toast.error('Failed to get payment information. Please try again.');
-        setState(prev => ({ ...prev, isProcessing: false }));
-        return false;
+      // Use backend when cache missing OR cached id doesn't look like Airtable rec (should start with "rec")
+      if (!airtableRecordId || !airtableRecordId.startsWith('rec') || !city) {
+        console.log('Getting record info for session:', sessionKey);
+        const recordInfo = await getRecordInfo(sessionKey);
+        console.log('Record info response:', recordInfo);
+
+        if (!recordInfo.success || !recordInfo.data) {
+          console.error('Failed to get record info:', recordInfo.message);
+          toast.error('Failed to get payment information. Please try again.');
+          setState(prev => ({ ...prev, isProcessing: false }));
+          return false;
+        }
+
+        airtableRecordId = recordInfo.data.airtableRecordId;
+        city = recordInfo.data.city;
+
+        // Cache for subsequent retries
+        localStorage.setItem('business_airtableRecordId', airtableRecordId);
+        localStorage.setItem('business_city', city);
       }
       
       // Step 2: Create payment order with the Airtable record ID
-      console.log('Creating payment order with record ID:', recordInfo.data.airtableRecordId);
+      console.log('Creating payment order with record ID:', airtableRecordId);
       
       const result = await continueToPayment(
         amount, 
-        recordInfo.data.phoneNumber, 
+        phoneNumber, 
         redirectUrl,
-        recordInfo.data.airtableRecordId,
-        recordInfo.data.city
+        airtableRecordId!,
+        city!
       );
       
       console.log('Payment creation response:', result);
