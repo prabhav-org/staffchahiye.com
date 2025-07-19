@@ -51,11 +51,7 @@ export const useBusinessFlow = () => {
         }));
         // ✅ Store critical values in localStorage immediately
         localStorage.setItem('business_sessionId',  result.data?.sessionId);
-        // Persist Airtable record and city locally to avoid extra round-trip later
-        localStorage.setItem('business_airtableRecordId', result.data?.recordId);
-        if (formData.city) {
-          localStorage.setItem('business_city', formData.city);
-        }
+        // NOTE: Airtable recordId isn't available yet – will cache it later after OTP verification
      
 
 

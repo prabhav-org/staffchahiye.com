@@ -4,7 +4,11 @@ import type { VacancyForm } from '../components/forms/types';
 // const API_BASE_URL = '/api/business';
 // const API_BASE_URL = 'https://api.airtable.com/v0/app1234567890/tbl1234567890';
 // const API_BASE_URL = process.env.NODE_ENV === 'dev' ? 'http://localhost:4000/api' : 'https://api.thestaffcompany.com/api';
-const isLocal = /^localhost:?\d*$/.test(window.location.host);
+// Determine environment
+const LOCAL_HOST_PATTERN = /^(localhost|127\.(?:\d+\.){2}\d+|192\.168\.(?:\d+\.){1}\d+|0\.0\.0\.0)(:\d+)?$/;
+const isLocal = LOCAL_HOST_PATTERN.test(window.location.host);
+
+// Prefer explicit env variable first (set in .env or .env.local)
 const API_BASE_URL = isLocal
   ? 'http://localhost:4000/api'
   : 'https://api.thestaffcompany.com/api';
