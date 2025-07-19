@@ -3,7 +3,11 @@ import type { VacancyForm } from '../components/forms/types';
 
 // const API_BASE_URL = '/api/business';
 // const API_BASE_URL = 'https://api.airtable.com/v0/app1234567890/tbl1234567890';
-const API_BASE_URL = process.env.NODE_ENV === 'dev' ? 'http://localhost:4000/api' : 'https://api.thestaffcompany.com/api';
+// const API_BASE_URL = process.env.NODE_ENV === 'dev' ? 'http://localhost:4000/api' : 'https://api.thestaffcompany.com/api';
+const isLocal = /^localhost:?\d*$/.test(window.location.host);
+const API_BASE_URL = isLocal
+  ? 'http://localhost:4000/api'
+  : 'https://api.thestaffcompany.com/api';
 const REQUEST_TIMEOUT = 10000; // 10 seconds
 
 export interface ApiResponse {
