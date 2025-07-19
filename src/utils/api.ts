@@ -3,7 +3,7 @@ import type { VacancyForm } from '../components/forms/types';
 
 // const API_BASE_URL = '/api/business';
 // const API_BASE_URL = 'https://api.airtable.com/v0/app1234567890/tbl1234567890';
-const API_BASE_URL = 'https://api.thestaffcompany.com/api';
+const API_BASE_URL = 'http://localhost:4000/api';
 const REQUEST_TIMEOUT = 10000; // 10 seconds
 
 export interface ApiResponse {
@@ -31,6 +31,14 @@ export interface PaymentResponse extends ApiResponse {
   data?: {
     paymentUrl: string;
     paymentId: string;
+  };
+}
+
+export interface RecordInfoResponse extends ApiResponse {
+  data?: {
+    airtableRecordId: string;
+    phoneNumber: string;
+    city: string;
   };
 }
 
@@ -208,8 +216,61 @@ export const verifyOtp = async (phoneNumber: string, otp: string, sessionId:stri
   }
 };
 
-// Step 4: Continue to payment
-export const continueToPayment = async (amount:number, phoneNumber:string, redirectUrl:string): Promise<ApiResponse> => {
+// Step 4: Get record info
+export const getRecordInfo = async (sessionKey: string): Promise<RecordInfoResponse> => {
+  try {
+    const response = await fetchWithTimeout(
+      `${API_BASE_URL}/business/get-record-info`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ sessionKey }),
+      },
+      REQUEST_TIMEOUT
+    );
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP ${response.status}: Failed to get record info`);
+    }
+    
+    const result = await response.json();
+    return {
+      success: true,
+      message: 'Record info retrieved successfully!',
+      data: {
+        airtableRecordId: result.airtableRecordId,
+        phoneNumber: result.phoneNumber,
+        city: result.city,
+      },
+    };
+  } catch (error) {
+    console.error('Get record info error:', error);
+    
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        return {
+          success: false,
+          message: 'Request timed out. Please check your connection and try again.',
+        };
+      }
+      return {
+        success: false,
+        message: error.message,
+      };
+    }
+    
+    return {
+      success: false,
+      message: 'Failed to get record information. Please try again.',
+    };
+  }
+};
+
+// Step 5: Continue to payment
+export const continueToPayment = async (amount:number, phoneNumber:string, redirectUrl:string, airtableRecordId:string, city:string): Promise<ApiResponse> => {
   try {
     const response = await fetchWithTimeout(
       `${API_BASE_URL}/payments/create-order`,
@@ -218,7 +279,7 @@ export const continueToPayment = async (amount:number, phoneNumber:string, redir
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ amount , phoneNumber , redirectUrl }),
+        body: JSON.stringify({ amount , phoneNumber , redirectUrl, airtableRecordId, city }),
       },
       REQUEST_TIMEOUT
     );

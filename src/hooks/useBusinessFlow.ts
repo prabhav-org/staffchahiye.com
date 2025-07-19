@@ -5,6 +5,7 @@ import {
   sendOtp, 
   verifyOtp, 
   continueToPayment,
+  getRecordInfo,
 } from '../utils/api';
 import type { VacancyForm } from '../components/forms/types';
 
@@ -154,20 +155,54 @@ export const useBusinessFlow = () => {
   // Step 4: Continue to payment
   const handleContinueToPayment = async (amount: number): Promise<boolean> => {
     const phoneNumber = localStorage.getItem('business_phoneNumber');
+    const sessionKey = localStorage.getItem('business_sessionId');
+    
     if (!phoneNumber) {
       toast.error('Phone number not found. Please restart the process.');
       return false;
     }
+    
+    if (!sessionKey) {
+      toast.error('Session not found. Please restart the process.');
+      return false;
+    }
+    
     const redirectUrl = `${window.location.origin}/payment-success`;
 
     setState(prev => ({ ...prev, isProcessing: true }));
     
     try {
-      const result = await continueToPayment(amount, phoneNumber, redirectUrl);
+      // Step 1: Get the Airtable record information
+      console.log('Getting record info for session:', sessionKey);
+      
+      const recordInfo = await getRecordInfo(sessionKey);
+      console.log('Record info response:', recordInfo);
+      
+      if (!recordInfo.success || !recordInfo.data) {
+        console.error('Failed to get record info:', recordInfo.message);
+        toast.error('Failed to get payment information. Please try again.');
+        setState(prev => ({ ...prev, isProcessing: false }));
+        return false;
+      }
+      
+      // Step 2: Create payment order with the Airtable record ID
+      console.log('Creating payment order with record ID:', recordInfo.data.airtableRecordId);
+      
+      const result = await continueToPayment(
+        amount, 
+        recordInfo.data.phoneNumber, 
+        redirectUrl,
+        recordInfo.data.airtableRecordId,
+        recordInfo.data.city
+      );
+      
+      console.log('Payment creation response:', result);
       
       // Extract redirectUrl in a type-safe way (API response returns data.data.redirectUrl)
       const redirectUrlFromApi = (result.data as { data?: { redirectUrl?: string } } | undefined)?.data?.redirectUrl;
       if (result.success && redirectUrlFromApi) {
+        console.log('Redirecting to payment:', redirectUrlFromApi);
+        
         setState(prev => ({
           ...prev,
           currentStep: 'completed',
@@ -182,13 +217,14 @@ export const useBusinessFlow = () => {
         
         return true;
       } else {
-        toast.error(result.message || 'Failed to get payment URL.');
+        console.error('Failed to create payment order:', result.message || result);
+        toast.error(result.message || 'Failed to create payment. Please try again.');
         setState(prev => ({ ...prev, isProcessing: false }));
         return false;
       }
     } catch (error) {
-      console.error('Payment initialization error:', error);
-      toast.error('Failed to initialize payment. Please try again.');
+      console.error('Error in payment flow:', error);
+      toast.error('An error occurred during payment setup. Please try again.');
       setState(prev => ({ ...prev, isProcessing: false }));
       return false;
     }

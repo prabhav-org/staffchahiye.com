@@ -12,7 +12,7 @@ export const vacancyTypes = [
 ];
 
 export const candidateTypes = [
-  'Fresher Works',
+  'Fresher works',
   'Experienced only', 
   'Any'
 ];

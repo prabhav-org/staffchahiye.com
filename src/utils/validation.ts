@@ -49,7 +49,7 @@ export const vacancyFormSchema = z.object({
     errorMap: () => ({ message: 'Please select a gender preference' }),
   }),
   
-  candidateType: z.enum(['Fresher Works', 'Experienced only', 'Any'], {
+  candidateType: z.enum(['Fresher works', 'Experienced only', 'Any'], {
     errorMap: () => ({ message: 'Please select candidate type' }),
   }),
   
