@@ -1,9 +1,11 @@
-import { redirect } from 'react-router-dom';
+// import { redirect } from 'react-router-dom';
 import type { VacancyForm } from '../components/forms/types';
 
 // const API_BASE_URL = '/api/business';
 // const API_BASE_URL = 'https://api.airtable.com/v0/app1234567890/tbl1234567890';
-const API_BASE_URL = 'http://localhost:4000/api';
+const API_BASE_URL = window.location.hostname === 'localhost'
+  ? 'http://localhost:4000/api'
+  : 'https://api.thestaffcompany.com/api';
 const REQUEST_TIMEOUT = 10000; // 10 seconds
 
 export interface ApiResponse {
