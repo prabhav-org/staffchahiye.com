@@ -8,11 +8,10 @@ import { useBusinessFlow } from '../hooks/useBusinessFlow';
 import type { VacancyModalProps } from './forms/types';
 
 
-export const VacancyModal: React.FC<VacancyModalProps & { sessionId: string }> = ({ 
+export const VacancyModal: React.FC<VacancyModalProps> = ({ 
   isOpen, 
   onClose,
-  initialPhone,
-  sessionId
+  initialPhone
 }) => {
   const {
     currentStep,

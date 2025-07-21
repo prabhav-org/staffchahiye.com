@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { VacancyModal } from './VacancyModal';
 
 const Blogs: React.FC = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handlePostJobClick = () => {
+        setIsModalOpen(true);
+    };
+
     return (
         <div>
             <Header />
@@ -24,7 +31,12 @@ const Blogs: React.FC = () => {
                     {/* <Footer /> */}
                 </div>
             </main>
-            <Footer />
+            <Footer handlePostJobClick={handlePostJobClick} />
+            <VacancyModal 
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                initialPhone=""
+            />
         </div>
     );
 };

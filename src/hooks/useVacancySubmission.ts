@@ -51,6 +51,9 @@ export const useVacancySubmission = () => {
       console.log('Result:', result);
       
       if (result.success) {
+        if (result.data?.verificationId) {
+          localStorage.setItem('verificationId', result.data.verificationId);
+        }
         toast.success(result.message);
         return true;
       } else {
@@ -70,7 +73,8 @@ export const useVacancySubmission = () => {
     setIsSubmitting(true);
     
     try {
-      const result = await verifyOtp(phoneNumber,otp,sessionId);
+      const verificationId = localStorage.getItem('verificationId') || '';
+      const result = await verifyOtp(phoneNumber,otp,sessionId,verificationId);
       console.log('Result:', result);
       
       if (result.success) {
