@@ -4,7 +4,7 @@ import Footer from './Footer';
 
 // Mock data for a small restaurant
 const mockBusinessData = {
-  name: "Spice Garden Restaurant",
+  name: "Sample Dashboard",
   type: "Restaurant",
   location: "Delhi",
   activeJobPosts: [

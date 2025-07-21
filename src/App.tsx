@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Toaster } from "sonner";
 import { VacancyModal } from "./components/VacancyModal";
 import { usePhoneValidation } from "./hooks/usePhoneValidation";
-import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 import TermsAndConditions from "./components/TermsAndConditions";
@@ -12,10 +12,10 @@ import Blogs from "./components/Blogs";
 import ContactUs from "./components/ContactUs";
 import AboutUs from "./components/AboutUs";
 import Dashboard from "./components/Dashboard";
-import { PaymentSuccess } from "./components/PaymentSuccess";
 import logo from './assets/logo.svg';
-// import { OtpRequestForm } from './components/OtpRequestForm';
+import { OtpRequestForm } from './components/OtpRequestForm';
 import { OtpVerification } from './components/OtpVerification';
+import PaymentVerification from "./components/PaymentVerification";
 
 function App() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -858,8 +858,8 @@ function App() {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/verify-otp" element={<OtpVerification phoneNumber={location.state?.phoneNumber} onVerify={handleVerifyOtp} onSendOtp={handleSendOtp} onBack={() => navigate('/')} isProcessing={false} />} />
-        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/verify-payment" element={<PaymentVerification />} />
+        <Route path="/next-route" element={<div>Next Route</div>} />
       </Routes>
     </div>
   );

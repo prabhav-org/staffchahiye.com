@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, RefreshCw } from 'lucide-react';
+// import axios from 'axios';
 
 interface OtpVerificationProps {
   phoneNumber: string;
   onVerify: (otp: string) => Promise<boolean>;
   onSendOtp: (phoneNumber: string) => Promise<boolean>;
   onBack: () => void;
+
   isProcessing: boolean;
 }
 
@@ -14,6 +16,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
   onVerify,
   onSendOtp,
   onBack,
+ 
   isProcessing,
 }) => {
   const [otp, setOtp] = useState('');
@@ -42,8 +45,15 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (otp.length === 4) {
-      await onVerify(otp);
+    if (otp.length ===4) {
+      try {
+        const response = await onVerify(otp);
+        console.log(response);
+       
+      } catch (error) {
+        console.error('Error during OTP verification or payment link generation:', error);
+        alert('An error occurred. Please try again later.');
+      }
     }
   };
 
@@ -72,7 +82,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
           Verify your phone number
         </h2>
         <p className="text-gray-600">
-          We've sent a 6-digit code to {formatPhoneNumber(phoneNumber)}
+          We've sent a 4-digit code to {formatPhoneNumber(phoneNumber)}
         </p>
       </div>
 

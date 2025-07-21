@@ -5,9 +5,11 @@ import {
   sendOtp, 
   verifyOtp, 
   continueToPayment,
-  getRecordInfo,
+  // type FormSubmissionResponse,
+  // type PaymentResponse 
 } from '../utils/api';
 import type { VacancyForm } from '../components/forms/types';
+
 
 export type FlowStep = 'form' | 'otp' | 'payment' | 'completed';
 
@@ -40,18 +42,23 @@ export const useBusinessFlow = () => {
       const result = await submitVacancy(formData);
       console.log('Result from useBusinessFlow:', result);
     
-      if (result.success && result.data?.recordId && result.data?.sessionId  && result.data?.phoneNumber) {
+      if (result.success && result.data?.record && result.data?.sessionId  && result.data?.phoneNumber) {
         setState(prev => ({
           ...prev,
           currentStep: 'otp',
-          recordId: result.data!.recordId,
+          recordId: result.data!.record.id,
           sessionId: result.data!.sessionId,
           isProcessing: false,
           phoneNumber: result.data!.phoneNumber,
         }));
+console.log("record result", result.data?.record);
+
         // ✅ Store critical values in localStorage immediately
         localStorage.setItem('business_sessionId',  result.data?.sessionId);
-        // NOTE: Airtable recordId isn't available yet – will cache it later after OTP verification
+        localStorage.setItem('recordId',result.data?.record.id);
+        localStorage.setItem('clientID', result.data?.clientId);
+        localStorage.setItem('record',JSON.stringify(result.data?.record));
+        localStorage.setItem("city",result.data?.record.fields.City)
      
 
 
@@ -91,12 +98,9 @@ export const useBusinessFlow = () => {
       if (result.success) {
         toast.success(result.message);
         setState(prev => ({ ...prev, isProcessing: false }));
-        // Safely extract verificationId from API response
-        const verificationId = (result.data as { verificationId?: string } | undefined)?.verificationId;
-        console.log(verificationId, "verificationId check");
-        if (verificationId) {
-          localStorage.setItem('verificationId', verificationId);
-        }
+        console.log(result.data.verificationId, "verifiactionId check")
+        console.log(result.data, "data check for vid")
+         localStorage.setItem('verificationId',result.data.verificationId)
         return true;
       } else {
         toast.error(result.message);
@@ -155,88 +159,48 @@ export const useBusinessFlow = () => {
 
   // Step 4: Continue to payment
   const handleContinueToPayment = async (amount: number): Promise<boolean> => {
-    const phoneNumber = localStorage.getItem('business_phoneNumber');
-    const sessionKey = localStorage.getItem('business_sessionId');
-    // Try to fetch cached record & city first (helps if server session expired)
-    let airtableRecordId = localStorage.getItem('business_airtableRecordId');
-    let city = localStorage.getItem('business_city');
-    
-    if (!phoneNumber) {
-      toast.error('Phone number not found. Please restart the process.');
+    if (!state.recordId) {
+      toast.error('Record ID not found. Please restart the process.');
       return false;
     }
+    const phoneNumber =   localStorage.getItem('business_phoneNumber');
+    const recordId = localStorage.getItem("recordId");
+  
+    const clientId = localStorage.getItem('clientID')
+   
     
-    if (!sessionKey) {
-      toast.error('Session not found. Please restart the process.');
-      return false;
-    }
-    
-    const redirectUrl = `${window.location.origin}/payment-success`;
 
     setState(prev => ({ ...prev, isProcessing: true }));
-    
+    const redirectUrl = "http://localhost:5173/verify-payment"
     try {
-      // Use backend when cache missing OR cached id doesn't look like Airtable rec (should start with "rec")
-      if (!airtableRecordId || !airtableRecordId.startsWith('rec') || !city) {
-        console.log('Getting record info for session:', sessionKey);
-        const recordInfo = await getRecordInfo(sessionKey);
-        console.log('Record info response:', recordInfo);
-
-        if (!recordInfo.success || !recordInfo.data) {
-          console.error('Failed to get record info:', recordInfo.message);
-          toast.error('Failed to get payment information. Please try again.');
-          setState(prev => ({ ...prev, isProcessing: false }));
-          return false;
-        }
-
-        airtableRecordId = recordInfo.data.airtableRecordId;
-        city = recordInfo.data.city;
-
-        // Cache for subsequent retries
-        localStorage.setItem('business_airtableRecordId', airtableRecordId);
-        localStorage.setItem('business_city', city);
-      }
+      const result = await continueToPayment(amount, phoneNumber!, redirectUrl,recordId!,clientId!);
+      console.log(result,'payment one');
       
-      // Step 2: Create payment order with the Airtable record ID
-      console.log('Creating payment order with record ID:', airtableRecordId);
       
-      const result = await continueToPayment(
-        amount, 
-        phoneNumber, 
-        redirectUrl,
-        airtableRecordId!,
-        city!
-      );
-      
-      console.log('Payment creation response:', result);
-      
-      // Extract redirectUrl in a type-safe way (API response returns data.data.redirectUrl)
-      const redirectUrlFromApi = (result.data as { data?: { redirectUrl?: string } } | undefined)?.data?.redirectUrl;
-      if (result.success && redirectUrlFromApi) {
-        console.log('Redirecting to payment:', redirectUrlFromApi);
-        
+      if (result.success && result.data?.redirectUrl) {
         setState(prev => ({
           ...prev,
           currentStep: 'completed',
-          paymentUrl: redirectUrlFromApi,
+          paymentUrl: result.data!.redirectUrl,
           isProcessing: false,
         }));
-        
+        localStorage.setItem('orderId',result.data?.orderId);
         toast.success(result.message);
-        
+         resetFlow()
         // Redirect to payment URL
-        window.location.href = redirectUrlFromApi;
+        console.log("redirecting to phonepe url", result.data!.redirectUrl);
+        window.open(result.data!.redirectUrl, '_self');
+       
         
         return true;
       } else {
-        console.error('Failed to create payment order:', result.message || result);
-        toast.error(result.message || 'Failed to create payment. Please try again.');
+        toast.error(result.message);
         setState(prev => ({ ...prev, isProcessing: false }));
         return false;
       }
     } catch (error) {
-      console.error('Error in payment flow:', error);
-      toast.error('An error occurred during payment setup. Please try again.');
+      console.error('Payment initialization error:', error);
+      toast.error('Failed to initialize payment. Please try again.');
       setState(prev => ({ ...prev, isProcessing: false }));
       return false;
     }

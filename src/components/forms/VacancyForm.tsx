@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { vacancyFormSchema } from '../../utils/validation';
@@ -14,6 +14,7 @@ import {
   otherBenefitsOptions
 } from '../../constants/jobOptions';
 import type { VacancyForm as VacancyFormData, VacancyFormProps } from './types';
+import { OtpVerification } from '../OtpVerification';
 
 
 export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
@@ -26,7 +27,7 @@ export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
     handleSubmit,
     watch,
     setValue,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<VacancyFormData>({
     resolver: zodResolver(vacancyFormSchema),
     defaultValues: {
@@ -52,6 +53,8 @@ export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
 
   const candidateType = watch('candidateType');
   const minSalary = watch('minSalary');
+  const [isOtpVisible, setIsOtpVisible] = useState<boolean>(false);
+  const [sessionId, setSessionId] = useState<string>('');
 
   // Set initial phone number if provided
   useEffect(() => {
@@ -72,6 +75,9 @@ export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
     }
   
       await handleSendOtp(data.phoneNumber);
+
+
+    setIsOtpVisible(true);
   };
 
 
@@ -257,9 +263,17 @@ export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
           <div className="pt-4 border-t border-gray-200">
             <button
               type="submit"
+              disabled={isSubmitting}
               className="submit-btn"
             >
-              Submit & Continue
+              {isSubmitting ? (
+                <div className="submit-btn-loading">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Submitting...
+                </div>
+              ) : (
+                'Submit & Continue'
+              )}
             </button>
           </div>
         </form>

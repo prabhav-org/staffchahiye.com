@@ -7,7 +7,7 @@ export interface VacancyForm {
   city: string;              // required, min 2 chars
   locality: string;          // required, min 2 chars
   gender: 'Male' | 'Female' | 'Any';  // required
-  candidateType: 'Fresher works' | 'Experienced only' | 'Any';  // required
+  candidateType: 'Fresher Works' | 'Experienced only' | 'Any';  // required
   requiredExperience: string; // required when candidateType is 'Experienced only'
   minimumQualification: string; // required
   minSalary: number;         // required

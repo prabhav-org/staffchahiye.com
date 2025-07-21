@@ -605,8 +605,8 @@ interface VacancyForm {
   city: string;              // required, min 2 chars
   locality: string;          // required, min 2 chars
   gender: 'Male' | 'Female' | 'Any';  // required
-  candidateType: 'Fresher Works' | 'Experienced Only' | 'Any';  // required
-  requiredExperience: string; // required when candidateType is 'Experienced Only'
+  candidateType: 'Fresher Works' | 'Experienced only' | 'Any';  // required
+  requiredExperience: string; // required when candidateType is 'Experienced only'
 }
 ```
 
@@ -633,7 +633,7 @@ const vacancy = [
 
 const candidateTypes = [
   'Fresher Works',
-  'Experienced Only', 
+  'Experienced only', 
   'Any'
 ];
 
@@ -721,7 +721,7 @@ export const submitVacancy = async (data: VacancyForm) => {
 
 ### **Form UX Enhancements:**
 - **Progressive validation**: Real-time feedback as user types
-- **Conditional fields**: Show experience field only for "Experienced Only"
+- **Conditional fields**: Show experience field only for "Experienced only"
 - **Loading states**: Submit button shows spinner during API call
 - **Error recovery**: Clear errors on field focus/change
 
@@ -984,79 +984,3 @@ const VacancyModal = ({ isOpen, onClose, initialPhone }) => {
 ---
 
 This comprehensive plan ensures the modal and form implementation perfectly matches the requirements while maintaining high code quality, performance, and accessibility standards. The implementation will follow StaffChahiye's design system and provide an excellent user experience across all devices.
-
-# 🚑 PHASE 4: PAYMENT FLOW DEBUG & FIX PLAN
-
-## 4.1  Current Symptoms
-- Browser console shows repeated `400 Bad Request` responses for `POST /api/business/continue-to-payment`.
-- `useBusinessFlow.ts` logs reveal that `verificationId` is **null** during OTP verification (`console.log(otp , phoneNumber, verificationId, sessionId, "dsta rewutdt")`).
-- Multiple duplicate requests (same endpoint hit 4-5 times) originate from the UI.
-- API layer logs confirm OTP verification **succeeds** but payment link generation fails with `400`.
-
-## 4.2  Hypotheses / Likely Root-Causes
-1. **Missing or malformed request payload**
-   - Front-end currently sends only `{ recordId }` in `continueToPayment()`.  Backend may additionally expect `sessionId`, `phoneNumber`, or `verificationId` for idempotency / security.
-2. **Lost `verificationId` in `localStorage`**
-   - `handleSendOtp()` stores `verificationId` but the later read returns `null`.  Possible causes: typo in storage key, premature `localStorage.clear()`, or navigating away before storage write completes.
-3. **Stale / mismatched `sessionId`**
-   - `sessionId` created on form-submit is required by later steps but is never forwarded to `continue-to-payment`.
-4. **Duplicate UI submissions**
-   - Lack of debouncing or disabling of "Proceed to Payment" button triggers several identical requests leading to backend throttling / 400.
-5. **Backend validation rules**
-   - Server might assert that OTP status = `VERIFICATION_COMPLETED` AND `verificationId` matches AND request timestamp < 15 min.  Any mismatch => 400.
-6. **PhonePe sandbox configuration**
-   - If backend is hitting PhonePe prod URL with *test* creds or vice-versa, PhonePe returns error which backend surfaces as 400.
-
-## 4.3  Investigation Checklist
-A. **Inspect request body & response** (Network tab)
-   - Confirm fields present: `recordId`, `sessionId`, `phoneNumber`, `verificationId`.
-   - Save backend 400 response JSON for clues (`errorCode`, `message`).
-
-B. **Verify localStorage lifecycle**
-   - Check keys after each step:
-     - `business_sessionId`
-     - `verificationId`
-     - `business_phoneNumber`
-   - Ensure they persist until payment step.
-
-C. **Backend endpoint contract**
-   - Open `/api/business/continue-to-payment` controller/service code.
-   - Note required fields & validation logic.
-   - Identify PhonePe SDK/env variables (KEY, SECRET, CALLBACK).  Ensure `environment: 'UAT'` when using test keys.
-
-D. **PhonePe API logs**
-   - Inspect response from PhonePe create-payment call.  Typical test success error-code = `PAYMENT_INITIATED`.  Any other → mis-config.
-
-## 4.4  Front-End Action Items
-| # | File | Change |
-|---|------|--------|
-| 1 | `src/utils/api.ts` | Extend `continueToPayment()` to send `{ recordId, sessionId, phoneNumber, verificationId }` (payload should mirror backend contract). |
-| 2 | `src/hooks/useBusinessFlow.ts` |   a) Pass all four parameters to `continueToPayment()`.<br> b) Add guard to prevent multiple in-flight payment requests (disable button until promise resolves). |
-| 3 | `src/components/PaymentStep.tsx` | Ensure `onContinue` button is disabled once clicked (`isProcessing`).  Consider debounce (500 ms). |
-| 4 | `src/hooks/useBusinessFlow.ts` | Fix storage key logic:  verify `handleSendOtp()` writes `localStorage.setItem('verificationId', String(result.data.verificationId))`. |
-| 5 | Dev Tools | Remove stray debug string `"dsta rewutdt"` from console log. |
-
-## 4.5  Backend Action Items (outline – code not in repo)
-1. **Validate request schema** – Update controller to accept optional fields but assert required ones; return 422 with descriptive message instead of generic 400.
-2. **PhonePe environment guard** –
-   - Use `process.env.PHONEPE_ENV` (`'UAT' | 'PROD'`).
-   - Route to `https://api-preprod.phonepe.com/apis/pg-sandbox/...` when in UAT.
-3. **Idempotency & duplicate filtering** – Add Redis/DB check on `verificationId` to prevent double charge.
-4. **Logging** – Log body & error from PhonePe for easier debugging.
-
-## 4.6  Testing Plan
-1. **Unit** – Write Jest tests for `continueToPayment()` ensuring correct payload formation.
-2. **Integration** – Stub backend with msw; simulate 200 & 400 responses.
-3. **E2E** – Cypress flow: form → otp → payment, assert redirect URL opens.
-4. **Manual** –
-   - Chrome DevTools: clear storage, run happy path.
-   - Repeat click spam to confirm debouncing.
-   - Switch env to invalid PhonePe creds → verify graceful error.
-
-## 4.7  Roll-out Checklist
-- [ ] Feature flag behind `PAYMENT_FLOW_V2` until verified.
-- [ ] Monitor backend logs for 400 rates < 1%.
-- [ ] Success e-mail / slack alert once redirect URL generated.
-
----
-**Outcome:** With the above fixes & validations, OTP verification should pass `verificationId` & `sessionId` through to the payment endpoint, ensuring PhonePe initialization succeeds and a single `redirectUrl` is returned.

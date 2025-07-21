@@ -24,7 +24,7 @@ const Blogs: React.FC = () => {
                     {/* <Footer /> */}
                 </div>
             </main>
-            <Footer handlePostJobClick={() => {}} />
+            <Footer />
         </div>
     );
 };

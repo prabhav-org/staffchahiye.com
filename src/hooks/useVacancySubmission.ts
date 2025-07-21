@@ -6,8 +6,6 @@ import { sendOtp, verifyOtp } from '../utils/api';
 
 export const useVacancySubmission = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [sessionId, setSessionId] = useState<string>('');
-  const [verificationId, setVerificationId] = useState<string>('');
 
   const handleSubmit = async (data: VacancyForm): Promise<object> => {
     setIsSubmitting(true);
@@ -19,10 +17,10 @@ export const useVacancySubmission = () => {
       if (result && typeof result === 'object' && 'success' in result) {
         if (result.success) {
           toast.success(result.message);
-          if (result.data?.sessionId) {
-            setSessionId(result.data.sessionId);
-          }
-          return { success: true, data: result };
+          return {
+            success: true,
+            data:result,
+          };
         } else {
           toast.error(result.message);
           return {
@@ -49,15 +47,11 @@ export const useVacancySubmission = () => {
     setIsSubmitting(true);
 
     try {
-      const result = await sendOtp(phoneNumber, sessionId);
+      const result = await sendOtp(phoneNumber, "gxghcjgkjlk");
       console.log('Result:', result);
       
       if (result.success) {
         toast.success(result.message);
-        const otpInfo = result.data as { verificationId?: string };
-        if (otpInfo?.verificationId) {
-          setVerificationId(otpInfo.verificationId);
-        }
         return true;
       } else {
         toast.error(result.message);
@@ -72,11 +66,11 @@ export const useVacancySubmission = () => {
     }
   };
 
-  const handleVerifyOtp = async (phoneNumber: string, otp: string): Promise<boolean> => {
+  const handleVerifyOtp = async (phoneNumber: string, otp: string , sessionId:string): Promise<boolean> => {
     setIsSubmitting(true);
     
     try {
-      const result = await verifyOtp(phoneNumber, otp, sessionId, verificationId);
+      const result = await verifyOtp(phoneNumber,otp,sessionId);
       console.log('Result:', result);
       
       if (result.success) {

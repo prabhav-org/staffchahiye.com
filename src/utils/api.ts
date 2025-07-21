@@ -1,17 +1,9 @@
-// import { redirect } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 import type { VacancyForm } from '../components/forms/types';
 
 // const API_BASE_URL = '/api/business';
 // const API_BASE_URL = 'https://api.airtable.com/v0/app1234567890/tbl1234567890';
-// const API_BASE_URL = process.env.NODE_ENV === 'dev' ? 'http://localhost:4000/api' : 'https://api.thestaffcompany.com/api';
-// Determine environment
-const LOCAL_HOST_PATTERN = /^(localhost|127\.(?:\d+\.){2}\d+|192\.168\.(?:\d+\.){1}\d+|0\.0\.0\.0)(:\d+)?$/;
-const isLocal = LOCAL_HOST_PATTERN.test(window.location.host);
-
-// Prefer explicit env variable first (set in .env or .env.local)
-const API_BASE_URL = isLocal
-  ? 'http://localhost:4000/api'
-  : 'https://api.thestaffcompany.com/api';
+const API_BASE_URL = 'http://localhost:4000/api';
 const REQUEST_TIMEOUT = 10000; // 10 seconds
 
 export interface ApiResponse {
@@ -22,8 +14,9 @@ export interface ApiResponse {
 
 export interface FormSubmissionResponse extends ApiResponse {
   data?: {
-    recordId: string;
+    record: any;
     phoneNumber: string;
+    clientId: string
 
     sessionId: string;
   };
@@ -39,14 +32,6 @@ export interface PaymentResponse extends ApiResponse {
   data?: {
     paymentUrl: string;
     paymentId: string;
-  };
-}
-
-export interface RecordInfoResponse extends ApiResponse {
-  data?: {
-    airtableRecordId: string;
-    phoneNumber: string;
-    city: string;
   };
 }
 
@@ -97,7 +82,8 @@ export const submitVacancy = async (data: VacancyForm): Promise<FormSubmissionRe
       success: true,
       message: 'Form submitted successfully! Please verify your phone number.',
       data: {
-        recordId: result.clientId,
+        clientId: result.clientId,
+        record:result.record,
         sessionId: result.sessionKey,
         phoneNumber: result.phoneNumber,
       },
@@ -126,7 +112,7 @@ export const submitVacancy = async (data: VacancyForm): Promise<FormSubmissionRe
 };
 
 // Step 2: Send OTP to phone number
-export const sendOtp = async (phoneNumber: string, sessionId: string): Promise<ApiResponse> => {
+export const sendOtp = async (phoneNumber: string, sessionId: string): Promise<any> => {
   try {
     const response = await fetchWithTimeout(
       `${API_BASE_URL}/business/send-otp`,
@@ -224,61 +210,8 @@ export const verifyOtp = async (phoneNumber: string, otp: string, sessionId:stri
   }
 };
 
-// Step 4: Get record info
-export const getRecordInfo = async (sessionKey: string): Promise<RecordInfoResponse> => {
-  try {
-    const response = await fetchWithTimeout(
-      `${API_BASE_URL}/business/get-record-info`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ sessionKey }),
-      },
-      REQUEST_TIMEOUT
-    );
-    
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || `HTTP ${response.status}: Failed to get record info`);
-    }
-    
-    const result = await response.json();
-    return {
-      success: true,
-      message: 'Record info retrieved successfully!',
-      data: {
-        airtableRecordId: result.airtableRecordId,
-        phoneNumber: result.phoneNumber,
-        city: result.city,
-      },
-    };
-  } catch (error) {
-    console.error('Get record info error:', error);
-    
-    if (error instanceof Error) {
-      if (error.name === 'AbortError') {
-        return {
-          success: false,
-          message: 'Request timed out. Please check your connection and try again.',
-        };
-      }
-      return {
-        success: false,
-        message: error.message,
-      };
-    }
-    
-    return {
-      success: false,
-      message: 'Failed to get record information. Please try again.',
-    };
-  }
-};
-
-// Step 5: Continue to payment
-export const continueToPayment = async (amount:number, phoneNumber:string, redirectUrl:string, airtableRecordId:string, city:string): Promise<ApiResponse> => {
+// Step 4: Continue to payment
+export const continueToPayment = async (amount:number,phoneNumber:string,redirectUrl:string,recordId:string,clientId:string): Promise<any> => {
   try {
     const response = await fetchWithTimeout(
       `${API_BASE_URL}/payments/create-order`,
@@ -287,7 +220,7 @@ export const continueToPayment = async (amount:number, phoneNumber:string, redir
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ amount , phoneNumber , redirectUrl, airtableRecordId, city }),
+        body: JSON.stringify({ amount , phoneNumber , redirectUrl,airtableRecordId:recordId,clientId }),
       },
       REQUEST_TIMEOUT
     );
@@ -301,7 +234,7 @@ export const continueToPayment = async (amount:number, phoneNumber:string, redir
     return {
       success: true,
       message: 'Payment link generated successfully!',
-      data: result,
+      data: result.data,
     };
   } catch (error) {
     console.error('Payment initialization error:', error);
@@ -323,19 +256,28 @@ export const continueToPayment = async (amount:number, phoneNumber:string, redir
       success: false,
       message: 'Failed to initialize payment. Please try again.',
     };
-  }
-};
 
-export const verifyPayment = async (orderId:string): Promise<ApiResponse> => {
-  try {
+
+   
+  }
+
+
+ 
+}; 
+ export const verifyPayment = async (orderId:string):Promise<any> =>{
+
+     try {
+      const record = JSON.parse(localStorage.getItem('record')!);
+      console.log(record);
+      
     const response = await fetchWithTimeout(
-      `${API_BASE_URL}/payments/verify-order`,
+      `${API_BASE_URL}/payments/check-status`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({orderId}),
+        body: JSON.stringify({orderId,record}),
       },
       REQUEST_TIMEOUT
     );
@@ -371,5 +313,9 @@ export const verifyPayment = async (orderId:string): Promise<ApiResponse> => {
       success: false,
       message: 'Failed to complete payment. Please try again.',
     };
+
+
+   
   }
-};
+
+  }
