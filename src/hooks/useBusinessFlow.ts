@@ -171,7 +171,7 @@ console.log("record result", result.data?.record);
     
 
     setState(prev => ({ ...prev, isProcessing: true }));
-    const redirectUrl = "http://localhost:5173/verify-payment"
+    const redirectUrl = `${window.location.origin}/verify-payment`;
     try {
       const result = await continueToPayment(amount, phoneNumber!, redirectUrl,recordId!,clientId!);
       console.log(result,'payment one');
