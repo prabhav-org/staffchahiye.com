@@ -39,7 +39,7 @@ function App() {
   const features = [
     {
       title: "Tell us what kind of staff you need.",
-      image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&h=400&fit=crop&auto=format"
+      image: "first.png"
     },
     {
       title: "We send you ready-to-hire profiles instantly.",
@@ -47,13 +47,33 @@ function App() {
     },
     {
       title: "Connect with them and start your hiring process in less than 30 minutes!",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=400&fit=crop&auto=format"
+      image: "third.png"
     }
   ];
 
   const faqData = [
     {
+      question: "Can I interview the candidates before hiring?",
+      answer: "Yes, you can. We’ll share candidate profiles, and you can schedule interviews at your convenience. If you need help setting this up, feel free to email us at team@staffchahiye.com"
+    },
+    {
+      question: "If the candidate provided is not as per my requirement, then what?",
+      answer: "No worries. If the candidate doesn't meet your expectations, we will continuously provide screened candidates to you for 7 days, ensuring up to 35 verified and pre-screened profiles are shared. Your dedicated account manager will personally assist you until the hiring is successfully completed."
+    },
+    {
+      question: "What do you mean by “pre-screened candidates”?",
+      answer: "Pre-screened candidates are individuals who have been evaluated by our team based on your job requirements. We speak to them directly to confirm their experience, interest, availability, and suitability before sharing their profiles with you."
+    },
+    {
+      question: "For any doubt or support, how can I contact you?",
+      answer: "We’re here to help! If you have any questions or need assistance at any stage, feel free to reach out to us at team@staffchahiye.com or call/WhatsApp us at ‪+91 7304216059‬."
+    },
+    {
       question: "How does StaffChahiye.com work?",
+      answer: "Just tell us what kind of staff you need. We'll send pre-screened candidates directly to your WhatsApp so you can connect and start hiring instantly."
+    },
+    {
+      question: "How do I get started?",
       answer: "Just tell us what kind of staff you need. We'll send pre-screened candidates directly to your WhatsApp so you can connect and start hiring instantly."
     },
     {
@@ -582,18 +602,22 @@ function App() {
                 </div>
 
                 {/* Testimonial Slideshow */}
-                <div className="relative h-[400px] lg:h-[320px] overflow-hidden">
-                  {/* Current card */}
-                  <div className={`
-                    testimonial-container rounded-2xl p-6 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
-                    ${isSliding
-                      ? (direction === "right"
-                          ? "-translate-x-32 opacity-0"
-                          : "translate-x-32 opacity-0")
-                      : "translate-x-0 opacity-100"}
-                    z-10
-                  `}>
-                    <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 h-full">
+                <div className="relative h-[400px] lg:h-[320px]">
+                  {/* Current card with arrows inside, using flex layout */}
+                  <div className="testimonial-container rounded-2xl p-6 lg:p-8 w-full h-full flex flex-row items-center justify-between gap-4 transition-all duration-400 ease-in-out overflow-hidden z-10">
+                    {/* Left Arrow */}
+                    <button
+                      onClick={handlePrev}
+                      disabled={isSliding}
+                      className="bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg pointer-events-auto transition-colors z-30 flex-shrink-0"
+                      aria-label="Previous"
+                    >
+                      <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    {/* Testimonial Content */}
+                    <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 flex-1 h-full">
                       {/* Testimonial Photo */}
                       <div className="flex-shrink-0">
                         <div className="testimonial-photo w-28 h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden shadow-lg">
@@ -625,12 +649,23 @@ function App() {
                         </div>
                       </div>
                     </div>
+                    {/* Right Arrow */}
+                    <button
+                      onClick={handleNext}
+                      disabled={isSliding}
+                      className="bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg pointer-events-auto transition-colors z-30 flex-shrink-0"
+                      aria-label="Next"
+                    >
+                      <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
                   </div>
 
                   {/* Next card (only during transition) */}
                   {isSliding && nextIndex !== null && (
                     <div className={`
-                      testimonial-container rounded-2xl p-6 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
+                      testimonial-container rounded-2xl p-8 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                       ${direction === "right"
                         ? "translate-x-32 opacity-0"
                         : "-translate-x-32 opacity-0"}
@@ -670,30 +705,6 @@ function App() {
                       </div>
                     </div>
                   )}
-
-                  {/* Slideshow Controls - Positioned on sides */}
-                  <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 z-[100] pointer-events-none">
-                    <button
-                      onClick={handlePrev}
-                      disabled={isSliding}
-                      className="bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg pointer-events-auto transition-colors"
-                      aria-label="Previous"
-                    >
-                      <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-                    <button
-                      onClick={handleNext}
-                      disabled={isSliding}
-                      className="bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg pointer-events-auto transition-colors"
-                      aria-label="Next"
-                    >
-                      <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
                 </div>
               </div>
             </section>

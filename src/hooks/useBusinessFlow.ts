@@ -51,9 +51,13 @@ export const useBusinessFlow = () => {
           isProcessing: false,
           phoneNumber: result.data!.phoneNumber,
         }));
+console.log("record result", result.data?.record);
+
         // ✅ Store critical values in localStorage immediately
         localStorage.setItem('business_sessionId',  result.data?.sessionId);
-        localStorage.setItem('recordId',result.data?.record.id)
+        localStorage.setItem('recordId',result.data?.record.id);
+        localStorage.setItem('clientID', result.data?.clientId);
+        localStorage.setItem('record',JSON.stringify(result.data?.record));
         localStorage.setItem("city",result.data?.record.fields.City)
      
 
@@ -161,14 +165,15 @@ export const useBusinessFlow = () => {
     }
     const phoneNumber =   localStorage.getItem('business_phoneNumber');
     const recordId = localStorage.getItem("recordId");
-    const city = localStorage.getItem('city');
-    console.log(recordId,city,"debgcb fn");
+  
+    const clientId = localStorage.getItem('clientID')
+   
     
 
     setState(prev => ({ ...prev, isProcessing: true }));
     const redirectUrl = "http://localhost:5173/verify-payment"
     try {
-      const result = await continueToPayment(amount, phoneNumber!, redirectUrl,recordId!,city!);
+      const result = await continueToPayment(amount, phoneNumber!, redirectUrl,recordId!,clientId!);
       console.log(result,'payment one');
       
       

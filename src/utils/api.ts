@@ -14,11 +14,7 @@ export interface ApiResponse {
 
 export interface FormSubmissionResponse extends ApiResponse {
   data?: {
-    record: {
-      id:string,
-
-      fields:any
-    };
+    record: any;
     phoneNumber: string;
     clientId: string
 
@@ -215,7 +211,7 @@ export const verifyOtp = async (phoneNumber: string, otp: string, sessionId:stri
 };
 
 // Step 4: Continue to payment
-export const continueToPayment = async (amount:number,phoneNumber:string,redirectUrl:string,recordId:string,city:string): Promise<any> => {
+export const continueToPayment = async (amount:number,phoneNumber:string,redirectUrl:string,recordId:string,clientId:string): Promise<any> => {
   try {
     const response = await fetchWithTimeout(
       `${API_BASE_URL}/payments/create-order`,
@@ -224,7 +220,7 @@ export const continueToPayment = async (amount:number,phoneNumber:string,redirec
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ amount , phoneNumber , redirectUrl,airtableRecordId:recordId,city }),
+        body: JSON.stringify({ amount , phoneNumber , redirectUrl,airtableRecordId:recordId,clientId }),
       },
       REQUEST_TIMEOUT
     );
@@ -271,6 +267,9 @@ export const continueToPayment = async (amount:number,phoneNumber:string,redirec
  export const verifyPayment = async (orderId:string):Promise<any> =>{
 
      try {
+      const record = JSON.parse(localStorage.getItem('record')!);
+      console.log(record);
+      
     const response = await fetchWithTimeout(
       `${API_BASE_URL}/payments/check-status`,
       {
@@ -278,7 +277,7 @@ export const continueToPayment = async (amount:number,phoneNumber:string,redirec
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({orderId}),
+        body: JSON.stringify({orderId,record}),
       },
       REQUEST_TIMEOUT
     );
