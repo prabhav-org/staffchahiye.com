@@ -39,7 +39,7 @@ function App() {
   const features = [
     {
       title: "Tell us what kind of staff you need.",
-      image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&h=400&fit=crop&auto=format"
+      image: "first.png"
     },
     {
       title: "We send you ready-to-hire profiles instantly.",
@@ -47,11 +47,27 @@ function App() {
     },
     {
       title: "Connect with them and start your hiring process in less than 30 minutes!",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=400&fit=crop&auto=format"
+      image: "third.png"
     }
   ];
 
   const faqData = [
+    {
+      question: "Can I interview the candidates before hiring?",
+      answer: "Yes, you can. We’ll share candidate profiles, and you can schedule interviews at your convenience. If you need help setting this up, feel free to email us at team@staffchahiye.com"
+    },
+    {
+      question: "If the candidate provided is not as per my requirement, then what?",
+      answer: "No worries. If the candidate doesn't meet your expectations, we will continuously provide screened candidates to you for 7 days, ensuring up to 35 verified and pre-screened profiles are shared. Your dedicated account manager will personally assist you until the hiring is successfully completed."
+    },
+    {
+      question: "What do you mean by “pre-screened candidates”?",
+      answer: "Pre-screened candidates are individuals who have been evaluated by our team based on your job requirements. We speak to them directly to confirm their experience, interest, availability, and suitability before sharing their profiles with you."
+    },
+    {
+      question: "For any doubt or support, how can I contact you?",
+      answer: "We’re here to help! If you have any questions or need assistance at any stage, feel free to reach out to us at team@staffchahiye.com or call/WhatsApp us at ‪+91 7304216059‬."
+    },
     {
       question: "How does StaffChahiye.com work?",
       answer: "Just tell us what kind of staff you need. We'll send pre-screened candidates directly to your WhatsApp so you can connect and start hiring instantly."
@@ -585,7 +601,7 @@ function App() {
                 <div className="relative h-[400px] lg:h-[320px] overflow-hidden">
                   {/* Current card */}
                   <div className={`
-                    testimonial-container rounded-2xl p-6 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
+                    testimonial-container rounded-2xl p-6 lg:p-12 px-8 lg:px-24 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                     ${isSliding
                       ? (direction === "right"
                           ? "-translate-x-32 opacity-0"
@@ -630,7 +646,7 @@ function App() {
                   {/* Next card (only during transition) */}
                   {isSliding && nextIndex !== null && (
                     <div className={`
-                      testimonial-container rounded-2xl p-6 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
+                      testimonial-container rounded-2xl p-6 lg:p-12 px-8 lg:px-24 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                       ${direction === "right"
                         ? "translate-x-32 opacity-0"
                         : "-translate-x-32 opacity-0"}
@@ -672,7 +688,7 @@ function App() {
                   )}
 
                   {/* Slideshow Controls - Positioned on sides */}
-                  <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 z-[100] pointer-events-none">
+                  <div className="absolute inset-y-0 left-4 right-4 md:left-6 md:right-6 flex items-center justify-between z-[100] pointer-events-none">
                     <button
                       onClick={handlePrev}
                       disabled={isSliding}
