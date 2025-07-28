@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-
+import CardStackCarousel from './CardStackCarousel';
 // Mock data for a small restaurant
 const mockBusinessData = {
   name: "Sample Dashboard",
@@ -109,6 +109,7 @@ const Dashboard: React.FC = () => {
       
       <main className="flex-grow pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CardStackCarousel />
           {/* Restaurant Profile Box */}
           <div className="bg-white rounded-xl shadow-sm mb-8 p-8">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
