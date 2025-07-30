@@ -176,6 +176,8 @@ console.log("record result", result.data?.record);
       const result = await continueToPayment(amount, phoneNumber!, redirectUrl,recordId!,clientId!);
       console.log(result,'payment one');
       
+      // Store payment amount for tracking pixel
+      localStorage.setItem('paymentAmount', amount.toString());
       
       if (result.success && result.data?.redirectUrl) {
         setState(prev => ({

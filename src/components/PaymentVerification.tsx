@@ -1,5 +1,5 @@
 import { verifyPayment } from '@/utils/api';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { CheckCircle, XCircle, Clock, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ const PaymentVerification = () => {
   const [message, setMessage] = useState('');
   const [countdown, setCountdown] = useState(3);
   const navigate = useNavigate();
+  const pixelFiredRef = useRef(false);
 
   const fetchPaymentStatus = useCallback(async () => {
     const orderId = localStorage.getItem('orderId');
@@ -24,6 +25,53 @@ const PaymentVerification = () => {
       if (response.success) {
         setPaymentStatus('success');
         setMessage('Payment verified successfully!');
+        
+        // Fire Trackier pixel for successful payment
+        if (!pixelFiredRef.current) {
+          pixelFiredRef.current = true;
+          
+          try {
+            // Add Trackier tracking iframe
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://staffchahiye.gotrackier.io/pixel?av=6889a15bee3b54fa5e0d920f&goal_value=Purchase&sale_amount=799&txn_id=${orderId}`;
+            iframe.scrolling = 'no';
+            iframe.frameBorder = '0';
+            iframe.width = '1';
+            iframe.height = '1';
+            iframe.style.display = 'none';
+            
+            // Add load and error handlers for debugging
+            iframe.onload = () => {
+              console.log('[Trackier] Conversion pixel loaded successfully', {
+                orderId,
+                amount: 799,
+                timestamp: new Date().toISOString()
+              });
+            };
+            
+            iframe.onerror = (error) => {
+              console.error('[Trackier] Failed to load conversion pixel', {
+                error,
+                orderId,
+                timestamp: new Date().toISOString()
+              });
+            };
+            
+            document.body.appendChild(iframe);
+            
+            // Log pixel firing attempt
+            console.log('[Trackier] Attempting to fire conversion pixel', {
+              orderId,
+              pixelUrl: iframe.src
+            });
+          } catch (error) {
+            console.error('[Trackier] Error creating conversion pixel', {
+              error,
+              orderId,
+              timestamp: new Date().toISOString()
+            });
+          }
+        }
         
         // Start countdown and redirect
         const timer = setInterval(() => {
@@ -47,7 +95,7 @@ const PaymentVerification = () => {
       setMessage('Payment verification failed. Please try again or contact support.');
       console.error('Payment verification error:', error);
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     fetchPaymentStatus();
