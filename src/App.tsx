@@ -16,6 +16,7 @@ import logo from './assets/logo.svg';
 import { OtpRequestForm } from './components/OtpRequestForm';
 import { OtpVerification } from './components/OtpVerification';
 import PaymentVerification from "./components/PaymentVerification";
+import CardStackCarousel from "./components/CardStackCarousel";
 
 function App() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -27,6 +28,7 @@ function App() {
   const [direction, setDirection] = useState("right"); // or "left"
   const [nextIndex, setNextIndex] = useState<number|null>(null);
   const [showMoreRoles, setShowMoreRoles] = useState<boolean>(false);
+  const [activeJobCard, setActiveJobCard] = useState(1);
 
   // Phone validation hook
   const {
@@ -39,7 +41,7 @@ function App() {
   const features = [
     {
       title: "Tell us what kind of staff you need.",
-      image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&h=400&fit=crop&auto=format"
+      image: "first.png"
     },
     {
       title: "We send you ready-to-hire profiles instantly.",
@@ -47,11 +49,28 @@ function App() {
     },
     {
       title: "Connect with them and start your hiring process in less than 30 minutes!",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=400&fit=crop&auto=format"
+      image: "third.png"
     }
   ];
 
+
   const faqData = [
+    {
+      question: "Can I interview the candidates before hiring?",
+      answer: "Yes, you can. We’ll share candidate profiles, and you can schedule interviews at your convenience. If you need help setting this up, feel free to email us at team@staffchahiye.com"
+    },
+    {
+      question: "If the candidate provided is not as per my requirement, then what?",
+      answer: "No worries. If the candidate doesn't meet your expectations, we will continuously provide screened candidates to you for 7 days, ensuring up to 35 verified and pre-screened profiles are shared. Your dedicated account manager will personally assist you until the hiring is successfully completed."
+    },
+    {
+      question: "What do you mean by “pre-screened candidates”?",
+      answer: "Pre-screened candidates are individuals who have been evaluated by our team based on your job requirements. We speak to them directly to confirm their experience, interest, availability, and suitability before sharing their profiles with you."
+    },
+    {
+      question: "For any doubt or support, how can I contact you?",
+      answer: "We’re here to help! If you have any questions or need assistance at any stage, feel free to reach out to us at team@staffchahiye.com or call/WhatsApp us at ‪+91 7304216059‬."
+    },
     {
       question: "How does StaffChahiye.com work?",
       answer: "Just tell us what kind of staff you need. We'll send pre-screened candidates directly to your WhatsApp so you can connect and start hiring instantly."
@@ -223,6 +242,7 @@ function App() {
     <div className="min-h-screen flex flex-col bg-white">
       {/* Toast Notifications */}
       <Toaster position="top-right" richColors />
+
 
       {/* Vacancy Modal */}
       <VacancyModal
@@ -456,6 +476,39 @@ function App() {
               </div>
             </section>
 
+            {/* Carousel Section*/}
+            <section className="py-16 lg:py-20 bg-gradient-to-br from-white via-blue-50 to-purple-50">
+  <div className="w-full max-w-7xl mx-auto px-6 lg:px-8">
+    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      
+      {/* Left Section - Job Prep Info */}
+      <div>
+        <div className="mb-6 text-center lg:text-left">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-teal-400 to-purple-500 mb-4 mx-auto lg:mx-0">
+            <span className="text-white font-semibold text-lg">AI</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-purple-900 mb-4">
+          AI-Filtered Candidates
+          </h2>
+          <p className="text-base sm:text-lg text-gray-700 mb-8">
+          Hire AI-shortlisted candidates in less than 30 minutes.
+          </p>
+          <button 
+          onClick={() => {handlePostJobClick()}}
+          className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+      {/* Right Section - Carousel */}
+      <div className="w-full flex justify-center lg:justify-end">
+        <CardStackCarousel />
+      </div>
+    </div>
+  </div>
+</section>
+
             {/* Role Selection Section - Enhanced */}
             <section className="py-20 bg-gradient-to-br from-orange-50 via-white to-orange-100 relative overflow-hidden">
               <div className="absolute inset-0 pointer-events-none">
@@ -585,7 +638,7 @@ function App() {
                 <div className="relative h-[400px] lg:h-[320px] overflow-hidden">
                   {/* Current card */}
                   <div className={`
-                    testimonial-container rounded-2xl p-6 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
+                    testimonial-container rounded-2xl p-6 lg:p-12 px-8 lg:px-24 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                     ${isSliding
                       ? (direction === "right"
                           ? "-translate-x-32 opacity-0"
@@ -630,7 +683,7 @@ function App() {
                   {/* Next card (only during transition) */}
                   {isSliding && nextIndex !== null && (
                     <div className={`
-                      testimonial-container rounded-2xl p-6 lg:p-8 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
+                      testimonial-container rounded-2xl p-6 lg:p-12 px-8 lg:px-24 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
                       ${direction === "right"
                         ? "translate-x-32 opacity-0"
                         : "-translate-x-32 opacity-0"}
@@ -672,7 +725,7 @@ function App() {
                   )}
 
                   {/* Slideshow Controls - Positioned on sides */}
-                  <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 z-[100] pointer-events-none">
+                  <div className="absolute inset-y-0 left-4 right-4 md:left-6 md:right-6 flex items-center justify-between z-[100] pointer-events-none">
                     <button
                       onClick={handlePrev}
                       disabled={isSliding}

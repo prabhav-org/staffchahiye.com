@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-
 // Mock data for a small restaurant
 const mockBusinessData = {
   name: "Sample Dashboard",
