@@ -16,7 +16,6 @@ import logo from './assets/logo.svg';
 import { OtpRequestForm } from './components/OtpRequestForm';
 import { OtpVerification } from './components/OtpVerification';
 import PaymentVerification from "./components/PaymentVerification";
-import CardStackCarousel from "./components/CardStackCarousel";
 
 function App() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -481,30 +480,7 @@ function App() {
   <div className="w-full max-w-7xl mx-auto px-6 lg:px-8">
     <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       
-      {/* Left Section - Job Prep Info */}
-      <div>
-        <div className="mb-6 text-center lg:text-left">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-teal-400 to-purple-500 mb-4 mx-auto lg:mx-0">
-            <span className="text-white font-semibold text-lg">AI</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-purple-900 mb-4">
-          AI-Filtered Candidates
-          </h2>
-          <p className="text-base sm:text-lg text-gray-700 mb-8">
-          Hire AI-shortlisted candidates in less than 30 minutes.
-          </p>
-          <button 
-          onClick={() => {handlePostJobClick()}}
-          className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300">
-            Hire Now
-          </button>
-        </div>
-      </div>
-
-      {/* Right Section - Carousel */}
-      <div className="w-full flex justify-center lg:justify-end">
-        <CardStackCarousel />
-      </div>
+     
     </div>
   </div>
 </section>

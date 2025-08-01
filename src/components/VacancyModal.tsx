@@ -58,6 +58,7 @@ export const VacancyModal: React.FC<VacancyModalProps> = ({
             onContinue={handleContinueToPayment}
             onBack={goBack}
             isProcessing={isProcessing}
+            initialAmount={799}
           />
         );
       
