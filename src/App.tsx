@@ -16,6 +16,7 @@ import logo from './assets/logo.svg';
 import { OtpRequestForm } from './components/OtpRequestForm';
 import { OtpVerification } from './components/OtpVerification';
 import PaymentVerification from "./components/PaymentVerification";
+import PopularSearches from "./components/PopularSearch";
 
 function App() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -559,173 +560,151 @@ function App() {
               </div>
             </section>
 
-            {/* Testimonial & Stats Section */}
-            <section className="py-16 lg:py-20 bg-white">
-              <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                {/* Section Header */}
-                <div className="text-center mb-8 lg:mb-12">
-                  <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-4">
-                    Why use StaffChahiye?
-                  </h2>
-                  <p className="text-base lg:text-lg text-gray-600 max-w-4xl mx-auto">
-                    From startups to SMEs to established enterprises, StaffChahiye revolutionizes the way businesses find high-quality talent quickly & effortlessly.
-                  </p>
-                </div>
+            <PopularSearches/>
 
-                {/* Stats Grid with Separators */}
-                <div className="mb-16 lg:mb-20">
-                  {/* Desktop Layout with Vertical Separators */}
-                  <div className="hidden lg:flex items-center justify-center">
-                    <div className="flex items-center divide-x divide-gray-200">
-                      <div className="px-8 text-center">
-                        <div className="text-3xl xl:text-4xl font-bold text-orange-400 mb-2">10,000+</div>
-                        <div className="text-sm text-gray-600">New candidates join StaffChahiye every month.</div>
-                      </div>
-                      <div className="px-8 text-center">
-                        <div className="text-3xl xl:text-4xl font-bold text-orange-400 mb-2">100+</div>
-                        <div className="text-sm text-gray-600">Cities to publish your job.</div>
-                      </div>
-                      <div className="px-8 text-center">
-                        <div className="text-3xl xl:text-4xl font-bold text-orange-400 mb-2">92%</div>
-                        <div className="text-sm text-gray-600">Business get qualified candidates within 24 hrs</div>
-                      </div>
-                    </div>
-                  </div>
+            {/*Testimonial Section*/}
+<section className="py-16 lg:py-20 bg-white">
+<div className="max-w-7xl mx-auto px-8 lg:px-16">
 
-                  {/* Mobile Layout - Stacked */}
-                  <div className="lg:hidden space-y-8">
+    {/* Section Header */}
+    <div className="text-center mb-8 lg:mb-12">
+      <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-4">
+        Why use StaffChahiye?
+      </h2>
+      <p className="text-base lg:text-lg text-gray-600 max-w-4xl mx-auto">
+        From startups to SMEs to established enterprises, StaffChahiye revolutionizes the way businesses find high-quality talent quickly & effortlessly.
+      </p>
+    </div>
 
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-orange-600 mb-2">10,000+</div>
-                      <div className="text-sm text-gray-600">New candidates join StaffChahiye every month.</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-orange-600 mb-2">100+</div>
-                      <div className="text-sm text-gray-600">Cities to publish your job.</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-orange-600 mb-2">92%</div>
-                      <div className="text-sm text-gray-600">Business get qualified candidates within 24 hrs</div>
-                    </div>
-                  </div>
-                </div>
+    {/* Stats Section */}
+    <div className="mb-16 lg:mb-20">
+      {/* Desktop Stats */}
+      <div className="hidden lg:flex items-center justify-center">
+        <div className="flex items-center divide-x divide-gray-200">
+          {[
+            { value: '10,000+', label: 'New candidates join StaffChahiye every month.' },
+            { value: '100+', label: 'Cities to publish your job.' },
+            { value: '92%', label: 'Business get qualified candidates within 24 hrs' }
+          ].map((stat, index) => (
+            <div key={index} className="px-8 text-center">
+              <div className="text-3xl xl:text-4xl font-bold text-orange-400 mb-2">{stat.value}</div>
+              <div className="text-sm text-gray-600">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-                {/* Testimonial Slideshow */}
-                <div className="relative h-[400px] lg:h-[320px] overflow-hidden">
-                  {/* Current card */}
-                  <div className={`
-                    testimonial-container rounded-2xl p-6 lg:p-12 px-8 lg:px-24 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
-                    ${isSliding
-                      ? (direction === "right"
-                          ? "-translate-x-32 opacity-0"
-                          : "translate-x-32 opacity-0")
-                      : "translate-x-0 opacity-100"}
-                    z-10
-                  `}>
-                    <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 h-full">
-                      {/* Testimonial Photo */}
-                      <div className="flex-shrink-0">
-                        <div className="testimonial-photo w-28 h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden shadow-lg">
-                          <img
-                            src={testimonials[testimonialIndex].image}
-                            alt={testimonials[testimonialIndex].author}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      </div>
-                      {/* Testimonial Content */}
-                      <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[280px] lg:max-h-[240px] flex flex-col justify-center">
-                        <div className="mb-4">
-                          <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-4">
-                            {testimonials[testimonialIndex].quote}
-                          </p>
-                        </div>
-                        {/* Author Info */}
-                        <div className="mb-2">
-                          <div className="font-semibold text-gray-900 text-lg">{testimonials[testimonialIndex].author}</div>
-                          <div className="text-gray-600 text-base">{testimonials[testimonialIndex].role}</div>
-                          <div className="mt-2">
-                            <img 
-                              src={testimonials[testimonialIndex].logo} 
-                              alt={testimonials[testimonialIndex].company}
-                              className="h-8 lg:h-10 object-contain"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+      {/* Mobile Stats */}
+      <div className="lg:hidden space-y-8">
+        {[
+          { value: '10,000+', label: 'New candidates join StaffChahiye every month.' },
+          { value: '100+', label: 'Cities to publish your job.' },
+          { value: '92%', label: 'Business get qualified candidates within 24 hrs' }
+        ].map((stat, index) => (
+          <div key={index} className="text-center">
+            <div className="text-3xl font-bold text-orange-600 mb-2">{stat.value}</div>
+            <div className="text-sm text-gray-600">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
 
-                  {/* Next card (only during transition) */}
-                  {isSliding && nextIndex !== null && (
-                    <div className={`
-                      testimonial-container rounded-2xl p-6 lg:p-12 px-8 lg:px-24 absolute inset-0 w-full transition-all duration-400 ease-in-out overflow-hidden
-                      ${direction === "right"
-                        ? "translate-x-32 opacity-0"
-                        : "-translate-x-32 opacity-0"}
-                      z-20
-                    `}>
-                      <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 h-full">
-                        {/* Testimonial Photo */}
-                        <div className="flex-shrink-0">
-                          <div className="testimonial-photo w-28 h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden shadow-lg">
-                            <img
-                              src={testimonials[nextIndex].image}
-                              alt={testimonials[nextIndex].author}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                        </div>
-                        {/* Testimonial Content */}
-                        <div className="flex-1 text-center lg:text-left overflow-y-auto max-h-[280px] lg:max-h-[240px] flex flex-col justify-center">
-                          <div className="mb-4">
-                            <p className="testimonial-quote text-base lg:text-lg text-gray-800 leading-relaxed mb-4">
-                              {testimonials[nextIndex].quote}
-                            </p>
-                          </div>
-                          {/* Author Info */}
-                          <div className="mb-2">
-                            <div className="font-semibold text-gray-900 text-lg">{testimonials[nextIndex].author}</div>
-                            <div className="text-gray-600 text-base">{testimonials[nextIndex].role}</div>
-                            <div className="mt-2">
-                              <img 
-                                src={testimonials[nextIndex].logo} 
-                                alt={testimonials[nextIndex].company}
-                                className="h-8 lg:h-10 object-contain"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+    {/* Testimonial Slider */}
+<div className="relative h-[300px] lg:h-[300px] overflow-visible px-10 lg:px-20">
+      {/* Reusable Testimonial Card */}
+      {[
+        { data: testimonials[testimonialIndex], active: true },
+        isSliding && nextIndex !== null ? { data: testimonials[nextIndex], active: false } : null
+      ]
+        .filter(Boolean)
+        .map((item, idx) => {
+          const { data, active } = item!;
+          const baseClasses = "absolute inset-0 w-full transition-all duration-400 ease-in-out z-10";
+          const animationClasses = isSliding
+            ? direction === "right"
+              ? active
+                ? "-translate-x-32 opacity-0 z-10"
+                : "translate-x-32 opacity-0 z-20"
+              : active
+              ? "translate-x-32 opacity-0 z-10"
+              : "-translate-x-32 opacity-0 z-20"
+            : "translate-x-0 opacity-100";
 
-                  {/* Slideshow Controls - Positioned on sides */}
-                  <div className="absolute inset-y-0 left-4 right-4 md:left-6 md:right-6 flex items-center justify-between z-[100] pointer-events-none">
-                    <button
-                      onClick={handlePrev}
-                      disabled={isSliding}
-                      className="bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg pointer-events-auto transition-colors"
-                      aria-label="Previous"
-                    >
-                      <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          return (
+            <div key={idx} className={`${baseClasses} ${animationClasses}`}>
+<div className="bg-gray-50 rounded-2xl shadow-lg p-4 lg:p-4 w-full max-w-3xl mx-auto flex flex-col md:flex-row gap-6 items-start lg:h-[200px]">
+                <img
+                  src={data.image}
+                  alt={`${data.author} avatar`}
+                  className="w-16 h-16 lg:w-20 lg:h-20 rounded-xl object-cover"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h3 className="text-lg font-semibold text-gray-900">{data.author}</h3>
+                    <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                    </button>
-                    <button
-                      onClick={handleNext}
-                      disabled={isSliding}
-                      className="bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg pointer-events-auto transition-colors"
-                      aria-label="Next"
-                    >
-                      <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
+                      Hired
+                    </span>
                   </div>
+                  <div className="flex items-center mt-1 mb-2">
+                    <span className="text-sm font-semibold text-gray-900 mr-1">4.5</span>
+                    <div className="flex text-yellow-400">
+                      {[...Array(4)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                          <path d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.955L10 0l2.951 5.955 6.561.955-4.756 4.635 1.122 6.545z" />
+                        </svg>
+                      ))}
+                      <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                        <defs>
+                          <linearGradient id={`half-${idx}`}>
+                            <stop offset="50%" stopColor="currentColor" />
+                            <stop offset="50%" stopColor="transparent" />
+                          </linearGradient>
+                        </defs>
+                        <path fill={`url(#half-${idx})`} d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.955L10 0l2.951 5.955 6.561.955-4.756 4.635 1.122 6.545z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-700 leading-relaxed">{data.quote}</p>
                 </div>
               </div>
-            </section>
+            </div>
+          );
+        })}
+
+      {/* Controls */}
+<div className="absolute top-1/2 -translate-y-1/2 w-full z-50 flex items-center justify-between pointer-events-none">
+  <button
+    onClick={handlePrev}
+    disabled={isSliding}
+    className="pointer-events-auto bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg -ml-10 transition"
+    aria-label="Previous"
+      style={{ left: '-45px', position: 'absolute' }}
+
+  >
+    <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+  <button
+    onClick={handleNext}
+    disabled={isSliding}
+    className="pointer-events-auto bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg -mr-10 transition"
+    aria-label="Next"
+      style={{ right: '45px', position: 'absolute' }}
+
+  >
+    <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+</div>
+    </div>
+  </div>
+</section>
+
 
             {/* FAQ Section */}
             <section className="py-16 lg:py-20 bg-white">
