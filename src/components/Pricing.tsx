@@ -50,7 +50,7 @@ const Pricing: React.FC = () => {
 
                                 <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                                     <div className="flex-1">
-                                        <div className="text-4xl font-bold text-gray-900 mb-2">₹700</div>
+                                        <div className="text-4xl font-bold text-gray-900 mb-2">₹799</div>
 
                                         <p className="text-gray-600 mb-6">per staff</p>
                                         
