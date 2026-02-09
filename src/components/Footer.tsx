@@ -92,7 +92,7 @@ const Footer: React.FC<FooterProps> = ({ handlePostJobClick }) => {
           <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="text-gray-400 text-sm">
-                © 2024 StaffChahiye | All rights reserved | Managed by SUJAN KUMAR
+                © 2024 StaffChahiye | All rights reserved | Managed by SUDEEP MISHRA
               </div>
               <div className="flex gap-6 text-sm">
                 <Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy policy</Link>
