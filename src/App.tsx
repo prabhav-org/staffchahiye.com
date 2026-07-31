@@ -314,9 +314,12 @@ function App() {
                     {/* Hero Text */}
                     <div className="mb-8">
                       <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-                        Hire candidates in under &lt;30 minutes with <span style={{ color: 'var(--brand-orange)' }}>StaffChahiye</span>.
+                        Get job-ready staff on <span style={{ color: 'var(--brand-orange)' }}>WhatsApp, fast</span>.
                       </h1>
-                      <p className="text-base lg:text-lg text-gray-600 leading-relaxed">We help you find and connect with candidates who are pre-screened and match your specific job requirements, saving you time and effort in the hiring process.</p>
+                      <p className="text-base lg:text-lg text-gray-600 leading-relaxed">Voice AI agents talk to businesses and candidates on WhatsApp, screen the fit, and share matched profiles without any app download.</p>
+                      <div className="mt-4 inline-flex items-center rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-semibold text-gray-900">
+                        Matches can start coming in 15-30 minutes
+                      </div>
                     </div>
 
                     {/* Statistics Section */}
@@ -338,7 +341,7 @@ function App() {
                     {/* Phone Input Section */}
                     <div className="max-w-xl">
                       <div className="mb-2 font-bold text-lg lg:text-xl text-gray-900">Let's get started</div>
-                      <div className="mb-4 text-sm lg:text-base text-gray-600">Hire much faster with StaffChahiye</div>
+                      <div className="mb-4 text-sm lg:text-base text-gray-600">Tell us your requirement. We start matching on WhatsApp.</div>
                       <div className="flex flex-col sm:flex-row gap-3">
                         <input
                           type="tel"
@@ -366,28 +369,84 @@ function App() {
                     </div>
                   </div>
 
-                  {/* Right Column: YouTube Video (Desktop) */}
-                  <div className="hidden lg:block flex-1">
-                    <div className="video-responsive h-full min-h-[500px]">
-                      <iframe
-                        src="https://www.youtube.com/embed/Ges88aDHRHg?si=PZAj4wI2HJqmJV3w"
-                        title="StaffChahiye Demo Video"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
+                  {/* Right Column: Hiring Loop Infographic (Desktop) */}
+                  <div className="hidden lg:flex flex-1">
+                    <div className="hiring-loop-graphic w-full min-h-[500px]" aria-label="StaffChahiye WhatsApp voice AI hiring loop">
+                      <div className="loop-status-bar">
+                        <span className="status-dot"></span>
+                        Live WhatsApp hiring loop
+                      </div>
+                      <div className="loop-node business-node">
+                        <span className="node-kicker">Business</span>
+                        <strong>Needs staff today</strong>
+                        <span>Role, location, pay, shift</span>
+                      </div>
+                      <div className="loop-connector loop-connector-one"></div>
+                      <div className="loop-node ai-node">
+                        <span className="node-kicker">Voice AI agent</span>
+                        <strong>Calls, asks, verifies</strong>
+                        <span>Experience, intent, availability</span>
+                      </div>
+                      <div className="loop-connector loop-connector-two"></div>
+                      <div className="loop-node candidate-node">
+                        <span className="node-kicker">Candidates</span>
+                        <strong>Matched on WhatsApp</strong>
+                        <span>Pre-screened profiles shared fast</span>
+                      </div>
+                      <div className="loop-phone" aria-hidden="true">
+                        <div className="phone-speaker"></div>
+                        <div className="message-bubble inbound">Need 3 waiters tonight</div>
+                        <div className="message-bubble outbound">Screening nearby candidates</div>
+                        <div className="voice-wave">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </div>
+                      </div>
+                      <div className="loop-match-pill">AI match score: High</div>
                     </div>
                   </div>
                 </div>
 
-                {/* YouTube Video (Mobile) - Below all content on mobile */}
+                {/* Hiring Loop Infographic (Mobile) - Below all content on mobile */}
                 <div className="block lg:hidden mb-8">
-                  <div className="video-responsive">
-                    <iframe
-                      src="https://www.youtube.com/embed/Ges88aDHRHg?si=PZAj4wI2HJqmJV3w"
-                      title="StaffChahiye Demo Video"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
+                  <div className="hiring-loop-graphic min-h-[430px]" aria-label="StaffChahiye WhatsApp voice AI hiring loop">
+                    <div className="loop-status-bar">
+                      <span className="status-dot"></span>
+                      Live WhatsApp hiring loop
+                    </div>
+                    <div className="loop-node business-node">
+                      <span className="node-kicker">Business</span>
+                      <strong>Needs staff today</strong>
+                      <span>Role, location, pay, shift</span>
+                    </div>
+                    <div className="loop-connector loop-connector-one"></div>
+                    <div className="loop-node ai-node">
+                      <span className="node-kicker">Voice AI agent</span>
+                      <strong>Calls, asks, verifies</strong>
+                      <span>Experience, intent, availability</span>
+                    </div>
+                    <div className="loop-connector loop-connector-two"></div>
+                    <div className="loop-node candidate-node">
+                      <span className="node-kicker">Candidates</span>
+                      <strong>Matched on WhatsApp</strong>
+                      <span>Pre-screened profiles shared fast</span>
+                    </div>
+                    <div className="loop-phone" aria-hidden="true">
+                      <div className="phone-speaker"></div>
+                      <div className="message-bubble inbound">Need 3 helpers</div>
+                      <div className="message-bubble outbound">Finding nearby matches</div>
+                      <div className="voice-wave">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
+                    <div className="loop-match-pill">AI match score: High</div>
                   </div>
                 </div>
               </div>
