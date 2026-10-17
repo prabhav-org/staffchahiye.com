@@ -27,5 +27,4 @@ export interface VacancyFormProps {
   initialPhone?: string;
   onSubmit: (data: VacancyForm) => Promise<boolean>;
   onClose: () => void;
-  handleSendOtp: (phoneNumber: string) => void;
 }

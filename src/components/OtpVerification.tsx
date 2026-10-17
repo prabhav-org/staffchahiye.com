@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, RefreshCw } from 'lucide-react';
+import { ArrowLeft, ArrowsClockwise as RefreshCw } from '@phosphor-icons/react';
 // import axios from 'axios';
 
 interface OtpVerificationProps {
@@ -16,7 +16,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
   onVerify,
   onSendOtp,
   onBack,
- 
+
   isProcessing,
 }) => {
   const [otp, setOtp] = useState('');
@@ -49,7 +49,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
       try {
         const response = await onVerify(otp);
         console.log(response);
-       
+
       } catch (error) {
         console.error('Error during OTP verification or payment link generation:', error);
         alert('An error occurred. Please try again later.');
@@ -77,7 +77,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
           <ArrowLeft size={20} className="mr-2" />
           Back
         </button>
-        
+
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
           Verify your phone number
         </h2>
@@ -127,4 +127,4 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
       </div>
     </div>
   );
-}; 
+};

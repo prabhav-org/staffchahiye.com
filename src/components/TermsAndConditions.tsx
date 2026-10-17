@@ -1,3 +1,4 @@
+import { Envelope } from "@phosphor-icons/react";
 import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
@@ -141,7 +142,7 @@ const TermsAndConditions: React.FC = () => {
                     If you have any questions or concerns, please contact:
                   </p>
                   <p className="text-gray-600 mt-2">
-                    📧 Email: <a href="mailto:team@staffchahiye.com" className="text-orange-500 hover:text-orange-600">team@staffchahiye.com</a>
+                    <Envelope size={20} weight="duotone" className="inline-block align-middle" aria-hidden="true" /> Email: <a href="mailto:team@staffchahiye.com" className="text-orange-500 hover:text-orange-600">team@staffchahiye.com</a>
                   </p>
                 </section>
               </div>

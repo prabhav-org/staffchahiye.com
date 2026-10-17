@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, CreditCard, Shield, Clock, Loader2 } from 'lucide-react';
+import { ArrowLeft, CreditCard, Shield, Clock, SpinnerGap as Loader2 } from '@phosphor-icons/react';
 
 interface PaymentStepProps {
   onContinue: (amount : number) => Promise<boolean>;
@@ -29,7 +29,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
     { code: 'BH150', discount: 150 },
   ];
 
-  
+
 
   // This simulates a backend API call to validate the coupon
   const validateCouponAPI = (code: string): Promise<{ valid: boolean; discount: number }> => {
@@ -78,7 +78,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
           <ArrowLeft size={20} className="mr-2" />
           Back
         </button>
-        
+
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
           Complete your payment
         </h2>
@@ -92,7 +92,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
           <h3 className="text-lg font-semibold text-gray-900">Service Fee</h3>
           <span className="text-lg font-semibold text-gray-900">₹{initialAmount}</span>
         </div>
-        
+
         {isCouponApplied && (
           <div className="flex items-center justify-between mb-4 text-green-600">
             <h3 className="font-semibold">Discount</h3>
@@ -104,7 +104,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
             <h3 className="text-xl font-bold text-gray-900">Total to Pay</h3>
             <span className="text-2xl font-bold text-orange-500">₹{amount}</span>
         </div>
-        
+
         <div className="space-y-3 text-sm text-gray-600 mt-6">
           <div className="flex items-center">
             <Shield size={16} className="mr-2 text-green-500" />
@@ -156,7 +156,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
           {couponError && <p className="mt-2 text-sm text-red-600">{couponError}</p>}
           {isCouponApplied && <p className="mt-2 text-sm text-green-600">Coupon applied successfully!</p>}
         </div>
-        
+
         <button
           onClick={() => onContinue(amount)}
           disabled={isProcessing}
@@ -171,7 +171,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
             `Proceed to Pay ₹${amount}`
           )}
         </button>
-        
+
         <p className="text-xs text-gray-500 text-center">
           By proceeding, you agree to our terms of service and privacy policy
         </p>
@@ -188,4 +188,4 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
       </div>
     </div>
   );
-}; 
+};

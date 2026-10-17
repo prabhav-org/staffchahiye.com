@@ -52,3 +52,6 @@ export default tseslint.config({
   },
 })
 ```
+# Staffing request form
+
+Hiring requirement actions open the staffing request form hosted at [Chatform](https://chatform.in/f/business-staffing-request-4d5658).

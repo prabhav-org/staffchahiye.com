@@ -1,3 +1,4 @@
+import { CheckCircle } from "@phosphor-icons/react";
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
@@ -56,23 +57,17 @@ const Pricing: React.FC = () => {
                                         
                                         <ul className="space-y-4">
                                             <li className="flex items-center">
-                                                <svg className="w-5 h-5 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                                                </svg>
+                                                <CheckCircle className="w-5 h-5 text-orange-500 mr-3" weight="regular" aria-hidden="true" />
                                                 <span className="text-gray-700">Verified staff profiles</span>
                                             </li>
 
                                             <li className="flex items-center">
-                                                <svg className="w-5 h-5 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                                                </svg>
+                                                <CheckCircle className="w-5 h-5 text-orange-500 mr-3" weight="regular" aria-hidden="true" />
                                                 <span className="text-gray-700">Quick staff matching within 30 minutes</span>
                                             </li>
 
                                             <li className="flex items-center">
-                                                <svg className="w-5 h-5 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                                                </svg>
+                                                <CheckCircle className="w-5 h-5 text-orange-500 mr-3" weight="regular" aria-hidden="true" />
                                                 <span className="text-gray-700">Custom support from team</span>
                                             </li>
                                         </ul>
@@ -82,27 +77,19 @@ const Pricing: React.FC = () => {
                                         <h4 className="text-lg font-semibold text-gray-900 mb-4">What's Included:</h4>
                                         <ul className="space-y-3">
                                             <li className="flex items-start">
-                                                <svg className="w-5 h-5 text-orange-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                                                </svg>
+                                                <CheckCircle className="w-5 h-5 text-orange-500 mr-3 mt-1" weight="regular" aria-hidden="true" />
                                                 <span className="text-gray-700">Access to verified candidate database</span>
                                             </li>
                                             <li className="flex items-start">
-                                                <svg className="w-5 h-5 text-orange-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                                                </svg>
+                                                <CheckCircle className="w-5 h-5 text-orange-500 mr-3 mt-1" weight="regular" aria-hidden="true" />
                                                 <span className="text-gray-700">Detailed staff profiles and work history</span>
                                             </li>
                                             <li className="flex items-start">
-                                                <svg className="w-5 h-5 text-orange-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                                                </svg>
+                                                <CheckCircle className="w-5 h-5 text-orange-500 mr-3 mt-1" weight="regular" aria-hidden="true" />
                                                 <span className="text-gray-700">Skill verification and assessment</span>
                                             </li>
                                             <li className="flex items-start">
-                                                <svg className="w-5 h-5 text-orange-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                                                </svg>
+                                                <CheckCircle className="w-5 h-5 text-orange-500 mr-3 mt-1" weight="regular" aria-hidden="true" />
                                                 <span className="text-gray-700">Dedicated hiring support</span>
                                             </li>
                                         </ul>

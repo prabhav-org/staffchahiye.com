@@ -19,7 +19,7 @@ export default defineConfig({
       '@hookform/resolvers/zod',
       'zod',
       'sonner',
-      'lucide-react'
+      '@phosphor-icons/react'
     ],
     exclude: [
       '@radix-ui/react-dialog'
