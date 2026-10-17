@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { vacancyFormSchema } from '../../utils/validation';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
 import {
-  vacancyTypes,
   candidateTypes,
   genderOptions,
   experienceOptions,
@@ -14,13 +13,11 @@ import {
   otherBenefitsOptions
 } from '../../constants/jobOptions';
 import type { VacancyForm as VacancyFormData, VacancyFormProps } from './types';
-import { OtpVerification } from '../OtpVerification';
 
 
 export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
   initialPhone,
   onSubmit,
-  handleSendOtp,
 }) => {
   const {
     register,
@@ -53,8 +50,6 @@ export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
 
   const candidateType = watch('candidateType');
   const minSalary = watch('minSalary');
-  const [isOtpVisible, setIsOtpVisible] = useState<boolean>(false);
-  const [sessionId, setSessionId] = useState<string>('');
 
   // Set initial phone number if provided
   useEffect(() => {
@@ -68,16 +63,7 @@ export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
   const onFormSubmit = async (data: VacancyFormData) => {
     const success = await onSubmit(data);
 
-    if(!success){
-      console.log("Error in form submission");
-      return;
-      
-    }
-  
-      await handleSendOtp(data.phoneNumber);
-
-
-    setIsOtpVisible(true);
+    if (!success) console.log('Error in form submission');
   };
 
 
@@ -121,13 +107,12 @@ export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
           </div>
 
           <div className="grid grid-cols-1 gap-4">
-            <Select
+            <Input
               label="Requirement"
               required
-              options={vacancyTypes}
               {...register('requirement')}
               error={errors.requirement?.message}
-              placeholder="Select job category"
+              placeholder="Enter your staffing requirement"
             />
 
             {/* <Input
@@ -272,9 +257,9 @@ export const VacancyForm: React.FC<Omit<VacancyFormProps, 'onClose'>> = ({
                   Submitting...
                 </div>
               ) : (
-                'Submit & Continue'
+                'Submit requirement'
               )}
             </button>
           </div>
         </form>
-)}; 
+)};

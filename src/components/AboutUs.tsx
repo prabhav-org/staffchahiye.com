@@ -1,3 +1,4 @@
+import { CheckCircle } from "@phosphor-icons/react";
 import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
@@ -54,15 +55,15 @@ const AboutUs: React.FC = () => {
                                 </h3>
                                 <ul className="space-y-3">
                                     <li className="flex items-start group">
-                                        <span className="text-orange-500 mr-2 transform group-hover:scale-110 transition-transform">✓</span>
+                                        <span className="text-orange-500 mr-2 transform group-hover:scale-110 transition-transform"><CheckCircle size={20} weight="duotone" className="inline-block align-middle" aria-hidden="true" /></span>
                                         <span className="text-gray-600 group-hover:text-gray-900 transition-colors">All staff are thoroughly verified and background-checked</span>
                                     </li>
                                     <li className="flex items-start group">
-                                        <span className="text-orange-500 mr-2 transform group-hover:scale-110 transition-transform">✓</span>
+                                        <span className="text-orange-500 mr-2 transform group-hover:scale-110 transition-transform"><CheckCircle size={20} weight="duotone" className="inline-block align-middle" aria-hidden="true" /></span>
                                         <span className="text-gray-600 group-hover:text-gray-900 transition-colors">Connect with multiple staff options within 30 minutes</span>
                                     </li>
                                     <li className="flex items-start group">
-                                        <span className="text-orange-500 mr-2 transform group-hover:scale-110 transition-transform">✓</span>
+                                        <span className="text-orange-500 mr-2 transform group-hover:scale-110 transition-transform"><CheckCircle size={20} weight="duotone" className="inline-block align-middle" aria-hidden="true" /></span>
                                         <span className="text-gray-600 group-hover:text-gray-900 transition-colors">Simple, tech-driven process from start to finish</span>
                                     </li>
                                 </ul>
@@ -113,7 +114,7 @@ const AboutUs: React.FC = () => {
                             <p className="text-gray-600">Connect with verified staff within 30 minutes of posting your job</p>
                         </div>
                         {/* <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                            <div className="text-orange-500 text-4xl mb-4 transform hover:scale-110 transition-transform">✓</div>
+                            <div className="text-orange-500 text-4xl mb-4 transform hover:scale-110 transition-transform"><CheckCircle size={20} weight="duotone" className="inline-block align-middle" aria-hidden="true" /></div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Verified Staff</h3>
                             <p className="text-gray-600">All staff undergo thorough verification and background checks</p>
                         </div> */}

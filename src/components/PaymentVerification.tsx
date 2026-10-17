@@ -1,6 +1,6 @@
 import { verifyPayment } from '@/utils/api';
 import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { CheckCircle, XCircle, Clock, AlertCircle } from 'lucide-react';
+import { CheckCircle, XCircle, Clock, WarningCircle as AlertCircle } from '@phosphor-icons/react';
 import { useNavigate } from 'react-router-dom';
 
 const PaymentVerification = () => {
@@ -12,7 +12,7 @@ const PaymentVerification = () => {
 
   const fetchPaymentStatus = useCallback(async () => {
     const orderId = localStorage.getItem('orderId');
-    
+
     if (!orderId) {
       setPaymentStatus('failed');
       setMessage('Order ID not found. Please try again.');
@@ -21,15 +21,15 @@ const PaymentVerification = () => {
 
     try {
       const response = await verifyPayment(orderId);
-      
+
       if (response.success) {
         setPaymentStatus('success');
         setMessage('Payment verified successfully!');
-        
+
         // Fire Trackier pixel for successful payment
         if (!pixelFiredRef.current) {
           pixelFiredRef.current = true;
-          
+
           try {
             // Add Trackier tracking iframe
             const iframe = document.createElement('iframe');
@@ -39,7 +39,7 @@ const PaymentVerification = () => {
             iframe.width = '1';
             iframe.height = '1';
             iframe.style.display = 'none';
-            
+
             // Add load and error handlers for debugging
             iframe.onload = () => {
               console.log('[Trackier] Conversion pixel loaded successfully', {
@@ -48,7 +48,7 @@ const PaymentVerification = () => {
                 timestamp: new Date().toISOString()
               });
             };
-            
+
             iframe.onerror = (error) => {
               console.error('[Trackier] Failed to load conversion pixel', {
                 error,
@@ -56,9 +56,9 @@ const PaymentVerification = () => {
                 timestamp: new Date().toISOString()
               });
             };
-            
+
             document.body.appendChild(iframe);
-            
+
             // Log pixel firing attempt
             console.log('[Trackier] Attempting to fire conversion pixel', {
               orderId,
@@ -72,7 +72,7 @@ const PaymentVerification = () => {
             });
           }
         }
-        
+
         // Start countdown and redirect
         const timer = setInterval(() => {
           setCountdown(prev => {
@@ -173,7 +173,7 @@ const PaymentVerification = () => {
               {paymentStatus === 'failed' && 'Verification Failed'}
               {paymentStatus === 'delayed' && 'Payment Pending'}
             </h2>
-            
+
             <p className="text-gray-600 leading-relaxed">
               {paymentStatus === 'verifying' && 'Please wait while we verify your payment...'}
               {message && message}

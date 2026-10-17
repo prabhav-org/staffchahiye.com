@@ -26,7 +26,9 @@ export const vacancyFormSchema = z.object({
   
   requirement: z
     .string()
-    .min(1, 'Please select a requirement'),
+    .trim()
+    .min(2, 'Please enter a requirement')
+    .max(100, 'Requirement must be less than 100 characters'),
   
   numberOfOpenings: z
     .number()
@@ -91,4 +93,4 @@ export const vacancyFormSchema = z.object({
     message: 'Minimum salary cannot be greater than maximum salary',
     path: ['minSalary'],
   }
-); 
+);

@@ -1,3 +1,4 @@
+import { Envelope, Phone } from "@phosphor-icons/react";
 import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
@@ -45,13 +46,13 @@ const RefundPolicy: React.FC = () => {
                                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Contact Us:</h2>
                                 <div className="space-y-4">
                                     <div className="flex items-center space-x-3">
-                                        <span className="text-orange-500">📧</span>
+                                        <span className="text-orange-500"><Envelope size={20} weight="duotone" className="inline-block align-middle" aria-hidden="true" /></span>
                                         <a href="mailto:team@staffchahiye.com" className="text-gray-600 hover:text-orange-500 transition-colors">
                                             team@staffchahiye.com
                                         </a>
                                     </div>
                                     <div className="flex items-center space-x-3">
-                                        <span className="text-orange-500">📞</span>
+                                        <span className="text-orange-500"><Phone size={20} weight="duotone" className="inline-block align-middle" aria-hidden="true" /></span>
                                         <a href="tel:+917304216050" className="text-gray-600 hover:text-orange-500 transition-colors">
                                             +91 7304216050
                                         </a>

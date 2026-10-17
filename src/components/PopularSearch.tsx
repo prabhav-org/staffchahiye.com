@@ -1,3 +1,4 @@
+import { MagnifyingGlass } from "@phosphor-icons/react";
 import React, { useState } from 'react';
 import { VacancyForm } from './forms/VacancyForm';
 import { VacancyModal } from './VacancyModal';
@@ -69,7 +70,7 @@ const PopularSearches = () => {
           />
     <section className="py-14 px-4 md:px-20 bg-gradient-to-b from-gray-50 to-white">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-900 text-center">
-        <span role="img" aria-label="search">🔍</span> Popular Searches on{' '}
+        <MagnifyingGlass size={30} className="inline-block align-middle" aria-hidden="true" /> Popular Searches on{' '}
         <span className="text-orange-500">StaffChahiye</span>
       </h2>
 
